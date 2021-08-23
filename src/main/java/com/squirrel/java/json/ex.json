@@ -1,0 +1,97 @@
+{
+  "evaluateCode": "PJ2021031510220004",
+  "questionnaireSubmitDto": {
+    "bizCode": "",
+    "cityCode": "",
+    "productCode": ""
+  },
+  "sceneCode": "",
+  "sourceCode": "browser",
+  "submitDtos": [
+    {
+      "questionSubmitDtos": [
+        {
+          "answerSubmitDtos": [
+            {
+              "answerCode": "",
+              "value": "https://phpimg.ziroom.com/20f178bf-534e-4bc7-87a0-b7dca582d5d4.png"
+            }
+          ],
+          "questionCode": "QUE2020073015310026",
+          "type": "file"
+        },
+        {
+          "answerSubmitDtos": [
+            {
+              "answerCode": "",
+              "value": "麻果"
+            }
+          ],
+          "questionCode": "QUE2020073015310025",
+          "type": "text"
+        },
+        {
+          "answerSubmitDtos": [
+            {
+              "answerCode": "ANS2020073015300073",
+              "value": "1"
+            }
+          ],
+          "questionCode": "QUE2020073015300024",
+          "type": "thumb"
+        },
+        {
+          "answerSubmitDtos": [
+            {
+              "answerCode": "ANS2020073015300071",
+              "value": "1"
+            }
+          ],
+          "questionCode": "QUE2020073015300023",
+          "type": "thumb"
+        },
+        {
+          "answerSubmitDtos": [
+            {
+              "answerCode": "ANS2020073015300069",
+              "value": "1"
+            }
+          ],
+          "questionCode": "QUE2020073015300022",
+          "type": "thumb"
+        },
+        {
+          "answerSubmitDtos": [
+            {
+              "answerCode": "ANS2020073015300067",
+              "value": "1"
+            }
+          ],
+          "questionCode": "QUE2020073015290021",
+          "type": "thumb"
+        },
+        {
+          "answerSubmitDtos": [
+            {
+              "answerCode": "ANS2020073015290065",
+              "value": "5"
+            }
+          ],
+          "questionCode": "QUE2020073015280020",
+          "type": "bear"
+        },
+        {
+          "answerSubmitDtos": [
+            {
+              "answerCode": "ANS2020073015270058",
+              "value": "ANS2020073015270058"
+            }
+          ],
+          "questionCode": "QUE2020073015270019",
+          "type": "mot"
+        }
+      ],
+      "templateCode": "TP2020073014510011"
+    }
+  ]
+}

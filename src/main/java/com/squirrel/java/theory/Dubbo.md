@@ -1,0 +1,140 @@
+https://zhuanlan.zhihu.com/p/341638244
+
+
+### Dubbo是什么？RPC又是什么？
+
+- Dubbo是一个分布式服务框架,致力于提供高性能和透明化的RPC远程服务调用方案,以及SOA服务治理方案。
+
+### Dubbo能做什么？
+
+- 远程通信
+    - dubbo-remoting 模块提供了多种基于长连接NIO框架的抽象封装,包括多种对线程模型、序列化以及请求-响应模式的信息交换方式
+- 集群容错
+    - 提供基于接口方法的透明远程过程调用，包括多协议支持,以及软负载均衡、失败容错、地址路由、动态配置等集群支持。
+- 自动发现
+    - 基于注册中心目录以及服务,支持服务消费方动态查找服务提供方,地址透明，支持服务提供方平滑增加或减少机器
+
+### Dubbo的总体调用流程？
+
+- 消费者代理持有一个Invoker对象,使用Invoker进行调用
+- 之后通过Cluster进行负载容错,失败重试
+- 调用服务目录获取远程服务的Invoker列表
+- 负载均衡：配置路由规则：按照规则过滤获取到Invoker列表，没有配置规则：按照配置的负载均衡模式选取一个可以调用的Invoker
+- 经过过滤器链,通常是处理上下文,限流，计数等
+- 发送请求到服务端
+- 服务端接收到请求,分配到线程池中进行处理
+- Server来处理这些Request
+- 根据请求来找到对应的Exporter
+- 在经过一个一个的过滤器链
+- 找到具体的接口,在将请求接口返回
+
+### 说说Dubbo支持哪些协议,每种协议的应用场景和特点
+
+- dubbo: 单一长连接和NIO异步通讯,适合大并发数据量小的服务调用,以及消费者远大于提供者
+- rmi：jdk 版本
+- http： 基于HTTP 多个短连接
+- hession
+- redis
+- webService：
+
+### Dubbo中用到哪些设计模式？
+
+- 责任链模式：Dubbo的调用链组织是用责任链模式串起来的,责任链中每个节点实现Filter接口,然后由ProtocolFilterWrapper 将所有Filter串联起来
+- 观察者模式：Dubbo中使用观察者模式最经典的例子就是RegistryService。消费者在初始化的时候会调用 subscribe方法,注册一个观察者,如果观察者引用
+  的服务地址发生改变,就会通过NotifyListener通知消费者，此外,Dubbo的InvokerListener 和 ExporterListener 也实现了观察者模式
+  就可以接收到consumer端调用refer和provider调用export的通知。
+- 修饰器模式：ProtocolFilterWrapper 类是对Protocol类的修饰,在export和refer方法中,配合责任链模式Filter组装成责任链,实现对protocol功能的修饰
+- 适配器模式：dubbo 日志设置
+- 代理模式：Dubbo consumer 使用Proxy类创建远程服务的本地代理,本地代理实现和远程服务一样的接口,并且屏蔽了网络通信的细节,使得用户在使用本地代理 的时候,感觉和使用本地服务一样。
+
+### Dubbo中provider提供的服务有多个版本怎么办？
+
+- 配置服务的version
+
+### 服务暴露的过程是怎么样的？ ServiceBean
+
+- 通过ServiceConfig解析标签,创建dubbo标签解析器来解析dubbo标签,容器创建完成之后,触发ContextRefreshEvent事件回调。
+- 通过ProxyFactory.getInvoker 将服务暴露接口封装成Invoker对象,里面包含了需要执行的方法的对象信息和具体的URL地址
+- 在通过DubboProtocol的实现把包装后的Invoker转换成Expoter。
+- 然后启动 Server 监听端口
+- 最后RegistryProtocol 保存URL地址和Invoker映射关系,同时注册到注册中心。
+
+--serviceConfig -- 创建invoker-导出expoter -- 开启server - 注册到注册中心
+
+### 服务引用的流程是怎么样的？ ReferenceBean
+
+- 首先,客户端根据config文件信息从注册中心订阅服务,首次全量缓存到本地,后续的更新会监听动态更新到本地
+- 接着,DubboProtocol根据provider的地址和接口信息连接到服务端server,开启客户端client,然后创建Invoker
+- 然后,通过invoker 为服务接口生成代理对象,这个代理对象用于远程调用 provider,至此完成了服务引用
+
+-- 订阅服务 -- 开启client -- 创建invoker -- 创建代理服务
+
+### Dubbo的注册中心有哪些？
+
+- Zookeeper、Redis
+
+### 聊聊Dubbo的SPI机制
+
+- SPI是一种服务发现机制,将结构的实现类写入配置当中,在服务加载的时候读取配置文件,加载实现类，就可以在运行的时候,动态帮助接口替换实现类。
+- DubboSPI 有一个ExtensionLoader 用来加载扩展类,所以可以根据 key 配置的类 按需加载
+- 同时 增加了对扩展点IOC 和 AOP的支持,一个扩展点可以直接setter注入其他扩展
+
+### Dubbo 负载均衡？
+
+- 加权随机：请求均匀分配
+    - 给每台机器设置权重 A：4 B：5 C：6 总和15
+    - 0-4 A 4-9 B 9-15 C
+
+- 最小活跃数：
+    - 每个服务提供者对应一个活跃数,默认情况下 所有服务提供者活跃数都为0，每收到一个请求 活跃数+1 完成请求后活跃数-1。
+
+- 加权轮询
+- 一致性hash
+
+### 集群容错的方式有哪些？
+
+- Failover Cluster ： 失败自动切换： dubbo的默认容错方案,当调用事变时自动切换到其它可用的节点,具体的重试次数和间隔时间可以通过引用服务的时候 配置，默认重试1次。
+- Failback ：失败自动回复, 定时5s 对失败的任务进行重试
+- Failfast Cluster： 快速失败：只调用一次,失败后立刻抛出异常
+- FailSafe ：记录日志不抛出： 返回空结果
+- Forking Cluster ： 并行调用,线程池并发 如果有返回的那么就返回
+- Broadcast ： 逐步调用每个provider,如果有一台报错,在循环调用结束后,抛出异常
+
+### 说说Dubbo的分层？
+
+- 大一点的范围就是三层：
+    - Biz： 服务提供者、消费者 业务逻辑层,由我们自己来提供接口和实现还有一些配置信息
+    - RPC:  真正的RPC调用的核心层,封装整个RPC的调用过程,负载均衡、集群容错、代理
+    - Remoting：对网络传输协议和数据转换的封装
+
+-- 具体：
+
+- service
+- config
+- proxy
+- registry
+- cluster
+- monitor
+- protocol
+- exchange
+- transport
+- serialize
+
+### 服务提供者能实现失效踢出是什么原理？
+
+- 服务失效踢出基于Zookeeper临时节点原理，Zk中的节点是有生命周期的，具体的生命周期取决于节点的类型，节点主要分为持久节点和临时节点。
+
+### 为什么要通过代理对象通信？
+
+- 将调用细节封装起来,是的调用远程方法就像调用本地方法一样简单,还可以做一些其他方面的增强,比如负载均衡，容错机制，过滤操作，调用数据的统计
+
+### 如何设计一个RPC框架？
+
+- 首先需要一个注册中心,管理消费者和提供者的节点信息,这样才会有消费者和提供者去订阅服务,注册服务
+- 多个提供者 需要做负载均衡
+- 集群容错,一个提供者调用失败了怎么办
+- 通信协议 采用什么类型的网络传输 以及什么方式序列化
+- 
+
+### Dubbo服务之间的调用是阻塞的吗?
+- 默认是同步等待结果阻塞的，支持异步调用

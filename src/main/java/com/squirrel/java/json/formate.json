@@ -1,0 +1,61 @@
+{
+  "@type": "CardModelVO",
+  "cardVOList": [{
+    "@type": "CARD_A",
+    "count": "_holdingCount",
+    "buttonName": "查看详情",
+    "buttonURL": "ziroomCustomer://housekeepermanagement/HouseStockActivity",
+    "content": "全部持有库存",
+    "title": "持有库存",
+    "voEnum": "CARD_A"
+  },
+    {
+      "@type": "CARD_B",
+      "itemList": [{
+        "count": "_hasNoAppoint30daysCount",
+        "buttonName": "查看详情",
+        "buttonURL": "ziroomCustomer://housekeepermeeting/MeetingHouseListActivity",
+        "buttonParam": "$NO_SIGN_30",
+        "content": "试试发布出房悬赏，平均可增加2次带看哦~",
+        "title": "近30日无带看",
+        "voEnum": "CARD_A"
+      },
+        {
+          "count": "_newReleaseCount",
+          "buttonName": "查看详情",
+          "buttonURL": "ziroomCustomer://housekeepermeeting/MeetingHouseListActivity",
+          "buttonParam": "$NEW_RELEASE",
+          "content": "包括新收竣工、退租释放房源",
+          "title": "今日新释放房源",
+          "voEnum": "CARD_A"
+        }
+      ],
+      "modelName": "出房关注库存",
+      "voEnum": "CARD_B"
+    },
+    {
+      "@type": "CARD_B",
+      "itemList": [{
+        "count": "_unsalableCount",
+        "buttonName": "查看详情",
+        "buttonURL": "ziroomCustomer://housekeepermeeting/MeetingHouseListActivity",
+        "buttonParam": "$UN_SALABLE",
+        "content": "试试发布出房悬赏，成交率高达40%哦~",
+        "title": "当前滞销",
+        "voEnum": "CARD_A"
+      },
+        {
+          "count": "_unsalableToMonthEndCount",
+          "buttonName": "查看详情",
+          "buttonURL": "ziroomCustomer://housekeepermeeting/MeetingHouseListActivity",
+          "buttonParam": "$UN_SALABLE_TO_MONTH_END",
+          "content": "月底未出房将滞销的库存（不包含当前滞销）",
+          "title": "月底滞销",
+          "voEnum": "CARD_A"
+        }
+      ],
+      "modelName": "滞销库存",
+      "voEnum": "CARD_B"
+    }
+  ]
+}
