@@ -1,7 +1,5 @@
 package com.squirrel.java.leet.链表;
 
-import com.sun.org.apache.regexp.internal.RE;
-
 /**
  * <p></p>
  * <p>
