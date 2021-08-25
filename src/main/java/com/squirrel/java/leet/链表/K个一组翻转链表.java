@@ -21,7 +21,9 @@ public class K个一组翻转链表 {
 
     public ListNode reverseKGroup(ListNode head, int k) {
 
-        // 用栈实现
+        /**
+         * 思路： k个元素压栈,出栈的时候拼接在原链表上
+         */
 
         ListNode dummyNode = new ListNode(-1);
         ListNode prev = dummyNode;

@@ -45,15 +45,27 @@ public class 翻转链表2 {
         // 首先找到第m个节点
         ListNode dummyNode = new ListNode(-1);
         dummyNode.next = head;
-        ListNode curr = head;
+        ListNode prev = head;
 
         for (int i = 0; i < m; i++) {
-            curr = curr.next;
+            prev = prev.next;
         }
         // curr 为第m个节点
+        ListNode cur = prev.next;
+        ListNode next ;
 
+        for (int i = 0; i < n - m; i++) {
+            // 第二个节点
+            next = cur.next;
+            // 当前节点的下一个节点为第三个节点
+            cur.next = next.next;
+            // 头插法
+            next.next = prev.next;
 
-        return null;
+            prev.next = next;
+        }
+
+        return dummyNode.next;
 
     }
 
