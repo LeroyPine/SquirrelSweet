@@ -32,4 +32,17 @@ public class TreeNode {
         this.left = left;
         this.right = right;
     }
+    /**
+     *
+     *
+     *
+     *               8
+     *            4     10
+     *          3   7  9   11
+     *
+     *
+     *
+     *
+     *
+     */
 }
