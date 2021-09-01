@@ -225,8 +225,15 @@
   - 减少扫描行数,通过执行计划中扫描行数来添加合适的索引来减少扫描行数
   - join字段也要加索引,采用索引嵌套连接方式。
 - Mysql事务的实现以及原理？https://cloud.tencent.com/developer/article/1431307
-  - ~
+  - 事务的原子性是通过undolog来实现的
+    - 回滚日志,如果有异常那么就执行回滚日志,返回之前的数据。
+  - 事务的持久性是通过redolog来实现的
+    - redo log是同步存储,而缓存同步是 随机操作也就是数据写入到文件中
+    - 缓冲池,避免性能消耗
+  - 事务的隔离性是通过读写锁+MVCC实现的
 - Mvcc实现的原理是什么？https://github.com/NotFound9/interviewGuide/blob/master/docs/MySQLNote.md
+  - Mysql每行数据有隐藏的两列,一列时事务ID,一列是回滚指针,指向undolog
+  - 查询的时候,如果
 - Mysql死锁实践？
 - 设计数据库表的思路？
 
