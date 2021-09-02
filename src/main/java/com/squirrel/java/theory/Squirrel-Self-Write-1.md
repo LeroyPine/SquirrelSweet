@@ -235,9 +235,47 @@
   - Mysql每行数据有隐藏的两列,一列时事务ID,一列是回滚指针,指向undolog
   - 查询的时候,如果
 - Mysql死锁实践？
+  - b是唯一索引
+  - 事务A
+    - insert into  A (a,b) values (1,5);
+    - insert into  A (a,b) values (2,6);
+    - insert into  A (a,b) values (3,4);
+  - 事务B
+    - insert into  A (a,b) values (1,5);
+    - insert into  A (a,b) values (2,6);
+    - insert into  A (a,b) values (3,4);
+  - 首先呢唯一索引冲突的时候唯一索引会升级为 Next-key锁,next-key锁是行锁+间隙锁
+  - https://tech.meituan.com/2014/08/20/innodb-lock.html
 - 设计数据库表的思路？
+  - 首先根据我们的prd,原型图,找出某个业务对应的实体,来建立一张表,然后在考虑不同实体之间有什么联系,如果有联系的通过某一个字段进行关联。 例如用其中一个表的主键或者业务ID啊等
+  
+  - 然后考虑字段的类型呀,以及长度,根据业务场景确定字段的长度
+  
+  - 然后再就是考虑在经常查询的字段上建立合适的索引。
+  
+  - 然后再就是可以冗余的字段就冗余上,可以增加查询效率。（例如之前做过一个账单表中费用项,如果只存储费用项Code,还需要连表查询其名称,如果直接冗余,一次性就查出来了）
+  
+    
 
 #### Mq
+
+https://blog.csdn.net/ThinkWon/article/details/104588612
+
+- **Mq有哪些优点**？
+  - 异步:  异步通讯
+  - 解耦:  系统之间解耦,无序关心其他系统的处理
+  - 削峰:  通过消息长度来控制请求量
+- **Mq的问题**?
+  - 顺序消费？
+    - 在业务层面上保证业务顺序
+  - 重复消费？
+    - 幂等Key解决
+- RabbitMq 基本概念？ 主要载体
+  - Broker:消息队列服务器实体
+  - Exchange:交换器
+  - Queue:队列
+  - Bindkey:  交换器和队列通过绑定key进行绑定
+  - Routingkey: 通过routingkey,交换器可以知道路由到哪里队列中
 
 #### Dubbo
 
