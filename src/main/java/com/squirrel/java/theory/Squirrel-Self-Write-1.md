@@ -270,14 +270,28 @@ https://blog.csdn.net/ThinkWon/article/details/104588612
     - 在业务层面上保证业务顺序
   - 重复消费？
     - 幂等Key解决
-- RabbitMq 基本概念？ 主要载体
+- **RabbitMq 基本概念？ 主要载体**
   - Broker:消息队列服务器实体
   - Exchange:交换器
   - Queue:队列
   - Bindkey:  交换器和队列通过绑定key进行绑定
   - Routingkey: 通过routingkey,交换器可以知道路由到哪里队列中
+- 路由类型？
+  - fanout：如果交换器收到消息，将会广播到所有绑定的队列上
+  - direct：如果路由键完全匹配，消息就被投递到相应的队列
+  - topic：可以使来自不同源头的消息能够到达同一个队列。 使用 topic 交换器时，可以使用通配符    * 代表一个  #代表多个
+- 设计MQ思路
+  - 持久性-刷磁盘
+  - 可用性-集群架构
+  - 性能- 如何通讯
 
 #### Dubbo
+
+- Dubbo是什么？
+- Dubbo服务注册流程？
+- Dubbo服务引用流程？
+- Dubbo负载均衡算法？		
+- Dubbo的分层？
 
 #### Zookeeper
 
