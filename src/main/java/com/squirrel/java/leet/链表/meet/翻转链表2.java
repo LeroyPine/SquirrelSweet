@@ -17,6 +17,8 @@ public class 翻转链表2 {
         ListNode headNode = new ListNode(-1);
         // 链表的节点依次插入到头结点后
 
+        //   1  3  5  6  8
+
         while (node != null) {
             // 当前节点的下一个节点
             ListNode next = node.next;
