@@ -1,5 +1,7 @@
 package com.squirrel.java.leet.链表.meet;
 
+import java.util.List;
+
 public class 翻转链表2 {
 
     /**
@@ -18,17 +20,43 @@ public class 翻转链表2 {
         // 链表的节点依次插入到头结点后
 
         //   1  3  5  6  8
-
+        // 头插法
         while (node != null) {
-            // 当前节点的下一个节点
+
+            // 记录node 的下一个节点
             ListNode next = node.next;
-            // 当前节点的下一个节点为头结点
+            // 头插入
             node.next = headNode.next;
-            // 头结点的下一个节点为当前节点
             headNode.next = node;
-            // 当前节点切换成next节点
+
             node = next;
         }
+
+
+        return headNode.next;
+
+    }
+
+    public ListNode reverse11(ListNode node) {
+        // 节点为null或者只有一个节点 那么直接返回
+
+        if (node == null || node.next == null) {
+            return node;
+        }
+
+        ListNode headNode = new ListNode(-1);
+
+        while (node != null) {
+
+            ListNode next = node.next;
+
+            node.next = headNode.next;
+
+            headNode.next = node;
+
+            node = next;
+        }
+
         return headNode.next;
 
     }
@@ -44,31 +72,76 @@ public class 翻转链表2 {
      */
     public ListNode reverseBetween(ListNode head, int m, int n) {
 
-        // 首先找到第m个节点
         ListNode dummyNode = new ListNode(-1);
         dummyNode.next = head;
-        ListNode prev = head;
+        ListNode prev = dummyNode;
 
-        for (int i = 0; i < m; i++) {
+        for (int i = 0; i < m - 1; i++) {
             prev = prev.next;
         }
-        // curr 为第m个节点
-        ListNode cur = prev.next;
-        ListNode next ;
+        ListNode curr = prev.next;
+        ListNode next = null;
 
         for (int i = 0; i < n - m; i++) {
-            // 第二个节点
-            next = cur.next;
-            // 当前节点的下一个节点为第三个节点
-            cur.next = next.next;
-            // 头插法
+
+            next = curr.next;
+
+            curr.next = next.next;
+
             next.next = prev.next;
 
             prev.next = next;
+
         }
 
         return dummyNode.next;
 
     }
 
+    /**
+     * ListNode dummyNode = new ListNode(-1);
+     * dummyNode.next = head;
+     * ListNode pre = dummyNode;
+     * for (int i = 0; i < left - 1; i++) {
+     * pre = pre.next;
+     * }
+     * ListNode cur = pre.next;
+     * ListNode next;
+     * for (int i = 0; i < right - left; i++) {
+     * next = cur.next;
+     * cur.next = next.next;
+     * next.next = pre.next;
+     * pre.next = next;
+     * }
+     * return dummyNode.next;
+     * }
+     * <p>
+     * 作者：LeetCode-Solution
+     * 链接：https://leetcode-cn.com/problems/reverse-linked-list-ii/solution/fan-zhuan-lian-biao-ii-by-leetcode-solut-teyq/
+     * 来源：力扣（LeetCode）
+     * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+     *
+     * @param args
+     */
+
+
+    public static void main(String[] args) {
+
+        ListNode a = new ListNode(1);
+        ListNode b = new ListNode(2);
+        ListNode c = new ListNode(3);
+        ListNode d = new ListNode(4);
+
+        a.next = b;
+        b.next = c;
+        c.next = d;
+
+
+        // 第3个节点
+        for (int i = 0; i < 2; i++) {
+            a = a.next;
+        }
+        ListNode cc = a;
+
+    }
 }

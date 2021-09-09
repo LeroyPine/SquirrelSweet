@@ -55,4 +55,44 @@ public class 二叉树的层序遍历 {
 
     }
 
+
+    // 层序遍历
+
+    public List<List<Integer>> levelOrderSelf1(TreeNode root) {
+
+        if (root == null) {
+            return new ArrayList<>();
+        }
+        List<List<Integer>> result = new ArrayList<>();
+        // 使用队列
+        Deque<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+
+            int size = queue.size();
+
+            List<Integer> re = new ArrayList<>();
+
+            for (int i = 0; i < size; i++) {
+
+                TreeNode node = queue.poll();
+
+                re.add(node.val);
+
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
+            }
+
+            result.add(re);
+
+        }
+        return result;
+    }
+
+
 }
