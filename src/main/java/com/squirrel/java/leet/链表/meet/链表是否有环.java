@@ -47,6 +47,47 @@ public class 链表是否有环 {
     }
 
 
+    public boolean hasCycleV2(ListNode head) {
+
+        ListNode slow = head;
+        ListNode fast = head.next;
+        while (slow != fast) {
+            if (slow == null) {
+                return false;
+            }
+            slow = slow.next;
+            if (fast == null || fast.next == null) {
+                return false;
+            }
+            // fast--
+            fast = fast.next.next;
+        }
+        return true;
+    }
+
+    public ListNode hasCycle23(ListNode head) {
+
+        ListNode slow = head;
+        ListNode fast = head.next;
+
+        while (fast != null && fast.next != null) {
+            // 快慢指针相遇
+            if (fast == slow) {
+                slow = head;
+                fast = fast.next;
+                while (slow != fast) {
+                    slow = slow.next;
+                    fast = fast.next;
+                }
+                return slow;
+            }
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return null;
+
+    }
+
     /**
      * @param head
      * @return
@@ -77,7 +118,5 @@ public class 链表是否有环 {
         }
 
         return null;
-
-
     }
 }
