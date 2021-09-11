@@ -25,12 +25,12 @@ public class 二叉树的最大深度 {
 
         // 递归思想： 把该方法认为最底层的代码执行
 
-        if (root == null) {
+        if (root == null){
             return 0;
         }
+
         int l = maxDepth(root.left);
         int r = maxDepth(root.right);
-
         return 1 + Math.max(l, r);
 
         /**

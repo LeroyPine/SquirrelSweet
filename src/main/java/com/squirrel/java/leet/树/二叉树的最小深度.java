@@ -18,17 +18,22 @@ public class 二叉树的最小深度 {
 
     public int minDepth(TreeNode root) {
 
-        // 递归思想： 把该方法认为最底层的代码执行
 
         if (root == null) {
             return 0;
         }
-        if (root.left == null) {
-            return 1 + minDepth(root.right);
+        if (root.left == null && root.right == null) {
+            return 1;
         }
-        if (root.right == null) {
-            return 1 + minDepth(root.left);
+
+        int mindep = Integer.MAX_VALUE;
+        if (root.left != null) {
+            mindep = Math.min(minDepth(root.left), mindep);
         }
-        return 1 + Math.min(minDepth(root.left), minDepth(root.right));
+        if (root.right != null) {
+            mindep = Math.min(minDepth(root.right), mindep);
+        }
+        return mindep + 1;
+
     }
 }

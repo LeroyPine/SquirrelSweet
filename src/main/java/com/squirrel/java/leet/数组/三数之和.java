@@ -1,5 +1,7 @@
 package com.squirrel.java.leet.数组;
 
+import java.util.List;
+
 /**
  * <p></p>
  * <p>
@@ -15,4 +17,11 @@ package com.squirrel.java.leet.数组;
  * @since 1.0
  */
 public class 三数之和 {
+
+
+    public List<List<Integer>> threeSum(int[] nums) {
+
+
+        return null;
+    }
 }
