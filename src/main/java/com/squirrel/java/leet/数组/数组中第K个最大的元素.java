@@ -1,5 +1,6 @@
 package com.squirrel.java.leet.数组;
 
+import javax.imageio.plugins.jpeg.JPEGImageReadParam;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
@@ -21,6 +22,7 @@ import java.util.Set;
  */
 public class 数组中第K个最大的元素 {
 
+/*
 
     public int findKthLargest(int[] nums, int k) {
 
@@ -88,5 +90,113 @@ public class 数组中第K个最大的元素 {
         nums[left] = nums[right];
         nums[right] = temp;
     }
+
+
+    //  查找数组中第K个元素
+
+    public int findKthLargestV2(int[] nums, int k) {
+        return quickSelectV2(nums, 0, nums.length - 1, nums.length - k);
+    }
+
+
+    private int quickSelectV2(int[] nums, int left, int right, int index) {
+        // 随机选取一个 pivot
+        int pivot = selectRandomPartition(nums, left, right);
+        //
+        if (pivot == index) {
+            return nums[pivot];
+        } else {
+            return pivot < index ? quickSelectV2(nums, 0, pivot - 1, index) :
+
+                    quickSelectV2(nums, pivot + 1, right, index);
+        }
+    }
+
+    private int selectRandomPartition(int[] nums, int left, int right) {
+        int i = random.nextInt(right - left + 1);
+        // 交换基准值
+        swapV2(nums, i, right);
+        return partitionV2(nums, left, right);
+    }
+
+    private int partitionV2(int[] nums, int left, int right) {
+        int target = nums[right];
+        int i = left;
+
+        for (int j = left; j < right; j++) {
+            if (nums[j] < target) {
+                swapV2(nums, i, j);
+                i++;
+            }
+        }
+        // 调整基准值
+        swapV2(nums, i, right);
+        return i;
+    }
+
+    private void swapV2(int[] nums, int i, int right) {
+        int temp = nums[i];
+        nums[i] = nums[right];
+        nums[right] = temp;
+    }
+*/
+
+
+    class Solution {
+        Random random = new Random();
+
+        public int findKthLargest(int[] nums, int k) {
+            return quickSelect(nums, 0, nums.length - 1, nums.length - k);
+        }
+
+        /*private int quickSelect(int[] nums, int left, int right, int index) {
+            // 随机一个树
+            int pivot = random.nextInt(right - left + 1) + left;
+            swap(nums,pivot,right);
+            // 排序
+            return partition(nums,left,right);
+        }
+
+        public void swap(int[] a, int i, int j) {
+            int temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
+        }
+*/
+      public int quickSelect(int[] a, int left, int right, int index) {
+            int q = randomPartition(a, left, right);
+            if (q == index) {
+                return a[q];
+            } else {
+                return q < index ? quickSelect(a, q + 1, right, index) : quickSelect(a, left, q - 1, index);
+            }
+        }
+
+        public int randomPartition(int[] a, int left, int right) {
+            int i = random.nextInt(right - left + 1) + left;
+            swap(a, i, right);
+            return partition(a, left, right);
+        }
+
+        public int partition(int[] a, int left, int right) {
+            int x = a[right], i = left;
+            for (int j = left; j < right; ++j) {
+                if (a[j] <= x) {
+                    swap(a, i, j);
+                    i++;
+                }
+            }
+            swap(a, i, right);
+            return i;
+        }
+
+        public void swap(int[] a, int i, int j) {
+            int temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
+        }
+    }
+
+
 
 }
