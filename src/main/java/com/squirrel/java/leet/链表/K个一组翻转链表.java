@@ -24,7 +24,7 @@ public class K个一组翻转链表 {
         /**
          * 思路： k个元素压栈,出栈的时候拼接在原链表上
          */
-
+/*
         ListNode dummyNode = new ListNode(-1);
         ListNode prev = dummyNode;
         Deque<ListNode> stack = new LinkedList<>();
@@ -50,7 +50,40 @@ public class K个一组翻转链表 {
             prev.next = temp;
             head = temp;
         }
-        return dummyNode.next;
-
+        return dummyNode.next;*/
+        return null;
     }
+
+
+    public ListNode reverseKGroup2(ListNode head, int k) {
+
+        ListNode dummyNode = new ListNode(-1);
+        ListNode prev = dummyNode;
+        Deque<ListNode> stack = new LinkedList<>();
+        while (true) {
+            ListNode temp = head;
+            int count = 0;
+            while (temp != null && count < k) {
+                stack.push(temp);
+                temp = temp.next;
+                count++;
+            }
+            // 剩余元素不满足k个直接跳出
+            if (count != k) {
+                prev.next = head;
+                break;
+            }
+            //
+            while (!stack.isEmpty()) {
+                prev.next = stack.pop();
+                prev = prev.next;
+            }
+            //
+            prev.next = temp;
+            head = temp;
+        }
+        return dummyNode.next;
+    }
+
+
 }

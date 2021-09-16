@@ -48,13 +48,33 @@ package com.squirrel.java.leet.字符串;
 // 👍 5759 👎 0
 
 
+import java.util.HashSet;
+import java.util.Set;
+
 //leetcode submit region begin(Prohibit modification and deletion)
 public class 无重复字符的最长子串 {
 
-
+    // 滑动窗口思想
     public int lengthOfLongestSubstring(String s) {
 
+        final int length = s.length();
+        Set<Character> set = new HashSet<>();
+        // 定义右指针 和 答案
+        int rk = -1, ans = 0;
+        for (int i = 0; i < length; i++) {
+            // 左指针向右移动
+            if (i != 0) {
+                set.remove(s.charAt(i - 1));
+            }
+            // 证明其非重复的字符
+            while (rk + 1 < length && !set.contains(s.charAt(rk + 1))) {
+                set.add(s.charAt(rk + 1));
+                rk++;
+            }
+            // 进行长度比较
+            ans = Math.max(ans, rk - i + 1);
 
-        return 0;
+        }
+        return ans;
     }
 }
