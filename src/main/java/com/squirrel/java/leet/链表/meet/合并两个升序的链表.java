@@ -17,60 +17,30 @@ package com.squirrel.java.leet.链表.meet;
 public class 合并两个升序的链表 {
 
 
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    public ListNode mergeTwoLists(ListNode node1, ListNode node2) {
 
         ListNode dummyNode = new ListNode(-1);
         ListNode curr = dummyNode;
 
-        while (l1 != null && l2 != null) {
+        while (node1 != null && node2 != null) {
 
-
-            if (l1.val > l2.val) {
-                curr.next = l2;
-                l2 = l2.next;
+            if (node1.val < node2.val) {
+                curr.next = node1;
+                node1 = node1.next;
             } else {
-                curr.next = l1;
-                l1 = l1.next;
+                curr.next = node2;
+                node2 = node2.next;
             }
             curr = curr.next;
         }
-
-        if (l1 != null) {
-            curr.next = l1;
+        if (node1 != null) {
+            curr.next = node1;
         }
-        if (l2 != null) {
-            curr.next = l2;
+        if (node2 != null) {
+            curr.next = node2;
         }
-
         return dummyNode.next;
-    }
 
-
-    public ListNode mergeTwoLists1(ListNode l1, ListNode l2) {
-
-        //
-        ListNode dummyNode = new ListNode(-1);
-        ListNode cur = dummyNode;
-
-        while (l1 != null && l2 != null) {
-            //
-            if (l1.val <= l2.val) {
-                cur.next = l1;
-                l1 = l1.next;
-            } else {
-                cur.next = l2;
-                l2 = l2.next;
-            }
-            cur = cur.next;
-        }
-        if (l1 != null) {
-            cur.next = l1;
-        }
-        if (l2 != null) {
-            cur.next = l2;
-        }
-
-        return dummyNode.next;
     }
 
 

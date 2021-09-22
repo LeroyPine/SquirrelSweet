@@ -26,7 +26,7 @@ public class 链表是否有环 {
      * @return
      */
     public boolean hasCycle(ListNode head) {
-        if (head == null) {
+        if (head == null || head.next == null) {
             return false;
         }
         //
@@ -34,9 +34,6 @@ public class 链表是否有环 {
         ListNode fast = head.next;
 
         while (slow != fast) {
-            if (slow == null) {
-                return false;
-            }
             slow = slow.next;
             if (fast == null || fast.next == null) {
                 return false;
@@ -44,49 +41,9 @@ public class 链表是否有环 {
             fast = fast.next.next;
         }
         return true;
-    }
-
-
-    public boolean hasCycleV2(ListNode head) {
-
-        ListNode slow = head;
-        ListNode fast = head.next;
-        while (slow != fast) {
-            if (slow == null) {
-                return false;
-            }
-            slow = slow.next;
-            if (fast == null || fast.next == null) {
-                return false;
-            }
-            // fast--
-            fast = fast.next.next;
-        }
-        return true;
-    }
-
-    public ListNode hasCycle23(ListNode head) {
-
-        ListNode slow = head;
-        ListNode fast = head.next;
-
-        while (fast != null && fast.next != null) {
-            // 快慢指针相遇
-            if (fast == slow) {
-                slow = head;
-                fast = fast.next;
-                while (slow != fast) {
-                    slow = slow.next;
-                    fast = fast.next;
-                }
-                return slow;
-            }
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-        return null;
 
     }
+
 
     /**
      * @param head

@@ -20,76 +20,30 @@ import java.util.*;
 public class 二叉树的层序遍历 {
 
 
-    public List<List<Integer>> levelOrderSelf(TreeNode root) {
-
-        // 一层 ::: 采用队列
-        if (root == null) {
-            return null;
-        }
-        Deque<TreeNode> queue = new ArrayDeque<>();
-        queue.offer(root);
-        List<List<Integer>> list = new ArrayList<>();
-        while (!queue.isEmpty()) {
-
-            int size = queue.size();
-            List<Integer> nodes = new LinkedList<>();
-
-            while (size-- > 0) {
-                final TreeNode poll = queue.poll();
-
-                assert poll != null;
-                nodes.add(poll.val);
-
-                if (poll.left != null) {
-                    queue.offer(poll.left);
-                }
-                if (poll.right != null) {
-                    queue.offer(poll.right);
-                }
-            }
-            list.add(nodes);
-
-        }
-
-        return list;
-
-    }
-
-
     // 层序遍历
-
-    public List<List<Integer>> levelOrderSelf1(TreeNode root) {
-
-        if (root == null) {
-            return new ArrayList<>();
-        }
+    public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
-        // 使用队列
+
+        // 使用队列进行层序遍历
         Deque<TreeNode> queue = new LinkedList<>();
+
         queue.offer(root);
-
+        // 如果队列不为空
         while (!queue.isEmpty()) {
-
-            int size = queue.size();
-
-            List<Integer> re = new ArrayList<>();
-
+            final int size = queue.size();
+            List<Integer> list = new ArrayList<>();
             for (int i = 0; i < size; i++) {
-
-                TreeNode node = queue.poll();
-
-                re.add(node.val);
-
+                final TreeNode node = queue.poll();
+                list.add(node.val);
                 if (node.left != null) {
                     queue.offer(node.left);
                 }
                 if (node.right != null) {
                     queue.offer(node.right);
                 }
+
             }
-
-            result.add(re);
-
+            result.add(list);
         }
         return result;
     }

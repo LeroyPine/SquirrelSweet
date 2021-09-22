@@ -1,5 +1,7 @@
 package com.squirrel.java.leet.排序;
 
+import java.util.Random;
+
 /**
  * <p></p>
  * <p>
@@ -34,53 +36,57 @@ public class 寿司快排 {
         System.out.println(ints);
     }
 
+    Random random = new Random();
 
+    // 快速排序: 分为左右两段 - 左<右
     public int[] quickSort(int[] nums) {
 
+        // 选取pivot
         quickSort(nums, 0, nums.length - 1);
 
         return nums;
     }
 
-    private void quickSort(int[] nums, int start, int end) {
-        // 下标小于结束
-        if (start < end) {
-            // 获取分割点
-            int pivot = partition(nums, start, end);
-            quickSort(nums, 0, pivot - 1);
-            quickSort(nums, pivot + 1, end);
+    // k
+    private void quickSort(int[] nums, int left, int right) {
 
+        // 随机选取 pivot
+        if (left < right) {
+            int pivot = randomSelectPivot(nums, left, right);
+            quickSort(nums, left, pivot - 1);
+            quickSort(nums, pivot + 1, right);
         }
-
 
     }
 
-    // 分区
-    private int partition(int[] nums, int start, int end) {
+    private int randomSelectPivot(int[] nums, int left, int right) {
+        // 随机选取pivot ,并将小于 pivot的移动到其左面, 大于 pivot 的移动到其右面
+        final int i = random.nextInt(right - left + 1) + left;
+        swapO(nums, i, right);
+        // partition
 
-        // 选取基准值
-        int target = nums[end];
-        int i = start;
-        // 将小于target的值移动到数组前面
+        return partition0(nums, left, right);
+    }
 
-        for (int j = start; j < end; j++) {
-            if (nums[j] < target) {
-                // 如果小于目标值  进行交换
-                swap(nums, i, j);
+    private int partition0(int[] nums, int left, int right) {
+        //
+        int pivot = nums[right];
+        int i = left - 1;
+        for (int j = left; j <= right - 1; j++) {
+            if (nums[j] <= pivot) {
                 i++;
+                swapO(nums, j, i);
             }
         }
-        // 基准值修正
-        swap(nums, i, end);
-        return i;
+        swapO(nums, i + 1, right);
+        return i + 1;
     }
 
-    private void swap(int[] nums, int i, int j) {
-
+    // 交换
+    private void swapO(int[] nums, int i, int right) {
         int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
-
+        nums[i] = nums[right];
+        nums[right] = temp;
     }
 
 }

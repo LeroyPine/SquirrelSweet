@@ -12,91 +12,84 @@ public class 翻转链表2 {
      */
     public ListNode reverse(ListNode node) {
         // 节点为null或者只有一个节点 那么直接返回
-        if (node == null || node.next == null) {
+     /*   if (node == null || node.next == null) {
             return node;
         }
         // 创建一个头结点
         ListNode headNode = new ListNode(-1);
         // 链表的节点依次插入到头结点后
-
         //   1  3  5  6  8
         // 头插法
         while (node != null) {
-
-            // 记录node 的下一个节点
+            // 下一个节点
             ListNode next = node.next;
-            // 头插入
-            node.next = headNode.next;
+            //
+            next.next = headNode.next;
             headNode.next = node;
 
             node = next;
         }
+        return headNode.next;*/
 
-
-        return headNode.next;
-
-    }
-
-    public ListNode reverse11(ListNode node) {
-        // 节点为null或者只有一个节点 那么直接返回
-
-        if (node == null || node.next == null) {
+        if(node ==null || node.next ==null){
             return node;
         }
 
-        ListNode headNode = new ListNode(-1);
-
+        ListNode newHead = new ListNode(-1);
         while (node != null) {
 
             ListNode next = node.next;
-
-            node.next = headNode.next;
-
-            headNode.next = node;
-
+            node.next = newHead.next;
+            newHead.next = node;
             node = next;
         }
-
-        return headNode.next;
+        return newHead.next;
+        /**
+         *  if(node ==null || node.next ==null){
+         *             return node;
+         *         }
+         *
+         *         ListNode newHead = new ListNode(-1);
+         *         while (node != null) {
+         *
+         *             ListNode next = node.next;
+         *             node.next = newHead.next;
+         *             newHead.next = node;
+         *             node = next;
+         *         }
+         *         return newHead.next;
+         */
 
     }
 
 
-    /**
-     * 翻转链表 从m到n之间的
-     *
-     * @param head
-     * @param m
-     * @param n
-     * @return
-     */
+    // 头插法进行翻转
     public ListNode reverseBetween(ListNode head, int m, int n) {
 
         ListNode dummyNode = new ListNode(-1);
         dummyNode.next = head;
         ListNode prev = dummyNode;
 
-        for (int i = 0; i < m - 1; i++) {
+        // 遍历 m 到 第m的前一个个节点
+        for (int i = 0; i < m; i++) {
             prev = prev.next;
         }
         ListNode curr = prev.next;
-        ListNode next = null;
-
+        // 进行翻转
         for (int i = 0; i < n - m; i++) {
-
-            next = curr.next;
-
+            ListNode next = curr.next;
+            // 当前节点指向孙子节点
             curr.next = next.next;
-
+            // next 变为头结点
             next.next = prev.next;
-
+            //
             prev.next = next;
 
         }
-
         return dummyNode.next;
 
     }
+
 
     /**
      * ListNode dummyNode = new ListNode(-1);
