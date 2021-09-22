@@ -4,13 +4,33 @@ import java.util.List;
 
 public class 翻转链表2 {
 
+
+    // 翻转链表  头插法
+    public ListNode reverse(ListNode node) {
+
+        // 1 2 3 4 5
+
+        ListNode newHead = new ListNode(-1);
+        while (node != null) {
+
+            ListNode next = node.next;
+            next.next = newHead.next;
+            newHead.next = node;
+            node = next;
+        }
+        return newHead.next;
+
+
+    }
+
+
     /**
      * 采用头插法进行翻转链表: 创建一个头结点,在该节点后插入链表的值
      *
      * @param node
      * @return
      */
-    public ListNode reverse(ListNode node) {
+    public ListNode reverseV3(ListNode node) {
         // 节点为null或者只有一个节点 那么直接返回
      /*   if (node == null || node.next == null) {
             return node;
