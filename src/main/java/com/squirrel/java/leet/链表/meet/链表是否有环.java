@@ -50,14 +50,15 @@ public class 链表是否有环 {
      * @return
      */
     public ListNode hasCycle2(ListNode head) {
+        if (head == null || head.next == null) {
+            return null;
+        }
 
         ListNode slow = head;
         ListNode fast = head.next;
 
-        //
         while (fast != null && fast.next != null) {
 
-            // 如果快慢指针相遇
             if (slow == fast) {
                 slow = head;
                 fast = fast.next;
@@ -71,9 +72,7 @@ public class 链表是否有环 {
 
             slow = slow.next;
             fast = fast.next.next;
-
         }
-
         return null;
     }
 }

@@ -45,11 +45,13 @@ public class 合并两个有序数组 {
 
         int p1 = 0;
         int p2 = 0;
+        // 定义一个新数组
         int[] sorted = new int[m + n];
-        int cur = 0;
         while (p1 < m || p2 < n) {
 
-            //
+            // 定义变量接收当前值
+            int cur;
+
             if (p1 == m) {
                 cur = nums2[p2++];
             } else if (p2 == n) {
@@ -59,13 +61,17 @@ public class 合并两个有序数组 {
             } else {
                 cur = nums2[p2++];
             }
+
+            //
             sorted[p1 + p2 - 1] = cur;
+
         }
 
-        for (int i = 0; i < m + n; i++) {
+        for (int i = 0; i != m + n; i++) {
+
             nums1[i] = sorted[i];
-        }
 
+        }
     }
 
 }
