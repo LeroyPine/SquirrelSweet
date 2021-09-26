@@ -81,44 +81,28 @@ public class 两数相加2 {
         return dummyNode.next;
     }
 
+    private ListNode reverse(ListNode head) {
 
-    public static void main(String[] args) {
-        ListNode listNode = new ListNode(8);
-        ListNode listNode1 = new ListNode(5);
-        ListNode listNode2 = new ListNode(3);
-
-        listNode.next = listNode1;
-        listNode1.next = listNode2;
-
-        ListNode reverse = reverse(listNode);
-        System.out.println(reverse);
-    }
+        // 链表翻转头插法
+        ListNode headNode = new ListNode(-1);
 
 
-    public static ListNode reverse(ListNode node) {
-
-        if (node == null || node.next == null) {
-            return node;
-        }
-
-        // 1 -> 2 ->  3 ->  4
-        //  4 3  2 1
-        ListNode prev = null;
-        ListNode curr = node;
-
-
+        ListNode curr = head;
+        // 当前节点不为空的情况下
         while (curr != null) {
             // 下一个节点
-            ListNode next = curr.next;
+            final ListNode next = curr.next;
 
-            curr.next = prev;
-            // 当前节点翻转
-            prev = curr;
+            curr.next = headNode;
+
+            headNode.next = curr;
 
             curr = next;
+
         }
 
-        return prev;
+
+        return head;
     }
 
 }
