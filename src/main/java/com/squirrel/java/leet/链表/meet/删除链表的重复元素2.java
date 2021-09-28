@@ -30,7 +30,7 @@ public class 删除链表的重复元素2 {
 
             if (cur.next.val == cur.next.next.val) {
                 final int val = cur.next.val;
-                while (cur.next != null && cur.next.val == val) {
+                while (cur.next.next != null && cur.next.next.val == val) {
                     cur.next = cur.next.next;
                 }
             } else {
@@ -39,4 +39,29 @@ public class 删除链表的重复元素2 {
         }
         return dummyNode.next;
     }
+
+
+    public ListNode deleteDuplicates1(ListNode head) {
+
+        ListNode dummyNode = new ListNode(-1, head);
+        ListNode curr = dummyNode;
+
+        while (curr.next != null && curr.next.next != null) {
+
+
+            if (curr.next.val == curr.next.next.val) {
+                final int val = curr.next.val;
+
+                while (curr.next != null && curr.next.val == val) {
+                    curr.next = curr.next.next;
+                }
+            } else {
+                curr = curr.next;
+            }
+        }
+        return dummyNode.next;
+
+    }
+
+
 }
