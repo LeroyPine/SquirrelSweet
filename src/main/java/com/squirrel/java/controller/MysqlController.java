@@ -17,9 +17,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MysqlController {
 
-    private final DataSource dataSource;
+  //  private final DataSource dataSource;
 
-    @RequestMapping("testMysql")
+/*    @RequestMapping("testMysql")
     public String testMysql() {
         try {
             //获取连接,注意要关闭,这里没有关
@@ -41,7 +41,7 @@ public class MysqlController {
             e.printStackTrace();
         }
         return null;
-    }
+    }*/
 
 
 }
