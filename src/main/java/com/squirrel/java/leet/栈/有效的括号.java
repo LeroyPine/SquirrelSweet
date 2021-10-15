@@ -32,30 +32,33 @@ public class 有效的括号 {
      * @param s
      * @return
      */
-    public boolean isValid(String s) {
+    public static boolean isValid(String s) {
 
-        Map<String, String> map = new HashMap<>();
-        map.put(")", "(");
-        map.put("]", "[");
-        map.put("}", "{");
+        if (s.length() % 2 == 1) {
+            return false;
+        }
 
-        //
+        Map<Character, Character> map = new HashMap<>();
+        map.put(')', '(');
+        map.put(']', '[');
+        map.put('}', '{');
+        //使用栈来进行判断
         Deque<Character> stack = new LinkedList<>();
-        final int length = s.length();
-        //
 
-        for (int i = 0; i < length; i++) {
-            final char c = s.charAt(i);
-            if (!map.containsKey(String.valueOf(c))) {
+        for (int i = 0; i < s.length(); i++) {
+
+            if (!map.containsKey(s.charAt(i))) {
                 stack.push(s.charAt(i));
             } else {
-                if (!stack.isEmpty() && map.get(String.valueOf(c)).equals(String.valueOf(stack.peek()))) {
+                if (!stack.isEmpty() && map.get(s.charAt(i)) == stack.peek()) {
                     stack.pop();
                 }
             }
         }
         return stack.isEmpty();
+    }
 
-
+    public static void main(String[] args) {
+        isValid("]");
     }
 }

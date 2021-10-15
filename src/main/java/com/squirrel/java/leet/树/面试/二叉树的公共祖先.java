@@ -37,4 +37,26 @@ public class 二叉树的公共祖先 {
         return null;
     }
 
+
+    public TreeNode lowestCommonAncestorV1(TreeNode root, TreeNode p, TreeNode q) {
+        //
+        if (p == null || q == null) {
+            return null;
+        }
+        //
+        if (root != null) {
+            TreeNode leftNode = lowestCommonAncestor(root.left, p, q);
+            TreeNode rightNode = lowestCommonAncestor(root.right, p, q);
+
+            if (leftNode != null && rightNode != null) {
+                return root;
+            } else if (leftNode == null) {
+                return rightNode;
+            } else {
+                return leftNode;
+            }
+        }
+        return null;
+
+    }
 }

@@ -48,10 +48,8 @@ public class 合并两个有序数组 {
         // 定义一个新数组
         int[] sorted = new int[m + n];
         while (p1 < m || p2 < n) {
-
             // 定义变量接收当前值
             int cur;
-
             if (p1 == m) {
                 cur = nums2[p2++];
             } else if (p2 == n) {
@@ -61,17 +59,45 @@ public class 合并两个有序数组 {
             } else {
                 cur = nums2[p2++];
             }
-
             //
             sorted[p1 + p2 - 1] = cur;
+        }
+        for (int i = 0; i != m + n; i++) {
+            nums1[i] = sorted[i];
+        }
+    }
 
+
+    public static void mergePointV1(int[] nums1, int m, int[] nums2, int n) {
+        // 定义两个指针俩标记合并过程
+        int p1 = 0;
+        int p2 = 0;
+        int[] sorted = new int[]{m + n};
+
+        int j = 0;
+        while (p1 < m || p2 < n) {
+
+            int curr = 0;
+            if (p1 == m) {
+                curr = nums2[p2++];
+            } else if (p2 == n) {
+                curr = nums1[p1++];
+            } else if (nums1[p1] < nums2[p2]) {
+                curr = nums1[p1++];
+            } else {
+                curr = nums2[p2++];
+            }
+
+            sorted[j++] = curr;
         }
 
-        for (int i = 0; i != m + n; i++) {
-
+        for (int i = 0; i < m + n; i++) {
             nums1[i] = sorted[i];
 
         }
+
+
     }
+
 
 }
