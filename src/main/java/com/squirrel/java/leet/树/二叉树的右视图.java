@@ -1,9 +1,6 @@
 package com.squirrel.java.leet.树;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
+import java.util.*;
 
 /**
  * <p></p>
@@ -26,30 +23,31 @@ public class 二叉树的右视图 {
 
     public List<Integer> levelOrder(TreeNode root) {
 
-        List<Integer> temp = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
         if (root == null) {
-            return temp;
+            return list;
         }
-        Deque<TreeNode> queue = new ArrayDeque<>();
-        queue.offer(root);
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            while (size-- > 0) {
-                TreeNode node = queue.poll();
+        Deque<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()){
 
-                if (root.left != null) {
-                    queue.offer(node.left);
+            list.add(queue.peek().val);
+            final int size = queue.size();
+
+            for (int i = 0; i <size; i++) {
+
+                final TreeNode poll = queue.poll();
+                if (poll.right!=null){
+                    queue.add(poll.right);
                 }
-                if (root.right != null) {
-                    queue.offer(node.right);
+                if (poll.left!=null){
+                    queue.add(poll.left);
                 }
-            }
-            if (queue.peek() != null) {
-                temp.add(queue.peek().val);
 
             }
+
         }
-        return temp;
+        return list;
 
     }
 }
