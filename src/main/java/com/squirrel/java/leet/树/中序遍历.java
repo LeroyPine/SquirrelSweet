@@ -1,6 +1,8 @@
 package com.squirrel.java.leet.树;
 
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -42,6 +44,25 @@ public class 中序遍历 {
         inOrder(root.left, list);
         list.add(root.val);
         inOrder(root.right, list);
+    }
+
+
+    public List<Integer> postorderTraversalWhile(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        Deque<TreeNode> stack = new LinkedList<>();
+
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            res.add(root.val);
+            root = root.right;
+        }
+        return res;
+
+
     }
 
 }

@@ -17,45 +17,47 @@ import java.util.LinkedList;
  * @date Created in 2021年09月26日 15:57
  * @since 1.0
  */
-public class 用栈实现队列 {
+public class MyQueue {
 
+    Deque<Integer> inStack;
+    Deque<Integer> outStack;
 
     // 定义两个栈   --  一个输入栈 一个输出栈
+    public MyQueue() {
+        inStack = new LinkedList<>();
+        outStack = new LinkedList<>();
+    }
 
-    Deque<Integer> inStack = new LinkedList<>();
-    Deque<Integer> outStack = new LinkedList<>();
+    //  peek()   pop()  push()  isEmpty()
 
+    // 队列是先进先出
+    // 栈是先进后出
 
-    public void push(int x) {
+    public void push(Integer x) {
         inStack.push(x);
     }
 
-    public int pop() {
-        // 出栈
-        if (!inStack.isEmpty()) {
-            in2out();
+
+    public void pop() {
+        if (inStack.isEmpty()) {
+            in2Out();
         }
-        return outStack.pop();
-
+        outStack.pop();
     }
 
-    public int peek() {
-        if (!inStack.isEmpty()) {
-            in2out();
+    public Integer peek() {
+        if (inStack.isEmpty()) {
+            in2Out();
         }
-        return outStack.peek();
+         return outStack.peek();
     }
 
-    public boolean empty() {
-        return inStack.isEmpty() && outStack.isEmpty();
-    }
 
-    private void in2out() {
-        // 编程队列的顺序
+
+    //
+    public void in2Out() {
         while (!inStack.isEmpty()) {
             outStack.push(inStack.pop());
         }
     }
-
-
 }

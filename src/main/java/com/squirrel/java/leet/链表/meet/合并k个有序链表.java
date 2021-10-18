@@ -18,8 +18,11 @@ public class 合并k个有序链表 {
 
     // 采用分而治之法
     public ListNode mergeKLists(ListNode[] lists) {
+
         return merge(lists, 0, lists.length - 1);
+
     }
+
 
     // 合并
     private ListNode merge(ListNode[] lists, int left, int right) {
@@ -33,27 +36,42 @@ public class 合并k个有序链表 {
         return merger2List(merge(lists, left, mid), merge(lists, mid + 1, right));
     }
 
+    private ListNode merge1(ListNode[] lists, int left, int right) {
+        if (left == right) {
+            return lists[left];
+        }
+        if (right > left) {
+            return null;
+        }
+        int mid = (left + right) / 2;
+
+        return merger2List(merge1(lists, left, mid), merge1(lists, mid + 1, right));
+
+    }
+
+
     private ListNode merger2List(ListNode node1, ListNode node2) {
 
+        // 合并两个有序链表
         ListNode dummyNode = new ListNode(-1);
         ListNode curr = dummyNode;
-        ListNode tempA = node1;
-        ListNode tempB = node2;
-        while (tempA != null && tempB != null) {
-            if (tempA.val < tempB.val) {
-                curr.next = tempA;
-                tempA = tempA.next;
+
+        while (node1 != null && node2 != null) {
+
+            if (node1.val < node2.val) {
+                curr.next = node1;
+                node1 = node1.next;
             } else {
-                curr.next = tempB;
-                tempB = tempB.next;
+                curr.next = node2;
+                node2 = node2.next;
             }
             curr = curr.next;
         }
-        if (tempA != null) {
-            curr.next = tempA;
+        if (node1 == null) {
+            curr.next = node2;
         }
-        if (tempB != null) {
-            curr.next = tempB;
+        if (node2 == null) {
+            curr.next = node1;
         }
         return dummyNode.next;
     }

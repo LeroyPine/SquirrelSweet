@@ -50,9 +50,21 @@ public class 全排列 {
             backtrack(n, output, res, first + 1);
             // 交换
             Collections.swap(output, first, i);
-
-
         }
+    }
+
+
+    public List<List<Integer>> permuteV2(int[] nums) {
+
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> output = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            output.add(nums[i]);
+        }
+        // 回溯
+        int n = nums.length;
+        backtrack(n, output, res, 0);
+        return res;
 
     }
 

@@ -18,34 +18,42 @@ public class 搜索旋转数组 {
 
     // 使用二分查找
     public int search(int[] nums, int target) {
-        int n = nums.length;
-        if (n == 0) {
+
+        // 切分成两段
+        if (nums.length == 0) {
             return -1;
         }
-        if (n == 1) {
-            return nums[0] == target ? 0 : -1;
+
+        if (nums.length == 1) {
+            if (nums[0] == target) {
+                return 0;
+            } else {
+                return -1;
+            }
         }
 
-        int l = 0;
-        int r = n - 1;
+        // 切分成两段有序的数组
+        int left = 0;
+        int right = nums.length - 1;
 
-        while (l <= r) {
-            int mid = (l + r) / 2;
+        while (left <= right) {
+            // 选取中位数
+            int mid = (left + right) / 2;
             if (nums[mid] == target) {
                 return mid;
             }
+            // 分段查询
             if (nums[0] <= nums[mid]) {
-                //
                 if (nums[0] <= target && target < nums[mid]) {
-                    r = mid - 1;
+                    right = mid - 1;
                 } else {
-                    l = mid + 1;
+                    left = mid + 1;
                 }
             } else {
-                if (nums[mid] < target && target <= nums[n - 1]) {
-                    l = mid + 1;
+                if (nums[mid] < target && target < nums[nums.length - 1]) {
+                    left = mid + 1;
                 } else {
-                    r = mid - 1;
+                    right = mid - 1;
                 }
             }
         }

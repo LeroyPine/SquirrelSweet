@@ -51,7 +51,7 @@ public class 翻转链表2 {
         }
         return headNode.next;*/
 
-        if(node ==null || node.next ==null){
+        if (node == null || node.next == null) {
             return node;
         }
 
@@ -101,6 +101,40 @@ public class 翻转链表2 {
             // 当前节点指向孙子节点
             curr.next = next.next;
             // next 变为头结点
+            next.next = prev.next;
+            //
+            prev.next = next;
+
+        }
+        return dummyNode.next;
+
+    }
+
+
+    public ListNode reverseBetween1(ListNode head, int m, int n) {
+
+    /*    if (head == null || head.next == null) {
+            return head;
+        }*/
+        // 穿针引线  找到第   M个节点-N
+        ListNode dummyNode = new ListNode(-1);
+        dummyNode.next = head;
+        ListNode prev = dummyNode;
+        //ListNode fast = head;
+        // 同时跑   1 3 4 5  第3
+
+        for (int i = 0; i < m - 1; i++) {
+            prev = prev.next;
+        }
+        // 此时prev 是m节点的前一个节点
+
+        ListNode curr = prev.next;
+
+        for (int i = 0; i < n - m; i++) {
+            // 下一个节点
+            ListNode next = curr.next;
+            curr.next = next.next;
+            //
             next.next = prev.next;
             //
             prev.next = next;
