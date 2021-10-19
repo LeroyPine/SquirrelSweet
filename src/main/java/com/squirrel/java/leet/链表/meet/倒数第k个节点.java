@@ -35,4 +35,21 @@ public class 倒数第k个节点 {
 
         return slow;
     }
+
+    public ListNode getKthFromEndV1(ListNode head, int k) {
+
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while (fast != null && k > 0) {
+            fast = fast.next;
+            k--;
+        }
+
+        while (fast != null) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return slow;
+    }
 }

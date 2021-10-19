@@ -1,8 +1,8 @@
 package com.squirrel.java.leet.链表.meet;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * <p></p>
@@ -61,6 +61,19 @@ public class 删除链表的重复元素2 {
         }
         return dummyNode.next;
 
+    }
+
+    public static void main(String[] args) {
+      /*  AtomicInteger i = new AtomicInteger();
+        final ExecutorService executorService = Executors.newFixedThreadPool(8);
+
+        while (i.get() != Integer.MAX_VALUE){
+            executorService.submit(()->{
+                i.getAndIncrement();
+                System.out.println(123);
+            });
+
+        }*/
     }
 
 
