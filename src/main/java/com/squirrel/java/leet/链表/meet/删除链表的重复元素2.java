@@ -1,8 +1,10 @@
 package com.squirrel.java.leet.链表.meet;
 
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * <p></p>
@@ -22,7 +24,8 @@ public class 删除链表的重复元素2 {
 
 
     public ListNode deleteDuplicates(ListNode head) {
-
+ReentrantLock lock = new ReentrantLock();;
+lock.lock();;
         ListNode dummyNode = new ListNode(-1);
         dummyNode.next = head;
         ListNode cur = dummyNode;

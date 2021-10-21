@@ -100,4 +100,31 @@ public class 合并两个有序数组 {
     }
 
 
+    // 合并两个有序数组
+    public static void merge3(int[] nums1, int m, int[] nums2, int n) {
+
+        int[] sorted = new int[m + n];
+        // 使用双指针
+        int p1 = 0;
+        int p2 = 0;
+
+        while (p1 != m || p2 != n) {
+            // 定义临时变量 接数组的值
+            int temp;
+            if (p1 == m) {
+                temp = nums2[p2++];
+            } else if (p2 == n) {
+                temp = nums1[p1++];
+            } else if (nums1[p1] < nums2[p2]) {
+                temp = nums1[p1++];
+            } else {
+                temp = nums2[p2++];
+            }
+            sorted[p1 + p2 - 1] = temp;
+        }
+        // 输出
+        for (int i = 0; i < sorted.length; i++) {
+            nums1[i] = sorted[i];
+        }
+    }
 }
