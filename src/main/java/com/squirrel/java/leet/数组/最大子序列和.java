@@ -34,12 +34,9 @@ public class 最大子序列和 {
 
         for (int num : nums) {
 
-            pre = Math.max(pre + num, num);
-
+            pre = Math.max(maxNum, pre + num);
             maxNum = Math.max(maxNum, pre);
         }
-
         return maxNum;
-
     }
 }

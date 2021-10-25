@@ -59,41 +59,43 @@ public class 螺旋矩阵 {
         return order;
     }
 
+    /**
+     * 螺旋矩阵   一层一层往里遍历
+     *
+     * @param matrix
+     * @return
+     */
+    public List<Integer> spiralOrder2(int[][] matrix) {
 
-    public List<Integer> spiralOrder1(int[][] matrix) {
-        //
-        List<Integer> order = new ArrayList<>();
-        // 校验
+        List<Integer> list = new ArrayList<>();
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
-            return order;
+            return list;
         }
-        //
-        int rows = matrix.length;
-        int columns = matrix[0].length;
-        int left = 0;
-        int right = columns - 1;
         int top = 0;
-        int bottom = rows - 1;
 
-        //  符合矩阵
+        int left = 0;
+        int bottom = matrix.length - 1;
+        int right = matrix[0].length - 1;
+
+
         while (left <= right && top <= bottom) {
 
-            // 第一行
-            for (int column = left; column <= right; column++) {
-                order.add(matrix[top][column]);
+            // 上面的行
+            for (int col = left; col <= right; col++) {
+                list.add(matrix[top][col]);
             }
-            // 右面的列
+            //  右面的列
             for (int row = top + 1; row <= bottom; row++) {
-                order.add(matrix[row][right]);
+                list.add(matrix[row][right]);
             }
             //
             if (left < right && top < bottom) {
-                for (int column = right - 1; column > left; column--) {
-                    order.add(matrix[bottom][column]);
+                for (int col = right - 1; col > left; col--) {
+                    list.add(matrix[bottom][col]);
                 }
 
                 for (int row = bottom; row > top; row--) {
-                    order.add(matrix[row][left]);
+                    list.add(matrix[row][left]);
                 }
             }
 
@@ -101,8 +103,8 @@ public class 螺旋矩阵 {
             right--;
             top++;
             bottom--;
-
         }
-        return order;
+        return list;
+
     }
 }

@@ -46,4 +46,33 @@ public class 二叉树的右视图 {
         return list;
 
     }
+
+
+    // 二叉树的右视图  -- 从右面看
+    public List<Integer> rightSideView2(TreeNode root) {
+
+        // 二叉树的层序遍历如何遍历呢？  使用队列的方式
+        List<Integer> list = new ArrayList<>();
+        Deque<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        // 如果队列不为空  那么让他遍历起来
+        while (!queue.isEmpty()) {
+
+            int size = queue.size();
+            TreeNode peek = queue.peek();
+            list.add(peek.val);
+            while (size > 0) {
+                TreeNode poll = queue.poll();
+                if (poll.left != null) {
+                    queue.offer(poll.left);
+                }
+                if (poll.right != null) {
+                    queue.offer(poll.right);
+                }
+                size--;
+            }
+        }
+        return list;
+
+    }
 }

@@ -172,6 +172,35 @@ public class 翻转链表2 {
      */
 
 
+    // 反转2
+    public ListNode reverseBetween2(ListNode head, int m, int n) {
+
+        ListNode dummyNode = new ListNode(-1);
+        dummyNode.next = head;
+        //
+        ListNode prev = dummyNode;
+        // 首先走到 第m个节点的前一个节点
+
+        for (int i = 0; i < m; i++) {
+            prev = prev.next;
+        }
+        // 此时的prev 为 m之前的一个节点， 要反转的节点 m
+        ListNode curr = prev.next;
+
+        // 头插法    3 5 7 0 2
+        for (int i = 0; i < n - m ; i++) {
+
+            ListNode next = curr.next;
+            curr.next = next.next;
+            next.next = prev.next;
+            prev.next = next;
+
+        }
+        return dummyNode.next;
+
+    }
+
+
     public static void main(String[] args) {
 
         ListNode a = new ListNode(1);

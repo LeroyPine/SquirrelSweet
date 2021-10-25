@@ -67,4 +67,40 @@ public class 接雨水 {
         return ans;
 
     }
+
+    /**
+     * 动态规划： 从左往右遍历找到最大的值，
+     * 从右往左遍历找到最大的值。
+     * <p>
+     * 两个数组相减的到最终的雨水
+     * <p>
+     * 双指针感受一下  接雨水
+     */
+
+    public int trapDpoint(int[] height) {
+
+        int ans = 0;
+        int left = 0;
+        int right = height.length - 1;
+
+        int leftMax = 0;
+        int rightMax = 0;
+
+        while (left < right) {
+
+            //
+            leftMax = Math.max(leftMax, height[left]);
+            rightMax = Math.max(rightMax, height[right]);
+
+            // 如果左面的高度小于右面的
+            if (height[left] < height[right]) {
+                ans += leftMax - height[left];
+                left++;
+            } else {
+                ans += rightMax - height[right];
+                --right;
+            }
+        }
+        return ans;
+    }
 }
