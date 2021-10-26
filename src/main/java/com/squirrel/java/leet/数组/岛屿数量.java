@@ -20,6 +20,7 @@ public class 岛屿数量 {
         if (grid == null || grid.length == 0) {
             return 0;
         }
+        // asd
 
         int nr = grid.length;
         int nc = grid[0].length;
