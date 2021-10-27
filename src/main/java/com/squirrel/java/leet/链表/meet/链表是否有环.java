@@ -79,7 +79,7 @@ public class 链表是否有环 {
 
         ReentrantReadWriteLock.ReadLock readLock = lock.readLock();
         readLock.lock();;
-        lock.writeLock()
+        lock.writeLock();
         return null;
     }
 

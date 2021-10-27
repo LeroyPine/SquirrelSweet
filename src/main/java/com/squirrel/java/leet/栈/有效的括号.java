@@ -1,5 +1,6 @@
 package com.squirrel.java.leet.栈;
 
+import java.awt.image.ImageProducer;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -32,33 +33,44 @@ public class 有效的括号 {
      * @param s
      * @return
      */
-    public static boolean isValid(String s) {
+
+    //"([}}])"
+    public static boolean isValid1(String s) {
 
         if (s.length() % 2 == 1) {
             return false;
         }
-
+        //
         Map<Character, Character> map = new HashMap<>();
         map.put(')', '(');
-        map.put(']', '[');
         map.put('}', '{');
-        //使用栈来进行判断
+        map.put(']', '[');
+
+        // 声明一个栈  来做校验  (([]))
         Deque<Character> stack = new LinkedList<>();
+
+        // 遍历字符串
 
         for (int i = 0; i < s.length(); i++) {
 
             if (!map.containsKey(s.charAt(i))) {
+                //
                 stack.push(s.charAt(i));
             } else {
-                if (!stack.isEmpty() && map.get(s.charAt(i)) == stack.peek()) {
-                    stack.pop();
+                if (stack.isEmpty() || stack.peek() != map.get(s.charAt(i))) {
+                    return false;
                 }
+
+                stack.pop();
+
             }
         }
         return stack.isEmpty();
+
+
     }
 
     public static void main(String[] args) {
-        isValid("]");
+        isValid1("([}}])");
     }
 }

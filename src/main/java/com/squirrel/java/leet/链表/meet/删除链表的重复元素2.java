@@ -24,8 +24,10 @@ public class 删除链表的重复元素2 {
 
 
     public ListNode deleteDuplicates(ListNode head) {
-ReentrantLock lock = new ReentrantLock();;
-lock.lock();;
+        ReentrantLock lock = new ReentrantLock();
+        ;
+        lock.lock();
+        ;
         ListNode dummyNode = new ListNode(-1);
         dummyNode.next = head;
         ListNode cur = dummyNode;
@@ -65,6 +67,33 @@ lock.lock();;
         return dummyNode.next;
 
     }
+
+
+    public ListNode deleteDuplicates12(ListNode head) {
+
+        ListNode dummyNode = new ListNode(-1);
+        dummyNode.next = head;
+
+        ListNode curr = dummyNode;
+
+        // 如果节点和下一个节点不为空
+        while (curr.next != null && curr.next.next != null) {
+
+            if (curr.next.val == curr.next.next.val) {
+                //
+                int val = curr.next.val;
+                while (curr.next.next != null && curr.next.next.val == val) {
+                    curr.next = curr.next.next;
+                }
+            } else {
+                curr = curr.next;
+            }
+
+        }
+        return dummyNode.next;
+
+    }
+
 
     public static void main(String[] args) {
       /*  AtomicInteger i = new AtomicInteger();
