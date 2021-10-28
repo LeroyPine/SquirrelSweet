@@ -15,5 +15,7 @@ public class SquirrelAspect {
 
     @Pointcut("@annotation(com.squirrel.java.annoation.SquLog))")
     public void squLog(){}
+    // ssh
+
 
 }
