@@ -27,36 +27,32 @@ public class K个一组翻转链表 {
         Deque<ListNode> stack = new LinkedList<>();
 
         ListNode dummyNode = new ListNode(-1);
+        dummyNode.next = head;
         ListNode curr = dummyNode;
 
-
         while (true) {
-            // 统计是否到k个元素
-            int count = 0;
-            // 临时引用
+
+            // k个一组
             ListNode temp = head;
-            // 如果不够 k 个保持原状
-            for (int i = 0; i < k && temp != null; i++) {
-                stack.add(temp);
+            int count = 0;
+            while (temp != null && count!=k) {
+                stack.push(temp);
                 temp = temp.next;
                 count++;
             }
             if (count < k) {
-
                 break;
             }
-            // 出站
             while (!stack.isEmpty()) {
+
                 curr.next = stack.pop();
                 curr = curr.next;
             }
-            // 不满足k个继续拼接
-            curr.next = head;
-            // temp 为下一段的起点
+            // 不足k接着拼 默认将后面的拼接上
+            curr.next = temp;
             head = temp;
         }
         return dummyNode.next;
-
     }
 
 

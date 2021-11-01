@@ -32,7 +32,7 @@ public class 分割链表 {
 
         while (head != null) {
 
-            if (head.val > x) {
+            if (head.val < x) {
                 before.next = head;
                 before = before.next;
             } else {
@@ -43,7 +43,7 @@ public class 分割链表 {
         }
 
         after.next = null;
-        before.next = after;
+        before.next = afterHead.next;
 
         return beforeHead.next;
     }

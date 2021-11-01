@@ -83,4 +83,42 @@ public class 删除链表的第N个节点 {
 
 
     }
+
+
+    public static ListNode removeByRatio(ListNode head, int a, int b) {
+
+        // 删除 a/b
+        if (a<1 || b >1 || head == null){
+            return head;
+        }
+        // 公式  统计 链表格式
+        int n = 0;
+        ListNode temp = head;
+        while (temp!=null){
+            temp = temp.next;
+            n++;
+        }
+        // 删除链表第几个节点
+        int k =(int) Math.ceil((double) a * n /b);
+
+        if (k ==1){
+            return head.next;
+        }
+
+        ListNode ans = head;
+        if (k>1){
+
+
+            // 找到k的前去节点
+            while (--k>1){
+                ans = ans.next;
+            }
+
+            if (ans.next !=null){
+                ans.next = ans.next.next;
+            }
+        }
+
+        return head;
+    }
 }
