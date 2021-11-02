@@ -31,4 +31,22 @@ public class 翻转二叉树 {
 
 
     }
+
+
+    public TreeNode invertTree1(TreeNode root) {
+
+        // 交换左右节点即可  dfs
+
+        if (root==null){
+            return null;
+        }
+
+        TreeNode left = root.left;
+        root.left = root.right;
+        root.right = left;
+
+        invertTree1(root.left);
+        invertTree1(root.right);
+        return root;
+    }
 }
