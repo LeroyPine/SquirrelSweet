@@ -15,5 +15,7 @@ public class LockT {
         lock.lock();
         Lock lock = readWriteLock.readLock();
         lock.lock();
+
+        Lock lock1 = readWriteLock.writeLock();
     }
 }
