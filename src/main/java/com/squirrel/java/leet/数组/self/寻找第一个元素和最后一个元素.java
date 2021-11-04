@@ -1,7 +1,5 @@
 package com.squirrel.java.leet.数组.self;
 
-import com.sun.org.apache.bcel.internal.generic.INEG;
-
 public class 寻找第一个元素和最后一个元素 {
 
 
