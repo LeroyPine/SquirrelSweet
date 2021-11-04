@@ -17,5 +17,10 @@ public class LockT {
         lock.lock();
 
         Lock lock1 = readWriteLock.writeLock();
+
+
+        StringBuilder builder = new StringBuilder();
+
+        StringBuffer buffer =  new StringBuffer();
     }
 }

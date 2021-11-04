@@ -30,20 +30,24 @@ public class 寻找旋转排序数组的最小值 {
         // 二分查找
         int left = 0;
         int right = arr.length - 1;
-        int minValue = Integer.MAX_VALUE;
 
-        /*while (left <= right) {
+        while (left <= right) {
 
-            int mid = (right + left) / 2;
+            // 如果一开始就是 遵循 left 《 right 那么直接返回
+            if (arr[left] <= arr[right]) {
+                return left;
+            }
+            int mid = left + (right - left) / 2;
 
-            if (arr[left] <= arr[mid]){
-                minValue = Math.min(arr[left],minValue);
-            }else {
+            if (arr[left] <= arr[mid]) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
 
-            }   }
-*/
+        }
 
-        return 0;
+        return -1;
     }
 
 }
