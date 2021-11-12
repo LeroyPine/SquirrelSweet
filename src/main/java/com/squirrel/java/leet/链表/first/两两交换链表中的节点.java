@@ -37,24 +37,20 @@ public class 两两交换链表中的节点 {
         // 定义一个哑结点
         ListNode dummyNode = new ListNode(-1);
         dummyNode.next = head;
-
         ListNode temp = dummyNode;
 
 
         // 进行两两交换
         while (temp.next != null && temp.next.next != null) {
-
             // 第一个节点
             ListNode node = temp.next;
             // 第二个节点
             ListNode nextNode = temp.next.next;
-
             node.next = nextNode.next;
             // 节点置为第二个
             temp.next = nextNode;
             // 进行交换
             nextNode.next = node;
-
             temp = node;
         }
         return dummyNode.next;

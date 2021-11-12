@@ -38,7 +38,7 @@ public class SortAlgorithm {
 
 
 
-        if (Objects.isNull(array) || array.length == 0) {
+       /* if (Objects.isNull(array) || array.length == 0) {
             return;
         }
         for (int i = 0; i < array.length - 1; i++) {
@@ -50,7 +50,19 @@ public class SortAlgorithm {
                 }
             }
             log.info("第{}轮比较,比较后的数组:{}", i + 1, Arrays.toString(array));
+        }*/
+
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array.length - i-1; j++) {
+                if (array[j + 1] < array[j]) {
+                    int temp = array[j + 1];
+                    array[j + 1] = array[j];
+                    array[j] = temp;
+                }
+            }
+
         }
+
         log.info("冒泡排序：result：{}", Arrays.toString(array));
 
     }
@@ -216,12 +228,12 @@ public class SortAlgorithm {
 
     public static void main(String[] args) {
         int[] array = {3, 7, 25, 21, 1, 9, 12};
-     /*   bubbleSort(array);
-        selectionSort(array);*/
+        bubbleSort(array);
+      /*  selectionSort(array);
         insertionSortSelf(array);
         shellSort(array);
 
-        quickSort(array, 0, array.length - 1);
+        quickSort(array, 0, array.length - 1);*/
 
         System.out.println(Arrays.toString(array));
     }
