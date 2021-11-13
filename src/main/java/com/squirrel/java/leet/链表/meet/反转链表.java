@@ -73,14 +73,14 @@ public class 反转链表 {
         one.next = two;
         two.next = three;
         three.next = four;
-      //  ListNode listNode = a.reverseNode(one);
-        // System.out.println(listNode );;
+      ListNode listNode = a.reverseNode(one);
+         System.out.println(listNode );;
 /*
         ListNode listNode1 = a.reverseNode(one, 2, 3);
         System.out.println(listNode1);*/
 
-        ListNode listNode = reverseList2(one);
-        System.out.println(listNode);
+   /*     ListNode listNode = reverseList2(one);
+        System.out.println(listNode);*/
     }
 
 
