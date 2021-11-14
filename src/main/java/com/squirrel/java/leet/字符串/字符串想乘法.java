@@ -25,45 +25,61 @@ public class 字符串想乘法 {
         String ans = "0";
         int m = num1.length();
         int n = num2.length();
-        //
+
+        // 遍历num2
         for (int i = n - 1; i >= 0; i--) {
-            StringBuilder curr = new StringBuilder();
-            int add = 0;
+            // 记录与每一个数进行相乘后的结果
+            StringBuilder temp = new StringBuilder();
+            // 如果当前数不是末尾,那么进行补0相乘的时候.
             for (int j = n - 1; j > i; j--) {
-                curr.append(0);
+                temp.append(0);
             }
+            int add = 0;
             int y = num2.charAt(i) - '0';
-            //
             for (int j = m - 1; j >= 0; j--) {
-                // 进行相乘
                 int x = num1.charAt(j) - '0';
-                int product = x * y + add;
-                curr.append(product % 10);
-                add = product / 10;
+                int result = x * y + add;
+                temp.append(result % 10);
+                add = result / 10;
             }
             if (add != 0) {
-                curr.append(add % 10);
+                temp.append(add % 10);
             }
-            // 进行字符串相加操作
-            ans = addStr(ans, curr.reverse().toString());
+
+            ans = addStr(ans, temp.reverse().toString());
         }
         return ans;
     }
 
     public String addStr(String num1, String num2) {
-        int i = num1.length() - 1, j = num2.length() - 1, add = 0;
-        // ~
-        StringBuilder ans = new StringBuilder();
-        //
-        while (i >= 0 || j >= 0 || add != 0) {
-            int iNum = i >= 0 ? num1.charAt(i) - '0' : 0;
-            int jNum = j >= 0 ? num2.charAt(j) - '0' : 0;
-            int result = iNum + jNum + add;
-            ans.append(result % 10);
+        //  1 2 8 // 4 5
+        //  0 4 5
+        int oneLen = num1.length();
+        int twoLen = num2.length();
+        int add = 0;
+        StringBuilder str = new StringBuilder();
+
+        while (oneLen > 0 || twoLen > 0 || add != 0) {
+            // 取出每次准备相加的数据
+            int one = oneLen > 0 ? num1.charAt(oneLen - 1) - '0' : 0;
+            int two = twoLen > 0 ? num2.charAt(twoLen - 1) - '0' : 0;
+
+            int result = one + two + add;
+            int fillNum = result % 10;
             add = result / 10;
-            i--;
-            j--;
+            str.append(fillNum);
+            oneLen--;
+            twoLen--;
         }
-        return ans.reverse().toString();
+
+        return str.reverse().toString();
+
+    }
+
+
+    public static void main(String[] args) {
+        字符串想乘法 a = new 字符串想乘法();
+        String multiply = a.multiply("110", "70");
+        System.out.println(multiply);
     }
 }
