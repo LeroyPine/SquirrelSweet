@@ -9,40 +9,36 @@ public class 二叉树转化为双向链表 {
 
 
     Node pre = null, head = null;
-
     public Node treeToDoublyList(Node root) {
-
         if (root == null) {
             return root;
         }
         dfs(root);
         head.left = pre;
-        pre.right =head;
+        pre.right = head;
         return head;
     }
 
     private void dfs(Node root) {
-
-        // 递归终止条件
-        if (root == null){
+        if (root == null) {
             return;
         }
+        // 中序遍历
         dfs(root.left);
-        if (pre!=null){
-            pre.right = root;
-        }else {
+        if (pre == null) {
+            // 标记为头结点
             head = root;
+        } else {
+            pre.right = root;
         }
         root.left = pre;
+        // 然后去访问右节点
         pre = root;
         dfs(root.right);
-        return;
-
-
     }
 
 
-    class Node{
+    class Node {
         public int value;
         public Node left;
         public Node right;
