@@ -1,5 +1,7 @@
 package com.squirrel.java.leet.链表.meet;
 
+import java.util.HashMap;
+
 /**
  * <p></p>
  * <p>
@@ -15,14 +17,21 @@ package com.squirrel.java.leet.链表.meet;
  * @since 1.0
  */
 public class 缺失的第一个正数 {
-/*
+
     public int firstMissingPositive(int[] nums) {
 
-        int n = nums.length;
-        for (int i = 0; i < n; i++) {
-            if (nums[i] <= 0) {
-                nums[i] = n + 1;
-            }
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            map.put(i, nums[i]);
         }
-    }*/
+        for (int i = 1; i < nums.length; i++) {
+
+            if (!map.containsKey(i)) {
+                return i;
+            }
+
+        }
+        return -1;
+    }
 }

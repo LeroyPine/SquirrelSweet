@@ -1,5 +1,7 @@
 package com.squirrel.java.exceptio;
 
+import org.springframework.beans.factory.config.BeanDefinition;
+
 /**
  * <p></p>
  * <p>
@@ -16,19 +18,21 @@ package com.squirrel.java.exceptio;
  */
 public class TestExce {
 
-    public static void main(String[] args) {
 
+    public void testCheck() {
+
+        Integer.parseInt("1");
         try {
-            if (1 == 1) {
-                throw new MyException("as");
-            }
-        } catch (Exception e) {
-            if (e instanceof MyException) {
-                System.out.println(123);
-            } else {
-                System.out.println(12421421);
-            }
+            throw new CheckException("as");
+        } catch (CheckException e) {
+            e.printStackTrace();
         }
 
+    }
+
+
+    public void testUncheck() {
+
+        throw new UnCheckException();
     }
 }

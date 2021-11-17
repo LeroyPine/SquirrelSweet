@@ -16,7 +16,7 @@ package com.squirrel.java.leet.数组;
  */
 public class 开平方根 {
 
-    public int mySqrt(int x) {
+    public int mySqrt1(int x) {
         int l = 0;
         int r = x;
         int ans = -1;
@@ -24,7 +24,7 @@ public class 开平方根 {
         while (l <= r) {
             int mid = l + (r - l) / 2;
 
-            if ((long)mid * mid <= x) {
+            if ((long) mid * mid <= x) {
                 ans = mid;
                 l = mid + 1;
             } else {
@@ -33,6 +33,27 @@ public class 开平方根 {
         }
         return ans;
     }
+
+
+    public int mySqrt(int x) {
+        int left = 0;
+        int right = x;
+        int ans = -1;
+
+        while (left <= right) {
+
+            int mid = left + (right - left) / 2;
+
+            if ((long) mid * mid <= x) {
+                ans = mid;
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return ans;
+    }
+
 
     public static void main(String[] args) {
         开平方根 a = new 开平方根();

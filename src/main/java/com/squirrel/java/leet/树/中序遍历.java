@@ -50,6 +50,19 @@ public class 中序遍历 {
     public List<Integer> postorderTraversalWhile(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         Deque<TreeNode> stack = new LinkedList<>();
+        while (root != null || !stack.isEmpty()) {
+
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            TreeNode pop = stack.pop();
+            res.add(pop.val);
+            root = pop.right;
+        }
+
+        return res;
+        /* Deque<TreeNode> stack = new LinkedList<>();
 
         while (root != null || !stack.isEmpty()) {
             while (root != null) {
@@ -61,7 +74,7 @@ public class 中序遍历 {
             root = root.right;
         }
         return res;
-
+*/
 
     }
 

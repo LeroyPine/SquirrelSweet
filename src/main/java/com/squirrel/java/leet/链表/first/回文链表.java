@@ -69,7 +69,7 @@ public class 回文链表 {
     public static void main(String[] args) {
 
         ListNode node = new ListNode(1);
-        ListNode node1 = new ListNode(1);
+        ListNode node1 = new ListNode(2);
         ListNode node2 = new ListNode(2);
         ListNode node3 = new ListNode(1);
 
@@ -77,47 +77,38 @@ public class 回文链表 {
         node1.next = node2;
         node2.next = node3;
 
-        final boolean palindromeV3 = isPalindromeV3(node);
+        isPalindromeV3(node);
+
     }
 
 
+    // 判断一个链表是否为回文链表
     public static boolean isPalindromeV3(ListNode head) {
 
-        ListNode temp = head;
-
-        ListNode reverseNode = reverse(temp);
-
-        System.out.printf("翻转:" + reverseNode);
-  // 1211 //1121
+        if (head == null) {
+            return false;
+        }
+        List<Integer> list = new ArrayList<>();
 
         while (head != null) {
-            if (reverseNode == null) {
+            list.add(head.val);
+            head = head.next;
+        }
+        if (list.size() % 2 == 1) {
+            return false;
+        }
+
+
+        for (int i = 0, j = list.size() - 1; i < list.size() / 2; i++, j--) {
+
+
+            if (!list.get(i).equals(list.get(j))) {
                 return false;
             }
 
-            if (head.val != reverseNode.val) {
-                return false;
-            } else {
-                head = head.next;
-                reverseNode = reverseNode.next;
-            }
         }
+
         return true;
-    }
-
-    public static ListNode reverse(ListNode node) {
-
-        ListNode prev = null;
-        ListNode curr = node;
-
-        while (curr != null) {
-            ListNode next = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = next;
-        }
-
-        return prev;
 
     }
 

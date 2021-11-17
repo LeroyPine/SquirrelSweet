@@ -1,5 +1,7 @@
 package com.squirrel.java.leet.树.面试;
 
+import java.util.HashMap;
+
 public class 重建二叉树 {
 
 
@@ -36,6 +38,44 @@ public class 重建二叉树 {
         }
 
         return null;
+    }
+
+
+    // 前序遍历和中序遍历 重建二叉树
+    public TreeNode rebuildTree(int[] pre, int[] in) {
+
+        // 中序遍历  使用hash表存储  下标及其数据
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < in.length; i++) {
+            map.put(in[i], i);
+        }
+
+
+        return rebuildTree1(pre, 0, pre.length - 1, map, 0, in.length - 1);
+
+
+    }
+
+    private TreeNode rebuildTree1(int[] pre, int preLeft, int preRight, HashMap<Integer, Integer> map, int inLeft, int inRight) {
+
+        // 寻找递归条件
+
+        if (preLeft > preRight || inLeft > inRight) {
+            return null;
+        }
+
+        // 初始化根节点
+        TreeNode root = new TreeNode(pre[preLeft]);
+        // 寻找 pivotIndext
+        int pIndex = map.get(root.val);
+
+        root.left = rebuildTree1(pre, preLeft + 1, pIndex - inLeft + preLeft, map, inLeft, pIndex - 1);
+
+        root.right = rebuildTree1(pre, pIndex - inLeft + preLeft + 1,   preRight,map, pIndex + 1, inRight);
+
+        return root;
+
+
     }
 
 
