@@ -68,6 +68,8 @@ public class 最长的括号 {
         if (s == null || s.length()==1){
             return 0;
         }
+
+        LinkedList<Object> objects = new LinkedList<>();
         //  定义栈来进行判断是否是合法的括号。
         Deque<Integer> stack = new LinkedList<>();
         stack.push(-1);
@@ -79,12 +81,11 @@ public class 最长的括号 {
             }else {
                 stack.pop();
                 if (stack.isEmpty()){
-                      stack.push(i);
+                    stack.push(i);
                 }else {
-                    ans = Math.max(ans,i-stack.peek());
+                    ans  = Math.max(ans,i-stack.peek());
                 }
             }
-
         }
 
 
@@ -92,5 +93,15 @@ public class 最长的括号 {
 
 
 
+    }
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 100; i++) {
+
+            Thread thread = new Thread();
+
+            thread.run();
+
+        }
     }
 }
