@@ -17,6 +17,39 @@ package com.squirrel.java.leet.字符串;
 public class 最长回文子串 {
 
 
+    // 暴力算法-- 枚举所有长度大于等于 22 的子串，依次判断它们是否是回文；
+    public String longestPalindromeBL(String s) {
+        int len = s.length();
+        if (len < 2) {
+            return s;
+        }
+        int maxLen = 1;
+        int begin = 0;
+        char[] chars = s.toCharArray();
+        for (int i = 0; i < s.length() - 1; i++) {
+            for (int j = i + 1; j < s.length(); j++) {
+                if (j - i + 1 > maxLen && isHuiW(chars, i, j)) {
+                    maxLen = j - i + 1;
+                    begin = i;
+                }
+            }
+        }
+        return s.substring(begin, begin + maxLen);
+
+    }
+
+    public boolean isHuiW(char[] array, int left, int right) {
+        while (left < right) {
+            if (array[left] != array[right]) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+
+
     // no mind ```
     public String longestPalindrome(String s) {
         //
@@ -42,6 +75,6 @@ public class 最长回文子串 {
             left--;
             right++;
         }
-        return right-left+1;
+        return right - left + 1;
     }
 }
