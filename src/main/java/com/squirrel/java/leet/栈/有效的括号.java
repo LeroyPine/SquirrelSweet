@@ -33,44 +33,35 @@ public class 有效的括号 {
      * @param s
      * @return
      */
+    public boolean isValid(String s) {
+        Map<Character,Character> map = new HashMap<>();
+        map.put(')','(');
+        map.put(']','[');
+        map.put('}','{');
 
-    //"([}}])"
-    public static boolean isValid1(String s) {
 
-        if (s.length() % 2 == 1) {
-            return false;
-        }
-        //
-        Map<Character, Character> map = new HashMap<>();
-        map.put(')', '(');
-        map.put('}', '{');
-        map.put(']', '[');
-
-        // 声明一个栈  来做校验  (([]))
         Deque<Character> stack = new LinkedList<>();
 
-        // 遍历字符串
+        int len = s.length();
 
-        for (int i = 0; i < s.length(); i++) {
+        for(int i=0;i<len;i++){
 
-            if (!map.containsKey(s.charAt(i))) {
-                //
-                stack.push(s.charAt(i));
-            } else {
-                if (stack.isEmpty() || stack.peek() != map.get(s.charAt(i))) {
+            if(map.containsKey(s.charAt(i))){
+
+                if(!stack.isEmpty() && stack.peek() == map.get(s.charAt(i))){
+                    stack.pop();
+                }else{
                     return false;
                 }
-
-                stack.pop();
-
+            }else{
+                stack.push(s.charAt(i));
             }
         }
         return stack.isEmpty();
 
 
     }
-
     public static void main(String[] args) {
-        isValid1("([}}])");
+        //.isValid("([}}])");
     }
 }

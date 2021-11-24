@@ -16,7 +16,7 @@ package com.squirrel.java.leet.树.面试;
  */
 public class 二叉树的最大路径之和 {
 
-    int maxSum = Integer.MAX_VALUE;
+    int maxSum = Integer.MIN_VALUE;
 
     public int maxPathSum(TreeNode root) {
 
