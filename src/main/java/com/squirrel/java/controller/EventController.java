@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/12")
 public class EventController {
 
+    @Autowired
+    private EventController eventController;
 
     @Autowired
     private MyEventPublish myEventPublish;
