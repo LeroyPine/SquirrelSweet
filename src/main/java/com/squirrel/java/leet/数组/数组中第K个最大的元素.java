@@ -1,7 +1,6 @@
 package com.squirrel.java.leet.数组;
 
-import javax.imageio.plugins.jpeg.JPEGImageReadParam;
-import java.util.*;
+import java.util.Random;
 
 import static com.squirrel.java.arithmetic.SortAlgorithm.swap;
 
@@ -21,62 +20,57 @@ import static com.squirrel.java.arithmetic.SortAlgorithm.swap;
  */
 public class 数组中第K个最大的元素 {
 
-    public static void main(String[] args) {
+    public void main(String[] args) {
         final int kthLargest = findKthLargest(new int[]{1, 2, 5, 7, 3, 6}, 3);
 
         System.out.println(kthLargest);
     }
 
 
-    public static int findKthLargest(int[] nums, int k) {
+    public int findKthLargest(int[] nums, int k) {
 
-        // 倒数第K  快排核心就是  分治法
-
-        int target = nums.length - k;
-        int left = 0;
-        int right = nums.length - 1;
-
-        while (true) {
-            // 分区索引
-            int index = partition(nums, left, right);
-            // if index
-            if (index < target) {
-                left = index + 1;
-            } else if (index > target) {
-                right = index - 1;
-            } else {
-                return nums[index];
-            }
-        }
-
+        // 寻找数组中第K个最大的元素 可以利用快排中 pivot的思想,将 数组的左面小于pivot,右面大于
+        return quickSortK(nums, 0, nums.length - 1, nums.length - k);
 
     }
 
-    private static int partition(int[] nums, int left, int right) {
-        Random random = new Random();
+    private int quickSortK(int[] nums, int left, int right, int index) {
 
-        // 随机选取pivot
-        if (right > left) {
-            int randomIndex = left + 1 + random.nextInt(right - left);
-            // 进行元素交换  --
-            swap(nums, randomIndex, right);
-        }
-        // 轴距
-        int pivot = nums[right];
-        //
-        int i = left - 1;
-        for (int j = left + 1; j <= right - 1; j++) {
-            // 如果元素小于轴距
-            if (nums[j] < pivot) {
-                i++;
-                // 进行交换
-                swap(nums, i, j);
+        int pivot = randomPartition(nums, left, right, index);
+        if (pivot == index) {
+            return nums[index];
+        } else {
+            if (pivot < index) {
+                return quickSortK(nums, pivot + 1, right, index);
+            } else {
+                return quickSortK(nums, left, pivot - 1, index);
             }
         }
-        // 将pivot 交换到正确位置上
-        swap(nums, i + 1, right);
+    }
 
+    Random random = new Random();
+
+    private int randomPartition(int[] nums, int left, int right, int index) {
+
+        int pivot = random.nextInt(right - left + 1) + left;
+
+        swap(nums, pivot, right);
+
+        return partition(nums, left, right);
+    }
+
+    private int partition(int[] nums, int left, int right) {
+        int pivot = nums[right];
+        int i = left - 1;
+
+        for (int j = left; j < right; j++) {
+            if (nums[j] <= pivot) {
+                swap(nums, i++, j);
+            }
+        }
+        swap(nums, i + 1, right);
         return i + 1;
+
     }
 
 

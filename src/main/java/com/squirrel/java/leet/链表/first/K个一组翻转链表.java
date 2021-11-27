@@ -19,50 +19,49 @@ import java.util.LinkedList;
  */
 public class K个一组翻转链表 {
 
-
+    // 利用栈来实现反转
     // 1 2 3 4 5 6 7   ||  2 1 4 3 6 5 7
     public ListNode reverseKGroup(ListNode head, int k) {
-
-        if (head == null) {
-            return null;
+        // 如果为空或者只有一个元素就直接返回
+        if (head == null || head.next == null) {
+            return head;
         }
-
         ListNode dummyNode = new ListNode(-1);
         ListNode prev = dummyNode;
-
-        // 使用栈进行存储,然后在进行拼接
         Deque<ListNode> stack = new LinkedList<>();
-        // 如果
         while (true) {
-
-            ListNode temp = head;
-
-
             int count = 0;
-            // k个反转
-            for (int i = 0; i < k && temp != null; i++) {
+            ListNode temp = head;
+            while (count < k && temp != null) {
                 stack.push(temp);
                 temp = temp.next;
                 count++;
             }
+            // k个拼接
+            if (count == k) {
+                while (!stack.isEmpty()) {
+                    prev.next = stack.pop();
+                    prev = prev.next;
+                }
 
-            //
-            if (count < k) {
-                prev.next = temp;
+            } else {
                 break;
             }
-
-            // 进行反转
-            while (!stack.isEmpty()) {
-                prev.next = stack.pop();
-                prev = prev.next;
-            }
-
+            prev.next = temp;
             head = temp;
+
         }
-
         return dummyNode.next;
-
     }
 
+
+    public static void main(String[] args) {
+
+
+        int count =0;
+        while (count<2){
+            System.out.println("12");
+            count++;
+        }
+    }
 }

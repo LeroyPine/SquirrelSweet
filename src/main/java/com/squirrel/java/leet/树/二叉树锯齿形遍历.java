@@ -19,39 +19,34 @@ import java.util.*;
 public class 二叉树锯齿形遍历 {
 
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        // 标记每层
-        List<List<Integer>> result = new ArrayList<>();
+
+        List<List<Integer>> res = new ArrayList<>();
         if (root == null) {
-            return result;
+            return res;
         }
-        // 使用双端队列
+
         Deque<TreeNode> queue = new ArrayDeque<>();
         queue.offer(root);
-        boolean isLeft = true;
-
+        boolean flag = true;
         while (!queue.isEmpty()) {
-            // 每次循环代表一层   先左后右 控制添加队列的顺序
-            final int size = queue.size();
-            Deque<Integer> sub = new LinkedList<>();
-            for (int j = 0; j < size; j++) {
-                final TreeNode poll = queue.poll();
-                if (isLeft) {
-                    sub.offerLast(poll.val);
-                } else {
-                    sub.offerFirst(poll.val);
-                }
-
+            int size = queue.size();
+            Deque<Integer> list = new ArrayDeque<>();
+            while (size-- > 0) {
+                TreeNode poll = queue.poll();
                 if (poll.left != null) {
                     queue.offer(poll.left);
                 }
                 if (poll.right != null) {
                     queue.offer(poll.right);
                 }
-
+                if (flag) {
+                    list.offerLast(poll.val);
+                } else {
+                    list.offerFirst(poll.val);
+                }
             }
-            isLeft = !isLeft;
-            result.add(new LinkedList<>(sub));
+            res.add(new LinkedList<>(list));
         }
-        return result;
+        return res;
     }
 }

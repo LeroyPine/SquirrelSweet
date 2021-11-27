@@ -65,64 +65,29 @@ public class 无重复字符的最长子串 {
      * @return
      */
     public static int lengthOfLongestSubstring(String s) {
-
-        if (s == null || s.equals("")) {
+        if (s == "" || s.length() == 0) {
             return 0;
         }
-        // 定义右指针
+        int ans = 0;
+        //
         int rk = -1;
-        int ans = -999;
-        // 定义  set集合进行去重
+
+        // 使用一个set标记这个字符串是否存在过
         Set<Character> set = new HashSet<>();
-        // 从左向右滑
+        // 遍历这个字符串
         for (int i = 0; i < s.length(); i++) {
 
-            if (i > 0) {
+            if (i != 0) {
                 set.remove(s.charAt(i - 1));
             }
-            // 计算不重复的子串长度
+            // 然后去循环计算其长度
             while (rk + 1 < s.length() && !set.contains(s.charAt(rk + 1))) {
                 set.add(s.charAt(rk + 1));
                 rk++;
             }
-            ans = Math.max(ans, rk - i + 1);
+            ans = Math.max(rk - i + 1, ans);
         }
         return ans;
-
-    }
-
-
-    // 滑动窗口思想
-
-    /**
-     * 无重复的最长子串
-     *
-     * @param s
-     * @return
-     */
-    public static int lengthOfLongestSubstringV1(String s) {
-        //  abcabcbb   "dvdf"
-        //Set<Character> set = new HashSet<>();
-        int ans = -999;
-        for (int i = 0; i < s.length(); i++) {
-            // 记录单词查找非重复字符的数量
-            Set<Character> set = new HashSet<>();
-            int len = 0;
-            // 滑动 删除之前的字符
-          /*  if (i > 0) {
-                set.remove(s.charAt(i - 1));
-              //  set.re
-            }*/
-            // 子部分进行计算长度1、  内部遍历: 右指针
-            for (int j = i; j < s.length() && !set.contains(s.charAt(j)); j++) {
-                set.add(s.charAt(j));
-                len++;
-            }
-            ans = Math.max(len, ans);
-
-        }
-        return ans;
-
     }
 
 
