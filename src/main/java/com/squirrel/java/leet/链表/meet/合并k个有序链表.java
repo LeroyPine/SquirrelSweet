@@ -23,30 +23,17 @@ public class 合并k个有序链表 {
 
     }
 
-
-    // 合并
     private ListNode merge(ListNode[] lists, int left, int right) {
+
         if (left == right) {
             return lists[left];
         }
         if (left > right) {
             return null;
         }
-        int mid = (left + right) / 2;
-        return merger2List(merge(lists, left, mid), merge(lists, mid + 1, right));
-    }
+        int mid = left + (right - left) / 2;
 
-    private ListNode merge1(ListNode[] lists, int left, int right) {
-        if (left == right) {
-            return lists[left];
-        }
-        if (right > left) {
-            return null;
-        }
-        int mid = (left + right) / 2;
-
-        return merger2List(merge1(lists, left, mid), merge1(lists, mid + 1, right));
-
+        return merger2List(merge(lists,left,mid),merge(lists,mid+1,right));
     }
 
 

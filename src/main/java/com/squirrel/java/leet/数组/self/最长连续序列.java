@@ -6,7 +6,7 @@ import java.util.Set;
 public class 最长连续序列 {
 
 
-    // 最长连续子序列。
+    // 最长连续子序列。 有几个
     public int longestConsecutive(int[] nums) {
         Set<Integer> numSet = new HashSet<>();
         for (int num : nums) {
@@ -15,21 +15,33 @@ public class 最长连续序列 {
         // \
         int ans = 0;
 
-        // 去遍历集合看最长子序列有多少》
-        for (int num : numSet) {
-            // 如果当前元素没有比他小的序列那么就进入方法
-            int currentNum = num;
-            int maxNum = 0;
-            if (!numSet.contains(num - 1)) {
-                while (numSet.contains(currentNum)) {
+        //
+        Set<Integer> set = new HashSet<>();
+        for (int num : nums) {
+            set.add(num);
+        }
+
+        // 从num开始遍历
+
+        int longestNum = 0;
+        for (Integer num : set) {
+
+            int curMaxNum = 0;
+            // 减少时间复杂度
+            // 如果当前元素非连续或者是连续的最小值那么才进入条件
+            if (!set.contains(num - 1)) {
+
+                //实际的去记录有几个连续子序列
+                int currentNum = num;
+                while (set.contains(currentNum)) {
                     currentNum++;
-                    maxNum++;
+                    curMaxNum++;
                 }
-                ans = Math.max(maxNum, ans);
+                longestNum = Math.max(longestNum, curMaxNum);
             }
 
         }
-        return ans;
+        return longestNum;
 
     }
 }
