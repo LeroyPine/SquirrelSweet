@@ -22,7 +22,6 @@ public class 二叉树的右视图 {
      */
 
     public List<Integer> levelOrder(TreeNode root) {
-
         List<Integer> list = new ArrayList<>();
         if (root == null) {
             return list;

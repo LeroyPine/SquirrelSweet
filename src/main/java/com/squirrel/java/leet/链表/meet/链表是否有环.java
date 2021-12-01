@@ -1,8 +1,5 @@
 package com.squirrel.java.leet.链表.meet;
 
-import java.util.List;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
-
 /**
  * <p></p>
  * <p>
@@ -70,46 +67,6 @@ public class 链表是否有环 {
                 }
                 return slow;
             }
-
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-
-        ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
-
-        ReentrantReadWriteLock.ReadLock readLock = lock.readLock();
-        readLock.lock();;
-        lock.writeLock();
-        return null;
-    }
-
-
-
-    // 环形链表2
-    public ListNode hasCycle21(ListNode head) {
-
-        //
-        if (head == null || head.next == null){
-            return null;
-        }
-
-        ListNode slow = head;
-        ListNode fast = head.next;
-
-        while (fast != null && fast.next != null){
-
-            //  追上了、 然后冲新走
-            if (slow == fast){
-                slow = head;
-                fast = fast.next;
-
-                while (slow !=fast){
-                    slow = slow.next;
-                    fast = fast.next;
-                }
-                return slow;
-
-            }
             slow = slow.next;
             fast = fast.next.next;
 
@@ -117,46 +74,6 @@ public class 链表是否有环 {
 
         return null;
     }
-
-
-    public boolean hasCycle213(ListNode head) {
-
-        if (head == null || head.next == null){
-            return false;
-        }
-
-        ListNode slow = head;
-        ListNode fast = head.next;
-
-        while (slow != fast ){
-            if (fast == null || fast.next == null){
-                return false;
-            }
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-
-        return true;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

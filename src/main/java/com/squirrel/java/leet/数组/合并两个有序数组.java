@@ -43,88 +43,29 @@ public class 合并两个有序数组 {
     // 合并两个有序数组 使用双指针
     public static void mergePoint(int[] nums1, int m, int[] nums2, int n) {
 
-        int p1 = 0;
-        int p2 = 0;
-        // 定义一个新数组
+        // 采用双指针
+        int p = 0;
+        int q = 0;
         int[] sorted = new int[m + n];
-        while (p1 < m || p2 < n) {
-            // 定义变量接收当前值
-            int cur;
-            if (p1 == m) {
-                cur = nums2[p2++];
-            } else if (p2 == n) {
-                cur = nums1[p1++];
-            } else if (nums1[p1] < nums2[p2]) {
-                cur = nums1[p1++];
-            } else {
-                cur = nums2[p2++];
-            }
-            //
-            sorted[p1 + p2 - 1] = cur;
-        }
-        for (int i = 0; i != m + n; i++) {
-            nums1[i] = sorted[i];
-        }
-    }
-
-
-    public static void mergePointV1(int[] nums1, int m, int[] nums2, int n) {
-        // 定义两个指针俩标记合并过程
-        int p1 = 0;
-        int p2 = 0;
-        int[] sorted = new int[]{m + n};
-
-        int j = 0;
-        while (p1 < m || p2 < n) {
-
-            int curr = 0;
-            if (p1 == m) {
-                curr = nums2[p2++];
-            } else if (p2 == n) {
-                curr = nums1[p1++];
-            } else if (nums1[p1] < nums2[p2]) {
-                curr = nums1[p1++];
-            } else {
-                curr = nums2[p2++];
-            }
-
-            sorted[j++] = curr;
-        }
-
-        for (int i = 0; i < m + n; i++) {
-            nums1[i] = sorted[i];
-
-        }
-
-
-    }
-
-
-    // 合并两个有序数组
-    public static void merge3(int[] nums1, int m, int[] nums2, int n) {
-
-        int[] sorted = new int[m + n];
-        // 使用双指针
-        int p1 = 0;
-        int p2 = 0;
-
-        while (p1 != m || p2 != n) {
-            // 定义临时变量 接数组的值
+        while (p < m || q < n) {
             int temp;
-            if (p1 == m) {
-                temp = nums2[p2++];
-            } else if (p2 == n) {
-                temp = nums1[p1++];
-            } else if (nums1[p1] < nums2[p2]) {
-                temp = nums1[p1++];
+            if (p == m) {
+                temp = nums2[q++];
+            } else if (q == n) {
+                temp = nums1[p++];
+            } else if (nums1[p] <= nums2[q]) {
+                temp = nums1[p++];
             } else {
-                temp = nums2[p2++];
+                temp = nums2[q++];
             }
-            sorted[p1 + p2 - 1] = temp;
+            sorted[p + q - 1] = temp;
         }
-        // 输出
+
         for (int i = 0; i < sorted.length; i++) {
             nums1[i] = sorted[i];
         }
+
     }
+
+
 }

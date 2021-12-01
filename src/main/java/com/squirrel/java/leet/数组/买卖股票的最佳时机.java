@@ -14,7 +14,7 @@ package com.squirrel.java.leet.数组;
  * @date Created in 2021年09月22日 10:48
  * @since 1.0
  */
-public class 买股票的最佳时机 {
+public class 买卖股票的最佳时机 {
 
     /**
      * 给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。
@@ -46,20 +46,18 @@ public class 买股票的最佳时机 {
      */
 
     public int maxProfit(int[] prices) {
-
-        // 标记一个最低点 ，然后依次比较
-
-        int minPoint = Integer.MAX_VALUE;
+        int lowestPrice = Integer.MAX_VALUE;
         int maxProfit = 0;
         for (int i = 0; i < prices.length; i++) {
 
-            if (prices[i] < minPoint) {
-                minPoint = prices[i];
-            } else if (prices[i] - minPoint > maxProfit) {
-                maxProfit = prices[i] - minPoint;
+            if (prices[i] < lowestPrice) {
+                lowestPrice = prices[i];
+            } else if (prices[i] - lowestPrice > maxProfit) {
+                maxProfit = prices[i] - lowestPrice;
             }
         }
         return maxProfit;
+
     }
 
 }

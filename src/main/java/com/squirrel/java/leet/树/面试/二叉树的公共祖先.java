@@ -16,35 +16,12 @@ package com.squirrel.java.leet.树.面试;
  */
 public class 二叉树的公共祖先 {
 
+    // 公共祖先
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == p || root == q) {
             return root;
         }
         if (root != null) {
-            //
-            TreeNode leftNode = lowestCommonAncestor(root.left, p, q);
-            TreeNode rightNode = lowestCommonAncestor(root.right, p, q);
-
-            if (leftNode != null && rightNode != null) {
-                return root;
-            } else if (leftNode == null) {
-                return rightNode;
-            } else {
-                return leftNode;
-            }
-
-        }
-        return null;
-    }
-
-
-    public TreeNode lowestCommonAncestorV1(TreeNode root, TreeNode p, TreeNode q) {
-        //
-        if (p == null || q == null) {
-            return null;
-        }
-        //
-        if (root != null) {
             TreeNode leftNode = lowestCommonAncestor(root.left, p, q);
             TreeNode rightNode = lowestCommonAncestor(root.right, p, q);
 
@@ -57,6 +34,6 @@ public class 二叉树的公共祖先 {
             }
         }
         return null;
-
     }
+
 }
