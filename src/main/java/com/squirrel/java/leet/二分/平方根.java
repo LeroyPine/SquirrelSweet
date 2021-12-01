@@ -40,7 +40,8 @@ public class 平方根 {
 
 
     public static void main(String[] args) {
-        mySqrt(10);
+        int i = mySqrt(10);
+        System.out.println(i);
     }
 
 }
