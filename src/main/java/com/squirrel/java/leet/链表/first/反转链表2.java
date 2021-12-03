@@ -16,6 +16,19 @@ package com.squirrel.java.leet.链表.first;
  */
 public class 反转链表2 {
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     // 1 2 3 4 5 6    反转 3  5   1 2 5 4 3   6
     public ListNode reverseBetween(ListNode head, int left, int right) {
         if (head == null || head.next == null) {
