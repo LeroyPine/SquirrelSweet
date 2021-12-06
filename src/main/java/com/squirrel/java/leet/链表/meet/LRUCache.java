@@ -22,92 +22,93 @@ import java.util.Map;
 @Data
 public class LRUCache {
 
-
-    // 定义双端链表
+    // put
+    // get
+    // 移除最近最久未使用的元素  使用双向链表实现。
 
     class DLinked {
-        DLinked prev;
-        DLinked next;
+
         int key;
-        int val;
+        int value;  //节点值
+        DLinked prev; //上一个节点
+        DLinked next; // 下一个节点
 
         DLinked() {
 
         }
 
-        DLinked(int key, int val) {
+        // 构造
+        DLinked(int key, int value) {
             this.key = key;
-            this.val = val;
+            this.value = value;
+
         }
     }
 
-
+    int size; // 集合大小
+    int cap; // 容量
     DLinked head;
     DLinked tail;
-    int cap;
-    int size;
-    Map<Integer, DLinked> map = new HashMap<>();
 
-    public LRUCache(int capacity) {
-        this.cap = capacity;
-        this.size = 0;
-        head = new DLinked();
-        tail = new DLinked();
+    LRUCache(int cap) {
+        this.head = new DLinked();
+        this.tail = new DLinked();
         head.next = tail;
         tail.prev = head;
+        size = 0;
+        this.cap = cap;
+
     }
+
+    // 用作缓存
+    Map<Integer, DLinked> cache = new HashMap<>();
+
 
     public int get(int key) {
-        if (!map.containsKey(key)) {
+
+        DLinked dLinked = cache.get(key);
+        // 判断是否存在
+        if (dLinked == null) {
             return -1;
         } else {
-            // 移动到头结点
-            moveToHead(map.get(key));
+            removeNode(dLinked);
+            moveToHead(dLinked);
+            return dLinked.value;
         }
-        return map.get(key).val;
     }
 
-    // 当前节点移动到头结点
-    private void moveToHead(DLinked node) {
-
-        removeNode(node);
-        addToHead(node);
-
+    private void removeNode(DLinked dLinked) {
+        //
+        dLinked.next.prev = dLinked.prev;
+        dLinked.prev.next = dLinked.next;
     }
 
-    // 删除当前节点
-    private void removeNode(DLinked node) {
-        node.next.prev = node.prev;
-        node.prev.next = node.next;
+    private void moveToHead(DLinked dLinked) {
+        //
+        dLinked.next = head.next;
+        dLinked.prev = head;
+        head.next.prev = dLinked;
+        head.next = dLinked;
+
     }
-
-
-    private void addToHead(DLinked node) {
-        // 切断当前节点
-        node.next = head.next;
-        node.prev = head;
-        head.next.prev = node;
-        head.next = node;
-    }
-
 
     public void put(int key, int value) {
-
-        DLinked node = map.get(key);
-        if (node == null) {
-            // 创建一个新的节点
-            DLinked dLinked = new DLinked(key, value);
-            map.put(key, dLinked);
+        // 校验是否存在key,如果存在替换 并移动到头结点，  如果不存在 添加 移动到头结点
+        DLinked dLinked = cache.get(key);
+        if (dLinked == null) {
+            DLinked newNode = new DLinked(key, value);
             size++;
-            addToHead(dLinked);
+            cache.put(key, newNode);
+            moveToHead(newNode);
             if (size > cap) {
-                DLinked removeNode = removeTail();
-                map.remove(removeNode.key);
-                --size;
+                DLinked tail = removeTail();
+                cache.remove(tail.key);
+                size--;
             }
         } else {
-            node.val = value;
-            moveToHead(node);
+            dLinked.value = value;
+            removeNode(dLinked);
+            moveToHead(dLinked);
         }
 
     }

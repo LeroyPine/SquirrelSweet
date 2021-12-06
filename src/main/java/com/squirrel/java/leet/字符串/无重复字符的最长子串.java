@@ -57,6 +57,16 @@ import java.util.Set;
 public class 无重复字符的最长子串 {
 
     // 滑动窗口思想
+    /**
+     * 以 \texttt{(a)bcabcbb}(a)bcabcbb 开始的最长字符串为 \texttt{(abc)abcbb}(abc)abcbb；
+     * 以 \texttt{a(b)cabcbb}a(b)cabcbb 开始的最长字符串为 \texttt{a(bca)bcbb}a(bca)bcbb；
+     * 以 \texttt{ab(c)abcbb}ab(c)abcbb 开始的最长字符串为 \texttt{ab(cab)cbb}ab(cab)cbb；
+     * 以 \texttt{abc(a)bcbb}abc(a)bcbb 开始的最长字符串为 \texttt{abc(abc)bb}abc(abc)bb；
+     * 以 \texttt{abca(b)cbb}abca(b)cbb 开始的最长字符串为 \texttt{abca(bc)bb}abca(bc)bb；
+     * 以 \texttt{abcab(c)bb}abcab(c)bb 开始的最长字符串为 \texttt{abcab(cb)b}abcab(cb)b；
+     * 以 \texttt{abcabc(b)b}abcabc(b)b 开始的最长字符串为 \texttt{abcabc(b)b}abcabc(b)b；
+     * 以 \texttt{abcabcb(b)}abcabcb(b) 开始的最长字符串为 \texttt{abcabcb(b)}abcabcb(b)。
+     */
 
     /**
      * 滑动窗口使用指针才进行运算
@@ -65,22 +75,18 @@ public class 无重复字符的最长子串 {
      * @return
      */
     public static int lengthOfLongestSubstring(String s) {
-        if (s == "" || s.length() == 0) {
+        if (s.equals("")) {
             return 0;
         }
         int ans = 0;
-        //
         int rk = -1;
-
-        // 使用一个set标记这个字符串是否存在过
         Set<Character> set = new HashSet<>();
-        // 遍历这个字符串
+        // 遍历字符串  依次选取非重复的子串
         for (int i = 0; i < s.length(); i++) {
-
             if (i != 0) {
                 set.remove(s.charAt(i - 1));
             }
-            // 然后去循环计算其长度
+            // 如果当前元素在字符串长度内  并且 集合中不包含当前元素  那么进行累加 否则直接跳出
             while (rk + 1 < s.length() && !set.contains(s.charAt(rk + 1))) {
                 set.add(s.charAt(rk + 1));
                 rk++;

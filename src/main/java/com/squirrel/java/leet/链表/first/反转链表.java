@@ -35,25 +35,15 @@ public class 反转链表 {
 
     public static ListNode reverseList(ListNode head) {
 
-        // 012345 NULL   ->  null543210
-        /**
-         *  将当前节点指向其前一个节点
-         */
-        // 定义一个新链表
+        // 使用头插法
+        ListNode headNode = new ListNode(-1);
 
-        ListNode prev =  null;
-        ListNode curr = head;
-
-        while (curr != null){
-            // 将当前节点的指针反转
-            ListNode next = curr.next;
-
-            curr.next = prev;
-            // 将下一个节点重新指向当前节点
-            prev = curr;
-
-            curr = next;
+        while (head != null) {
+            ListNode next = head.next;
+            head.next = headNode.next;
+            headNode.next = head;
+            head = next;
         }
-        return prev;
+        return headNode;
     }
 }
