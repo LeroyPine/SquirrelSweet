@@ -18,34 +18,49 @@ import java.util.*;
  */
 public class 二叉树锯齿形遍历 {
 
+    /**
+     * 思路：锯齿形遍历
+     * 1.主要是添加元素的时候可以增加一个变量
+     * 2.这个变量用于反转添加元素的顺序
+     *
+     *  Z字型遍历
+     *  -------
+     *     -
+     *    -
+     *  -------
+     * @param root 根节点
+     * @return re
+     */
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-
         List<List<Integer>> res = new ArrayList<>();
         if (root == null) {
             return res;
         }
-
-        Deque<TreeNode> queue = new ArrayDeque<>();
+        Deque<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
-        boolean flag = true;
+        // 定义一个变量,用来进行添加元素时反转
+        boolean orderLeft = true;
         while (!queue.isEmpty()) {
             int size = queue.size();
-            Deque<Integer> list = new ArrayDeque<>();
-            while (size-- > 0) {
-                TreeNode poll = queue.poll();
-                if (poll.left != null) {
-                    queue.offer(poll.left);
-                }
-                if (poll.right != null) {
-                    queue.offer(poll.right);
-                }
-                if (flag) {
-                    list.offerLast(poll.val);
+            // 通过一个队列来反转元素
+            Deque<Integer> list = new LinkedList<>();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                // 变向,添加结点的时候区分左右
+                if (orderLeft) {
+                    list.offerLast(node.val);
                 } else {
-                    list.offerFirst(poll.val);
+                    list.offerFirst(node.val);
+                }
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+                if (node.right != null) {
+                    queue.offer(node.right);
                 }
             }
-            res.add(new LinkedList<>(list));
+            orderLeft = !orderLeft;
+            res.add(new ArrayList<>(list));
         }
         return res;
     }

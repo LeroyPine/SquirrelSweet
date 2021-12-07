@@ -18,28 +18,6 @@ import java.util.Arrays;
  */
 public class 合并两个有序数组 {
 
-    public static void main(String[] args) {
-
-
-        merge(new int[]{5, 6, 3, 9, 0, 0, 0}, 4, new int[]{2, 1, 3}, 3);
-    }
-
-    public static void merge(int[] nums1, int m, int[] nums2, int n) {
-
-        // 简单方法 合并两个数组  并排序
-
-        for (int i = 0; i != n; ++i) {
-
-            nums1[m + i] = nums2[i];
-        }
-
-        Arrays.sort(nums1);
-
-        System.out.println(Arrays.toString(nums1));
-
-    }
-
-
     // 合并两个有序数组 使用双指针
     public static void mergePoint(int[] nums1, int m, int[] nums2, int n) {
 

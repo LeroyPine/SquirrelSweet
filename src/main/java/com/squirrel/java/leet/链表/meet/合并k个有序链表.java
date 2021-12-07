@@ -16,7 +16,13 @@ package com.squirrel.java.leet.链表.meet;
  */
 public class 合并k个有序链表 {
 
-    // 采用分而治之法
+    /**
+     * 思路:
+     * 1.分而治之,将一个集合拆分开,最后在进行合并。
+     *
+     * @param lists 链表集合
+     * @return 合并后的链表
+     */
     public ListNode mergeKLists(ListNode[] lists) {
 
         return merge(lists, 0, lists.length - 1);
@@ -24,41 +30,35 @@ public class 合并k个有序链表 {
     }
 
     private ListNode merge(ListNode[] lists, int left, int right) {
-
         if (left == right) {
             return lists[left];
         }
         if (left > right) {
             return null;
         }
-        int mid = left + (right - left) / 2;
-
-        return merger2List(merge(lists,left,mid),merge(lists,mid+1,right));
+        int mid = (left + right) / 2;
+        return mergeTwo(merge(lists, left, mid), merge(lists, mid + 1, right));
     }
 
-
-    private ListNode merger2List(ListNode node1, ListNode node2) {
-
-        // 合并两个有序链表
+    // 合并两个有序链表
+    private ListNode mergeTwo(ListNode listNode1, ListNode listNode2) {
         ListNode dummyNode = new ListNode(-1);
         ListNode curr = dummyNode;
-
-        while (node1 != null && node2 != null) {
-
-            if (node1.val < node2.val) {
-                curr.next = node1;
-                node1 = node1.next;
+        while (listNode1 != null && listNode2 != null) {
+            if (listNode1.val < listNode2.val) {
+                curr.next = listNode1;
+                listNode1 = listNode1.next;
             } else {
-                curr.next = node2;
-                node2 = node2.next;
+                curr.next = listNode2;
+                listNode2 = listNode2.next;
             }
             curr = curr.next;
         }
-        if (node1 == null) {
-            curr.next = node2;
+        if (listNode1 != null) {
+            curr.next = listNode1;
         }
-        if (node2 == null) {
-            curr.next = node1;
+        if (listNode2 != null) {
+            curr.next = listNode2;
         }
         return dummyNode.next;
     }

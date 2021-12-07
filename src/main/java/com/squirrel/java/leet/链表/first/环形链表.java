@@ -17,27 +17,30 @@ package com.squirrel.java.leet.链表.first;
 public class 环形链表 {
 
 
-    public static boolean hasCycle(ListNode head) {
+    /**
+     * 思路：
+     * 快慢指针互相追逐
+     *
+     * @param head 头结点
+     * @return 是否是环形链表
+     */
+    public boolean hasCycle(ListNode head) {
         // 相互追逐
         if (head == null || head.next == null) {
             return false;
         }
-
-        // 1.2
+        // 快慢指针的板子 我就用这个啦。
+        // 1 2 3 4 5 6     slow 1 fast 2   slow 2 fast 4  慢指针一步 快指针两步
         ListNode slow = head;
         ListNode fast = head.next;
-
-        // 如果 slow 不相遇 fast 那么就没有环
-
         while (slow != fast) {
-            if (slow == null || fast == null) {
+            if (fast == null || fast.next == null) {
                 return false;
             }
-            slow = slow.next;
             fast = fast.next.next;
+            slow = slow.next;
         }
         return true;
     }
-
 
 }

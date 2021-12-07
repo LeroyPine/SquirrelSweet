@@ -16,23 +16,25 @@ package com.squirrel.java.leet.链表.meet;
  */
 public class 相交链表 {
 
-    //  1 2  3   4  5      7 8 3
+    /**
+     * 思路：
+     * 依次遍历链表, a + b + c  = b + c + a
+     * 如果相交,那么返回
+     *
+     * @param headA 链表A走
+     * @param headB 链表B
+     * @return 相交节点
+     */
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-
+        // 校验空
         if (headA == null || headB == null) {
             return null;
         }
         ListNode tempA = headA;
         ListNode tempB = headB;
         while (tempA != tempB) {
-            tempA = tempA.next;
-            if (tempA == null) {
-                tempA = headB;
-            }
-            tempB = tempB.next;
-            if (tempB == null) {
-                tempB = headA;
-            }
+            tempA = tempA != null ? tempA.next : headB;
+            tempB = tempB != null ? tempB.next : headA;
         }
         return tempA;
     }
