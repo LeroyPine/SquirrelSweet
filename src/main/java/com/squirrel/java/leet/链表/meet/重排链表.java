@@ -16,59 +16,74 @@ package com.squirrel.java.leet.链表.meet;
  */
 public class 重排链表 {
 
-    // 重排链表 ： 寻找链表重点  +  链表逆序 +  合并链表
+    /**
+     * 输入：head = [1,2,3,4]
+     * 输出：[1,4,2,3]
+     * //
+     * 输入：head = [1,2,3,4,5]
+     * 输出：[1,5,2,4,3]
+     * // 取链表中点  + 反转链表  + 合并链表
+     *
+     * @param head 链表
+     */
+
     public void reorderList(ListNode head) {
-        //
+        // 为空返回
         if (head == null) {
             return;
         }
+        // 找到链表的中点
         ListNode middleNode = middle(head);
-        //
-        ListNode l2 = middleNode.next;
+        ListNode listNode2 = middleNode.next;
+        // 反转middleNode
+        ListNode reverseNode = reverseListNode(listNode2);
+        // 切断
         middleNode.next = null;
-        // 翻转右部分链表
-        l2 = reverseL(l2);
         // 合并两个链表
-        merge(head, l2);
+        mergeNode(head, reverseNode);
+
     }
 
-    private void merge(ListNode l1, ListNode reL2) {
-        ListNode temp1;
-        ListNode temp2;
+    private void mergeNode(ListNode head, ListNode reverseNode) {
+        ListNode tempA;
+        ListNode tempB;
+        while (head != null && reverseNode != null) {
+            // 取出两个链表的下一个节点的快照
+            tempA = head.next;
+            tempB = reverseNode.next;
 
-        while (l1 != null && reL2 != null) {
+            // 下一个节点设置为对应的节点
+            head.next = reverseNode;
+            head = tempA;
 
-            temp1 = l1.next;
-            temp2 = reL2.next;
-
-            l1.next = reL2;
-            l1 = temp1;
-
-            reL2.next = l1;
-            reL2 = temp2;
+            reverseNode.next = head;
+            reverseNode = tempB;
         }
     }
 
-    private ListNode reverseL(ListNode head) {
-        ListNode dummyNode = new ListNode(-1);
-        //  1  2  3  4  5
-        while (head != null) {
-            ListNode next = head.next;
-            head.next = dummyNode.next;
-            dummyNode.next = head;
-            head = next;
+    // 反转链表
+    private ListNode reverseListNode(ListNode node) {
+        // 采用头插法来反转链表  1 2 3
+        ListNode head = new ListNode(-1);
+        while (node != null) {
+            ListNode next = node.next;
+            node.next = head.next;
+            head.next = node;
+            node = next;
         }
-        return dummyNode.next;
+        return head.next;
 
     }
 
+    // 获取链表的中点  1 2 3 4 5   1  2  2 4
     private ListNode middle(ListNode head) {
         ListNode slow = head;
-        ListNode fast = head;
-        while (fast.next != null && fast.next.next != null) {
+        ListNode fast = head.next;
+        while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
         }
         return slow;
     }
+
 }

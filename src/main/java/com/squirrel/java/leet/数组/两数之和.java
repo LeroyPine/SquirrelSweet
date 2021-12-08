@@ -24,22 +24,20 @@ public class 两数之和 {
      * <p>
      * 将数组中的每一个数存入hash表中  并判断 目标值-当前值是否等于要算的数
      *
-     * @param nums
-     * @param target
-     * @return
+     * @param nums   数组
+     * @param target 目标值
+     * @return 结果集
      */
     public int[] twoSum(int[] nums, int target) {
-
+        //使用map存储下标
         Map<Integer, Integer> map = new HashMap<>();
-
+        // 遍历数组
         for (int i = 0; i < nums.length; i++) {
-
-            if (map.containsKey(target - nums[i])) {
-                return new int[]{map.get(target - nums[i]), i};
-            } else {
+            if (!map.containsKey(target - nums[i])) {
                 map.put(nums[i], i);
+            } else {
+                return new int[]{i, map.get(target - nums[i])};
             }
-
         }
 
         return new int[]{0};
