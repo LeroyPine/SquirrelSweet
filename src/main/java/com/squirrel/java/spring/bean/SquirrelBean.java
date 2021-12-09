@@ -18,6 +18,8 @@ public class SquirrelBean implements BeanNameAware, ApplicationContextAware, Bea
     }
 
     @Override
+
+
     public void setBeanName(String s) {
 
     }
