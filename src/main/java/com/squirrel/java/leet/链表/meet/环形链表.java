@@ -14,7 +14,7 @@ package com.squirrel.java.leet.链表.meet;
  * @date Created in 2021年08月25日 17:31
  * @since 1.0
  */
-public class 链表是否有环 {
+public class 环形链表 {
 
 
     /**
@@ -39,41 +39,5 @@ public class 链表是否有环 {
             fast = fast.next.next;
         }
         return true;
-
     }
-
-
-    /**
-     * @param head
-     * @return
-     */
-    public ListNode hasCycle2(ListNode head) {
-        if (head == null || head.next == null) {
-            return null;
-        }
-
-        ListNode slow = head;
-        ListNode fast = head.next;
-
-        while (fast != null && fast.next != null) {
-
-            if (slow == fast) {
-                slow = head;
-                fast = fast.next;
-
-                while (slow != fast) {
-                    slow = slow.next;
-                    fast = fast.next;
-                }
-                return slow;
-            }
-            slow = slow.next;
-            fast = fast.next.next;
-
-        }
-
-        return null;
-    }
-
-
 }

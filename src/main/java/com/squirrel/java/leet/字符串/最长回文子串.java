@@ -17,25 +17,35 @@ package com.squirrel.java.leet.字符串;
 public class 最长回文子串 {
 
 
-    // 暴力算法-- 枚举所有长度大于等于 22 的子串，依次判断它们是否是回文；
-    public String longestPalindromeBL(String s) {
-        int len = s.length();
-        if (len < 2) {
+    /**
+     * 思路:
+     * 1.遍历字符串,并采用嵌套循环的方式记录当前的最长回文字串
+     * 2.记录最长回文字串的开始下标,以及记录子串的最大长度
+     * 3
+     *
+     * @param s 字符串
+     * @return 最长回文子串
+     */
+    public String longestPalindrome(String s) {
+        // 首先校验字符串是否和法
+        if (s == null || s.length() < 2) {
             return s;
         }
-        int maxLen = 1;
         int begin = 0;
-        char[] chars = s.toCharArray();
-        for (int i = 0; i < s.length() - 1; i++) {
-            for (int j = i + 1; j < s.length(); j++) {
-                if (j - i + 1 > maxLen && isHuiW(chars, i, j)) {
-                    maxLen = j - i + 1;
+        int maxLen = 1;
+        int len = s.length();
+        char[] array = s.toCharArray();
+        // 遍历整个字符串
+        for (int i = 0; i < len - 1; i++) {
+            for (int j = i + 1; j < len; j++) {
+                // 下标长度如果大于了之前的最长子串再判断其是否为回文
+                if (j - i + 1 > maxLen && isHuiW(array, i, j)) {
                     begin = i;
+                    maxLen = j - i + 1;
                 }
             }
         }
         return s.substring(begin, begin + maxLen);
-
     }
 
     public boolean isHuiW(char[] array, int left, int right) {
@@ -47,34 +57,5 @@ public class 最长回文子串 {
             right--;
         }
         return true;
-    }
-
-
-    // no mind ```
-    public String longestPalindrome(String s) {
-        //
-        if (s == null || s.length() < 1) {
-            return "";
-        }
-        int start = 0;
-        int end = 0;
-        for (int i = 0; i < s.length(); i++) {
-            int len_odd = expandCenter(s, i, i);
-            int len_even = expandCenter(s, i, i + 1);
-            int len = Math.max(len_odd, len_even);
-            if (len > end - start) {
-                start = i - (len - 1) / 2;
-                end = i + len / 2;
-            }
-        }
-        return s.substring(start, end + 1);
-    }
-
-    private int expandCenter(String s, int left, int right) {
-        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
-            left--;
-            right++;
-        }
-        return right - left + 1;
     }
 }
