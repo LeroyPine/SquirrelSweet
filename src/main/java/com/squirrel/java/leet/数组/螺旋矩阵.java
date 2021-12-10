@@ -20,50 +20,52 @@ import java.util.List;
 public class 螺旋矩阵 {
 
     /**
+     * 思路:
      * 螺旋矩阵:掌握好各个边界
      *
-     * @param matrix
-     * @return
+     * @param matrix 矩阵
+     * @return 矩阵集合结果
      */
     public List<Integer> spiralOrder(int[][] matrix) {
-
+        // 结果集Res
         List<Integer> res = new ArrayList<>();
+        // 校验二维数组是否是合理的
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return res;
         }
-        int row = matrix.length;
-        int col = matrix[0].length;
+        // result =-=-=-=-=-=-=-=-=
+        int rows = matrix.length;
+        int cols = matrix[0].length;
         int top = 0;
-        int bottom = row - 1;
+        int bottom = rows - 1;
         int left = 0;
-        int right = col - 1;
-        while (top <= bottom && left <= right) {
-            // 最上层
-            for (int column = left; column <= right; column++) {
-                res.add(matrix[top][column]);
+        int right = cols - 1;
+        // 循环停止条件-左到右  上到下
+        while (left <= right && top <= bottom) {
+            // 行
+            for (int col = left; col <= right; col++) {
+                res.add(matrix[top][col]);
             }
-            // 最右层
-            for (int rown = top + 1; rown <= bottom; rown++) {
-                res.add(matrix[rown][right]);
+            // 列
+            for (int row = top + 1; row <= bottom; row++) {
+                res.add(matrix[row][right]);
             }
-            // 下以及左
             if (left < right && top < bottom) {
-                for (int column = right - 1; column > left; column--) {
-                    res.add(matrix[bottom][column]);
+                // 右往左
+                for (int col = right - 1; col > left; col--) {
+                    res.add(matrix[bottom][col]);
                 }
-                for (int rown = bottom; rown > top; rown--) {
-                    res.add(matrix[rown][left]);
+                // 底向上
+                for (int row = bottom; row > top; row--) {
+                    res.add(matrix[row][left]);
                 }
             }
             left++;
-            right--;
             top++;
+            right--;
             bottom--;
-
         }
         return res;
-
-
     }
 
 

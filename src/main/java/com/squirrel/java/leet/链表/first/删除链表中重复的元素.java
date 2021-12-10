@@ -17,33 +17,39 @@ package com.squirrel.java.leet.链表.first;
 public class 删除链表中重复的元素 {
 
     /**
+     * 思路:
      * 删除链表中重复的元素
-     * <p>
+     * 利用头节点,比较后续连续节点的值
      * 连续的  那么 直接比较当前与下一个的值
      * <p>
      * 1,2,2,3,4,4,5
      *
-     * @param head
-     * @return
+     * @param head 链表
+     * @return 删除重复节点后的链表
      */
-    public static ListNode deleteDuplicates(ListNode head) {
-
+    public ListNode deleteDuplicates(ListNode head) {
         if (head == null) {
-            return head;
+            return null;
         }
-        ListNode cur = head;
-        while (cur.next != null) {
-            if (cur.val == cur.next.val) {
-                cur.next = cur.next.next;
+        // 定义头结点
+        ListNode dummyNode = new ListNode(-1);
+        dummyNode.next = head;
+        // prev指向哑结点
+        ListNode curr = dummyNode;
+        // prev不为空
+        while (curr.next != null && curr.next.next != null) {
+            int val = curr.next.val;
+            // 条件
+            if (curr.next.val == curr.next.next.val) {
+                while (curr.next != null && curr.next.val == val) {
+                    curr.next = curr.next.next;
+                }
             } else {
-                cur = cur.next;
+                curr = curr.next;
             }
         }
-        return head;
+        return dummyNode.next;
     }
 
-    public static void main(String[] args) {
-        ListNode listNode = deleteDuplicates(ListNodeFactory.getSortListNode());
-        System.out.println(listNode);
-    }
+
 }

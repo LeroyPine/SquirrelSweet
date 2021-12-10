@@ -1,4 +1,4 @@
-package com.squirrel.java.theory;
+package com.squirrel.java.leet.数组;
 
 /**
  * <p></p>
@@ -15,6 +15,7 @@ package com.squirrel.java.theory;
  * @since 1.0
  */
 public class 数组遍历N次 {
+
 
 
     public static void main(String[] args) {
