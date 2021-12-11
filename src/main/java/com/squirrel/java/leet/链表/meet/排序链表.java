@@ -1,7 +1,5 @@
 package com.squirrel.java.leet.链表.meet;
 
-import java.util.List;
-
 /**
  * <p></p>
  * <p>
@@ -18,55 +16,66 @@ import java.util.List;
  */
 public class 排序链表 {
 
-    // 排序链表
+    /**
+     * 思路:
+     * 1.采用归并排序
+     * 2.然后在进行合并链表
+     *
+     * @param head 头结点
+     * @return 合并后的链表
+     */
     public ListNode sortList(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
+        // 寻找链表中点
+        ListNode middleNode = middle(head);
+        ListNode middleTemp = middleNode.next;
+        middleNode.next = null;
 
+        return merge(sortList(head), sortList(middleTemp));
+
+    }
+
+    private ListNode merge(ListNode node1, ListNode node2) {
+        if (node1 == null || node2 == null) {
+            return null;
+        }
+        ListNode dummyNode = new ListNode();
+        ListNode curr = dummyNode;
+        while (node1 != null && node2 != null) {
+            if (node1.val < node2.val) {
+                curr.next = node1;
+                node1 = node1.next;
+            } else {
+                curr.next = node2;
+                node2 = node2.next;
+            }
+            curr = curr.next;
+        }
+        if (node1 != null) {
+            curr.next = node1;
+        }
+        if (node2 != null) {
+            curr.next = node2;
+        }
+        return dummyNode.next;
+    }
+
+    /**
+     * 获取链表的中点
+     *
+     * @param head 头结点
+     * @return 中节点
+     */
+    public ListNode middle(ListNode head) {
         ListNode slow = head;
-        ListNode fast = head;
-
-        while (fast.next != null && fast.next.next != null) {
+        ListNode fast = head.next;
+        while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
         }
-
-        ListNode head2 = slow.next;
-        slow.next = null;
-
-        return merge(sortList(head), sortList(head2));
-
+        return slow;
     }
 
-    private ListNode merge(ListNode head1, ListNode head2) {
-
-        ListNode dummyNode = new ListNode(-1);
-        ListNode prev = dummyNode;
-
-        ListNode temp1 = head1;
-        ListNode temp2 = head2;
-
-        while (temp1 != null && temp2 != null) {
-
-            if (temp1.val < temp2.val) {
-                prev.next = temp1;
-                temp1 = temp1.next;
-            } else {
-                prev.next = temp2;
-                temp2 = temp2.next;
-            }
-            prev = prev.next;
-        }
-
-        if (temp1 != null) {
-            prev.next = temp1;
-        }
-        if (temp2 != null) {
-            prev.next = temp2;
-        }
-        return dummyNode.next;
-
-
-    }
 }

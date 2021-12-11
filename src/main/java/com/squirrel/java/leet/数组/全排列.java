@@ -1,9 +1,6 @@
 package com.squirrel.java.leet.数组;
 
-import javax.management.relation.InvalidRelationTypeException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -23,49 +20,59 @@ import java.util.List;
 public class 全排列 {
 
 
+    /**
+     * 思路:
+     * 1.递归-选择了一个数,在没有选择的数下面继续进行选择
+     * 2.设计状态变量:标记元素是否被选取过
+     *
+     * @param nums 数组
+     * @return 结果集
+     */
     public List<List<Integer>> permute(int[] nums) {
-
+        // 结果集
         List<List<Integer>> res = new ArrayList<>();
-        List<Integer> output = new ArrayList<>();
-        for (int num : nums) {
-            output.add(num);
-        }
+        // 每一组元素
+        List<Integer> path = new ArrayList<>();
         // 元素个数
-        final int n = nums.length;
-        // 回溯
-        backtrack(n, output, res, 0);
+        final int length = nums.length;
+        if (length == 0) {
+            return res;
+        }
+        // 状态变量
+        boolean[] used = new boolean[length];
+        // 回溯 - 原数组,数组长度，
+        backtrack(nums, length, 0, path, used, res);
         return res;
 
     }
 
-    private void backtrack(int n, List<Integer> output, List<List<Integer>> res, int first) {
-        // first 第一
-        if (first == n) {
-            res.add(new ArrayList<>(output));
+    /**
+     * 具体回溯方法
+     *
+     * @param nums  数组
+     * @param len   数组长度
+     * @param depth 遍历深度
+     * @param path  选择路径
+     * @param used  是否走过此路径
+     * @param res   结果集
+     */
+    private void backtrack(int[] nums, int len, int depth, List<Integer> path, boolean[] used, List<List<Integer>> res) {
+        if (depth == len) {
+            res.add(new ArrayList<>(path));
+            return;
         }
-        for (int i = first; i < n; i++) {
-
-            Collections.swap(output, first, i);
-            // 递归填下一个数
-            backtrack(n, output, res, first + 1);
-            // 交换
-            Collections.swap(output, first, i);
+        for (int i = 0; i < len; i++) {
+            // 如果没有选择过当前元素
+            if (!used[i]) {
+                // 状态变量标记,证明当前元素已选择
+                path.add(nums[i]);
+                used[i] = true;
+                backtrack(nums, len, depth+1, path, used, res);
+                // 状态变量重置,标记当前元
+                used[i] = false;
+                path.remove(path.size() - 1);
+            }
         }
-    }
-
-
-    public List<List<Integer>> permuteV2(int[] nums) {
-
-        List<List<Integer>> res = new ArrayList<>();
-        List<Integer> output = new ArrayList<>();
-        for (int i = 0; i < nums.length; i++) {
-            output.add(nums[i]);
-        }
-        // 回溯
-        int n = nums.length;
-        backtrack(n, output, res, 0);
-        return res;
-
     }
 
 }

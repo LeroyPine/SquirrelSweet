@@ -1,6 +1,5 @@
 package com.squirrel.java.leet.栈;
 
-import java.awt.image.ImageProducer;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -29,39 +28,34 @@ public class 有效的括号 {
      * 左括号必须用相同类型的右括号闭合。
      * 左括号必须以正确的顺序闭合。
      * ({[]})
+     * 思路:
+     * 1.通过栈来进行比较,如果遇到反括号，就要出栈,否则一致压栈
      *
-     * @param s
-     * @return
+     * @param s 字符串
+     * @return 是否是有效的
      */
     public boolean isValid(String s) {
-        Map<Character,Character> map = new HashMap<>();
-        map.put(')','(');
-        map.put(']','[');
-        map.put('}','{');
-
-
+        Map<Character, Character> map = new HashMap<>();
+        map.put(')', '(');
+        map.put(']', '[');
+        map.put('}', '{');
+        // 定义栈
         Deque<Character> stack = new LinkedList<>();
-
-        int len = s.length();
-
-        for(int i=0;i<len;i++){
-
-            if(map.containsKey(s.charAt(i))){
-
-                if(!stack.isEmpty() && stack.peek() == map.get(s.charAt(i))){
+        // 遍历字符串
+        for (int i = 0; i < s.length(); i++) {
+            // 如果属于左括号那么就压栈
+            if (!map.containsKey(s.charAt(i))) {
+                stack.push(s.charAt(i));
+            } else {
+                // 否则出栈并判断是否为有效
+                if (map.get(s.charAt(i)) == stack.peek()) {
                     stack.pop();
-                }else{
+                } else {
                     return false;
                 }
-            }else{
-                stack.push(s.charAt(i));
             }
         }
         return stack.isEmpty();
-
-
     }
-    public static void main(String[] args) {
-        //.isValid("([}}])");
-    }
+
 }

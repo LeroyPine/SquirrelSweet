@@ -17,55 +17,37 @@ package com.squirrel.java.leet.字符串;
 public class 字符串相加 {
 
     /**
-     * mind:     2 2
-     * 1 2 3
-     * 让其长度保持一致,从右面相加
-     * 注意进位逻辑
+     * 思路:
+     * 1.从字符串的最后一位进行相加,考虑进位问题
+     * 2.最后在反转字符串即可。
      *
-     * @param num1
-     * @param num2
-     * @return
+     * @param str1 字符串1
+     * @param str2 字符串2
+     * @return 结果
      */
-    public String addStrings(String num1, String num2) {
-        // 跳出条件是什么0
-        int i = num1.length() - 1;
-        int j = num2.length() - 1;
+    public String addStrings(String str1, String str2) {
+        int str1Len = str1.length() - 1;
+        int str2Len = str2.length() - 1;
+        // 进位
         int add = 0;
-        StringBuilder str = new StringBuilder();
-        while (i >= 0 || j >= 0 || add != 0) {
-            int x1 = i >= 0 ? num1.charAt(i) - '0' : 0;
-            int x2 = j >= 0 ? num2.charAt(j) - '0' : 0;
-            int lastN = (x1 + x2 + add) % 10;
-            str.append(lastN);
-            add = (x1 + x2) / 10;
-            i--;
-            j--;
-
+        // 定义字符串
+        StringBuilder ans = new StringBuilder();
+        while (str1Len >= 0 || str2Len >= 0 || add > 0) {
+            // 长度小于0时给默认值
+            int num1 = str1Len >= 0 ? str1.charAt(str1Len) - '0' : 0;
+            int num2 = str2Len >= 0 ? str2.charAt(str2Len) - '0' : 0;
+            int result = num1 + num2 + add;
+            // 余数-最后一位
+            int val = result % 10;
+            // 进位
+            add = result / 10;
+            ans.append(val);
+            // 指针移动
+            str1Len--;
+            str2Len--;
         }
-        return str.reverse().toString();
+        return ans.reverse().toString();
     }
 
 
-    // 字符串相加
-    public String addStringsV1(String num1, String num2) {
-
-        int num1Len = num1.length() - 1;
-        int num2Len = num2.length() - 1;
-        int add = 0;
-        StringBuilder str = new StringBuilder();
-        while (num1Len >= 0 || num2Len >= 0 || add > 0) {
-
-            // x1 x2
-            int x1 = num1Len >= 0 ? num1.charAt(num1Len) - '0' : 0;
-            int x2 = num2Len >= 0 ? num2.charAt(num2Len) - '0' : 0;
-            // 相加
-            int lastNum = (x1 + x2 + add) % 10;
-            add = (x1 + x2 + add) / 10;
-            str.append(lastNum);
-            num1Len--;
-            num2Len--;
-        }
-        return str.reverse().toString();
-
-    }
 }
