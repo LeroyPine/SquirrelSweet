@@ -1,5 +1,6 @@
 package com.squirrel.java.leet.数组;
 
+import java.util.Arrays;
 import java.util.ServiceLoader;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 import java.util.concurrent.locks.ReentrantLock;
@@ -55,9 +56,10 @@ public class 删除有序数组中的重复项 {
             }
             if (cnt < 2) {
                 nums[cur++] = nums[i];
-                System.out.println(nums[i]);
+
             }
         }
+        System.out.println(Arrays.toString(nums));
         return cur;
     }
 
@@ -69,8 +71,8 @@ public class 删除有序数组中的重复项 {
 
         int arr[] = new int[]{0,0,1,1,1,1,2,3,3};
 
-        int i1 = removeDuplicatesMin2(arr);
-        System.out.println(i1);
+        int i1 = removeDuplicates(arr);
+       // System.out.println(i1);
 
     }
 }

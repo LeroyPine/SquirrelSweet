@@ -31,15 +31,12 @@ public class 删除链表中重复的元素 {
         if (head == null) {
             return null;
         }
-        // 定义头结点
         ListNode dummyNode = new ListNode(-1);
         dummyNode.next = head;
-        // prev指向哑结点
         ListNode curr = dummyNode;
-        // prev不为空
         while (curr.next != null && curr.next.next != null) {
             int val = curr.next.val;
-            // 条件
+            // 连续元素值相同
             if (curr.next.val == curr.next.next.val) {
                 while (curr.next != null && curr.next.val == val) {
                     curr.next = curr.next.next;
