@@ -1,9 +1,8 @@
 package com.squirrel.java.lock;
 
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.locks.*;
 
 public class LockT {
 
@@ -12,7 +11,8 @@ public class LockT {
     public static ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
     public static void main(String[] args) {
-        lock.lock();
+      lock.lock();
+
         Lock lock = readWriteLock.readLock();
         lock.lock();
 
@@ -22,5 +22,10 @@ public class LockT {
         StringBuilder builder = new StringBuilder();
 
         StringBuffer buffer =  new StringBuffer();
+
+        Condition condition = lock.newCondition();
+
+
+
     }
 }

@@ -31,13 +31,17 @@ public class MapRef {
 
         a.put("as4","as");
 
+        String as4 = a.put("as4", "1");
+        System.out.println(as4);
 
-        a.put(null,"1");
+        String put = a.put(null, "1");
         String s = a.get(null);
         System.out.println(s);
 
         ConcurrentHashMap hashMap = new ConcurrentHashMap<>();;
-
+      hashMap.put("1","12");
+        Object put1 = hashMap.put("1", "124");
+        System.out.println(put1);
 
     }
 
