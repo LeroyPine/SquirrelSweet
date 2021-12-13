@@ -78,6 +78,12 @@
 - 单个桶内的扩容是加锁的,也是分为高位和低位元素,下标位置为高位i+n,低位i
 - 全部迁移完之后,将当前table变为新的迁移之后的table
 
+### ConcurrentHashMap如何计数？
+
+- ConcurrentHashMap引入了两个变量,一个是baseCount,一个是CounterCell
+    - baseCount负责简单计数,直接进行Cas操作,用于在没有竞争的情况下统计。操作失败再用CounterCell进行统计
+    - CounterCell:
+
 ### 什么是线程安全？
 
 - 由于对象存在堆中,不同线程可能会访问到同一个对象,如果一个线程在操作某个对象的时候,其他线程修改了这个对象的,那么就可能造成线程安全的问题。
