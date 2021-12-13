@@ -43,7 +43,7 @@ https://zhuanlan.zhihu.com/p/341638244
 
 ### Dubbo中provider提供的服务有多个版本怎么办？
 
-- 我们可以针对dubbo的方法进行版本的控制,此时dubbo回去寻找对应的版本
+- 我们可以针对dubbo的方法进行版本的控制,此时dubbo会去寻找对应的版本
 
 ### 服务暴露的过程是怎么样的？ ServiceBean
 
