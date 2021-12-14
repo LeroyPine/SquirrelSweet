@@ -1,6 +1,8 @@
 package com.squirrel.java.spring.publish;
 
 import com.squirrel.java.spring.event.MyEvent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
@@ -21,19 +23,13 @@ import org.springframework.stereotype.Service;
  * @since 1.0
  */
 @Service
-public class MyEventPublish implements ApplicationEventPublisherAware {
+public class MyEventPublish {
 
+    @Autowired
     private ApplicationEventPublisher applicationEventPublisher;
-
-
-    @Override
-    public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
-        this.applicationEventPublisher = applicationEventPublisher;
-    }
 
 
     public void publishEv() {
         applicationEventPublisher.publishEvent(new MyEvent(MyEventPublish.class.getSimpleName(), "发送事件1"));
     }
-
 }

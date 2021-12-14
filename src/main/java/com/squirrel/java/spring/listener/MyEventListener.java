@@ -3,7 +3,7 @@ package com.squirrel.java.spring.listener;
 import com.alibaba.fastjson.JSONObject;
 import com.squirrel.java.spring.event.MyEvent;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.event.EventListener;
+import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 /**
@@ -22,11 +22,14 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class MyEventListener {
+public class MyEventListener implements ApplicationListener<MyEvent> {
 
 
-    @EventListener
+
+    @Override
     public void onApplicationEvent(MyEvent event) {
         log.info("EVENT:{}", JSONObject.toJSONString(event));
     }
+
+
 }
