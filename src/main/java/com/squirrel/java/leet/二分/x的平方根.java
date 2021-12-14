@@ -14,20 +14,24 @@ package com.squirrel.java.leet.二分;
  * @date Created in 2021年10月19日 14:31
  * @since 1.0
  */
-public class 平方根 {
+public class x的平方根 {
 
 
-    public static int mySqrt(int x) {
-
+    /**
+     * 思路:
+     * 1.采用二分的方式
+     * 2.不过就是改用乘法而已
+     *
+     * @param x 结果x
+     * @return 答案 y的平方等于x
+     */
+    public int mySqrt(int x) {
         int l = 0;
         int r = x;
-
-        int ans = -1;
-
+        int ans = 0;
         while (l <= r) {
-
             int mid = l + (r - l) / 2;
-            if ((double) mid * mid <= x) {
+            if ((long) mid * mid <= x) {
                 ans = mid;
                 l = mid + 1;
             } else {
@@ -35,13 +39,6 @@ public class 平方根 {
             }
         }
         return ans;
-
-    }
-
-
-    public static void main(String[] args) {
-        int i = mySqrt(10);
-        System.out.println(i);
     }
 
 }
