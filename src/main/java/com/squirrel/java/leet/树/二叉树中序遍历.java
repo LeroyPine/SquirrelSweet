@@ -19,22 +19,21 @@ import java.util.List;
  * @date Created in 2021年06月25日 13:49
  * @since 1.0
  */
-public class 中序遍历 {
+public class 二叉树中序遍历 {
 
 
-    // 中序遍历 ：  左根右
-
+    /**
+     * 思路:
+     * 1.深度优先遍历
+     * 2.左根右,先添加左节点、根节点、右节点
+     *
+     * @param root 根节点
+     * @return re
+     */
     public List<Integer> postorderTraversal(TreeNode root) {
-
-        // 递归压栈   前序遍历: 根左右
-
-        List<Integer> list = new ArrayList<>();
-
-        inOrder(root, list);
-
-        return list;
-
-
+        List<Integer> res = new ArrayList<>();
+        inOrder(root, res);
+        return res;
     }
 
     private void inOrder(TreeNode root, List<Integer> list) {
@@ -46,36 +45,31 @@ public class 中序遍历 {
         inOrder(root.right, list);
     }
 
-
+    /**
+     * 思路:
+     * 1.利用栈这个数据结构
+     * 2.将左节点进行一顿压栈
+     * 3.然后出栈,并加入右节点
+     *
+     * @param root 根节点
+     * @return 中序遍历值
+     */
     public List<Integer> postorderTraversalWhile(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         Deque<TreeNode> stack = new LinkedList<>();
+        // 根节点不为空或者栈不为空
         while (root != null || !stack.isEmpty()) {
-
+            // 将左节点进行压栈
             while (root != null) {
                 stack.push(root);
                 root = root.left;
             }
+            // 左节点出栈
             TreeNode pop = stack.pop();
             res.add(pop.val);
             root = pop.right;
         }
-
         return res;
-        /* Deque<TreeNode> stack = new LinkedList<>();
-
-        while (root != null || !stack.isEmpty()) {
-            while (root != null) {
-                stack.push(root);
-                root = root.left;
-            }
-            root = stack.pop();
-            res.add(root.val);
-            root = root.right;
-        }
-        return res;
-*/
-
     }
 
 }

@@ -16,10 +16,7 @@ package com.squirrel.java.leet.链表.first;
  */
 public class 删除链表的节点 {
 
-    public static void main(String[] args) {
 
-
-    }
 
     public ListNode deleteNode(ListNode head, int val) {
 
