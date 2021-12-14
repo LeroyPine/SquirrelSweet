@@ -6,34 +6,35 @@ import java.util.List;
 public class 子集 {
 
 
+    /**
+     * 思路:
+     * 1.回溯算法
+     * 2.向元素中添加子集,回溯-挨个试
+     * 3.撤销选择记得
+     *
+     * @param nums 数组
+     * @return 子集结果
+     */
     public List<List<Integer>> subsets(int[] nums) {
-        // 路径变量-记录节点信息
-
+        // 路径变量
         List<List<Integer>> ans = new ArrayList<>();
-
         List<Integer> list = new ArrayList<>();
-
         dfs(0, nums, list, ans);
         return ans;
     }
 
     private void dfs(int cur, int[] nums, List<Integer> list, List<List<Integer>> ans) {
-
         // 首先寻找递归终止条件
-
-        if (cur == nums.length){
-            ans.add(list);
+        if (cur == nums.length) {
+            ans.add(new ArrayList<>(list));
             return;
         }
-
-        // 遍历没有选择的情况下
-        dfs(cur+1,nums,list,ans);
-        // 选择当前元素的情况下
         list.add(nums[cur]);
-        dfs(cur+1,nums,list,ans);
-
-
-
+        dfs(cur + 1, nums, list, ans);
+        // 撤销选择
+        list.remove(list.size() - 1);
+        // 在进行选择
+        dfs(cur + 1, nums, list, ans);
     }
 
 

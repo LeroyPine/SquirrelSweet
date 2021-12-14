@@ -19,23 +19,35 @@ import java.util.LinkedList;
  */
 public class 最长的有效括号 {
 
-    public int longestValidParentheses(String s) {
 
-        int maxans = 0;
+    /**
+     * 思路: 最长的有效括号
+     * 1.通过栈进行实现
+     * 2.将元素的下标进行压栈。
+     * 3.
+     *
+     * @param s 字符串
+     * @return 有效括号的长度
+     */
+    public int longestValidParentheses(String s) {
+        int maxAns = 0;
+        // 栈
         Deque<Integer> stack = new LinkedList<>();
-        stack.push(-1);
+        stack.push(-1); // 用来计算长度
+        // 遍历字符串
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) == '(') {
                 stack.push(i);
             } else {
                 stack.pop();
+                // 如果栈空了,那么把此元素加入进去 证明其是不匹配的括号
                 if (stack.isEmpty()) {
                     stack.push(i);
                 } else {
-                    maxans = Math.max(maxans, i - stack.peek());
+                    maxAns = Math.max(maxAns, i - stack.peek());
                 }
             }
         }
-        return maxans;
+        return maxAns;
     }
 }
