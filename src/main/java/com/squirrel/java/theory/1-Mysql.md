@@ -172,8 +172,8 @@
 ### 聊聊Mysql的主从复制原理？
 
 - 当主节点与从节点建立连接后,主节点会启用一个binlog dump线程,用于给从节点发送bin log日志,在读取bin log的时候会进行加锁,读取完成后会解锁
-- 从节点会启动一个IO线程接收binlog的内容并读取到relay-log中,保存成功后给主节点恢复ACK消息,表明接收成功
-- 然后从其节点会启动一个Sql线程,读取relay-log文件中的内容,并执行sql
+- 从节点会启动一个IO线程接收binlog的内容并读取到relay-log中,保存成功后给主节点回复ACK消息,表明接收成功
+- 然后从节点会启动一个Sql线程,读取relay-log文件中的内容,并执行sql
     - relay-log的结构和binlog非常相似，只不过他多了一个master.info和relay-log.info的文件。
     - master.info记录了上一次读取到master同步过来的binlog的位置，以及连接master和启动复制必须的所有信息。
     - relay-log.info记录了文件复制的进度，下一个事件从什么位置开始，由sql线程负责更新。

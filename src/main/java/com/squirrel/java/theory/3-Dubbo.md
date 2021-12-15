@@ -62,7 +62,7 @@ https://zhuanlan.zhihu.com/p/341638244
 
 ### Dubbo的注册中心有哪些？
 
-- Zookeeper、Redis
+- Zookeeper、Redis、Nacos
 
 ### 聊聊Dubbo的SPI机制
 

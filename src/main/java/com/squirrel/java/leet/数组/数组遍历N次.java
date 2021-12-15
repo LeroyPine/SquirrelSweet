@@ -38,31 +38,26 @@ public class 数组遍历N次 {
      */
     public static void printArray(int[] array, int num) {
 
-        // 统计遍历次数
         int count = 0;
-        // 下标
         int index = 0;
-        boolean forward = true;
+        boolean forward = false;
 
-        // 边界： 当遍历次数大于num时,截止
-        while (count <= num) {
+        while (count < num) {
 
-            if (index == 0) {
-                forward = true;
-            } else if (index == array.length - 1) {
+            if (index == array.length - 1) {
                 forward = false;
+            } else if (index == 0) {
+                forward = true;
             }
-            count++;
-            // 打印
-            System.out.print(array[index]);
-            // 控制index
+            System.out.println(array[index]);
             if (forward) {
                 index++;
             } else {
                 index--;
             }
-        }
 
+            count++;
+        }
 
     }
 
