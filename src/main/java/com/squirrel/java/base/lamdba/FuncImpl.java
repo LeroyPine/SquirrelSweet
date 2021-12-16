@@ -12,9 +12,6 @@ public class FuncImpl {
 
     public static void main(String[] args) {
 
-
-
-
         FuncImpl im = new FuncImpl();
         im.Fuc1(() -> {System.out.println("asf");return "艹";});
 

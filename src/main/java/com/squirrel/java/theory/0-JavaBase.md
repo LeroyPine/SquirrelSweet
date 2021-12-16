@@ -14,9 +14,9 @@
 - **反射是在java程序运行时,对任何一个类都能够知道其所有的属性和方法,对任何一个对象都能够调用它的任何一个属性和方法。**
 - java在编译完java文件后会生成class文件,反射可以通过class文件寻找对应的方法和属性。
 - 获取class对象的方法有几种:
-    - 可以通过**类.class**获取到class对象
-    - 也可以通过**对象.getClass**获取到class对象
-    - 也可以通过**Class.forName("全限定类名")**获取到class对象
+  - 可以通过**类.class**获取到class对象
+  - 也可以通过**对象.getClass**获取到class对象
+  - 也可以通过**Class.forName("全限定类名")**获取到class对象
 - 之后可以根据class对象获取响应的方法、参数以及构造方法等
 
 ### Java中的反射的开销有哪些？
@@ -24,6 +24,36 @@
 - 反射调用的参数使用的是变长数组,而且都是Object类型的
 - 如果参数是基本类型,就会带来响应的装箱和拆箱
 - 还有方法内联:method.invoke底层调用是通过委托模式来实现的,一个是本地实现还有一个是动态生成字节码,如果调用次数少于15次,那么就使用本地方法实现,如果超过15次就使用动态生成字节码的方式。(为了消除调用成本)
+
+### JDK1.8新特性？
+
+- Lambda表达式,是一个函数表达式,可以把lambda表达式认为是一个可以传递的代码,可以让代码变的更加整洁
+- StreamAPI-流式API （将处理的元素看做一种流,然后在管道里进行 筛选， 排序，聚合等处理
+- HashMap 扩容时的策略变更 (之前要rehash、现在根据hashCode与数组长度n-1,)
+- JVM元空间代替永久代,元空间存储在非堆上
+- 新的时间日期API
+- 接口中增加了默认方法
+
+### CompletableFuture 有什么特性？
+
+- 通过runAsync创建一个异步无返回值的线程,底层使用forkJoinPool线程池
+- 通过supplyAsync创建一个带有返回值的线程,返回类型为CompletableFuture
+- 通过Completable.join()等待方法的结束,但是不需要再使用try{}catch语句块.
+- 可以对任务进行流水线操作
+  - 合并两个线程的结果然后进行操作可以用 thenCombine
+  - thenAccept消费处理结果
+  - handle类似于thenAccept,但是多了异常的处理
+  - 一个线程依赖另一个线程的时候,可以把这两个线程串行化
+
+### 如何查看线程信息？
+
+- 通过arthas,thread的命令,可以查看线程信息
+- arthas都可以做什么？
+  - 查看线程信息
+  - dump堆信息
+  - 查看jvm信息
+  - 查看类加载
+  - 动态的替换类的class文件 --通过类加载器
 
 ### Java线程的实现方式？
 
@@ -160,9 +190,9 @@
 
 <img src="https://raw.githubusercontent.com/dunwu/images/dev/cs/java/javacore/concurrent/aqs_4.png" alt="AQS获取锁流程">
 
+### CountDownLatch、CyclicBarrier、FutureTask知道吗？讲讲？
 
-
-
+- CountDown
 
 
 
