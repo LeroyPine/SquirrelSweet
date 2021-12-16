@@ -21,11 +21,17 @@ import java.util.concurrent.ConcurrentHashMap;
 public class 二叉树的最大深度 {
 
 
+    /**
+     * 思路:
+     * 1.找号递归终止条件
+     * 2.压栈、因为是最大深度,所以每条路径都要看,选取左路径和右路径的最大值
+     *
+     * @param root 根节点
+     * @return 最大深度
+     */
     public int maxDepth(TreeNode root) {
 
-        // 递归思想： 把该方法认为最底层的代码执行
-
-        if (root == null){
+        if (root == null) {
             return 0;
         }
 
@@ -33,15 +39,6 @@ public class 二叉树的最大深度 {
         int r = maxDepth(root.right);
         return 1 + Math.max(l, r);
 
-        /**
-         *      3
-         *    3    2
-             2    5  7
-                 8
-
-
-
-         */
     }
 
 
