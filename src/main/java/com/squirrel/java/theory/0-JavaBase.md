@@ -9,14 +9,30 @@
 - 因为字符串存在于字符串常量池中,而字符串常量池都是在jvm的堆上,是线程共享的区域,如果多线程之间要是对同一个String对象进行了修改,那么就会导致线程不安全
 - 还有标为final,避免子类去继承String,对String的方法进行重写,也是为了避免风险
 
+### Object中有哪些方法？
+
+- equals()
+- hashCode()
+- toString();
+- wait
+- notify/notifyAll
+- getClass
+- clone
+
+### 为什么重写equals()要重写hashCode？
+
+- 首先equals默认是==,比较对象的地址,hashCode是根据地址hash出来的一个值,所以地址相同的对象,hashCode一定相同。
+- java文档中说明了重写equals一定要重写hashCode,否则的话可能在 hashMap等集合中无法正常工作,因为我们知道map插入一个元素的时候,会首先判断元素hash相同并且equals相同,然后将元素进行替换,
+  如果equals重写后,用equals相比两个对象是相同的,但是hashCode没重写,不相同,则map中可能包含了两个相同的key了。
+
 ### Java中的反射是什么？原理？
 
 - **反射是在java程序运行时,对任何一个类都能够知道其所有的属性和方法,对任何一个对象都能够调用它的任何一个属性和方法。**
 - java在编译完java文件后会生成class文件,反射可以通过class文件寻找对应的方法和属性。
 - 获取class对象的方法有几种:
-  - 可以通过**类.class**获取到class对象
-  - 也可以通过**对象.getClass**获取到class对象
-  - 也可以通过**Class.forName("全限定类名")**获取到class对象
+    - 可以通过**类.class**获取到class对象
+    - 也可以通过**对象.getClass**获取到class对象
+    - 也可以通过**Class.forName("全限定类名")**获取到class对象
 - 之后可以根据class对象获取响应的方法、参数以及构造方法等
 
 ### Java中的反射的开销有哪些？
@@ -40,20 +56,20 @@
 - 通过supplyAsync创建一个带有返回值的线程,返回类型为CompletableFuture
 - 通过Completable.join()等待方法的结束,但是不需要再使用try{}catch语句块.
 - 可以对任务进行流水线操作
-  - 合并两个线程的结果然后进行操作可以用 thenCombine
-  - thenAccept消费处理结果
-  - handle类似于thenAccept,但是多了异常的处理
-  - 一个线程依赖另一个线程的时候,可以把这两个线程串行化
+    - 合并两个线程的结果然后进行操作可以用 thenCombine
+    - thenAccept消费处理结果
+    - handle类似于thenAccept,但是多了异常的处理
+    - 一个线程依赖另一个线程的时候,可以把这两个线程串行化
 
 ### 如何查看线程信息？
 
 - 通过arthas,thread的命令,可以查看线程信息
 - arthas都可以做什么？
-  - 查看线程信息
-  - dump堆信息
-  - 查看jvm信息
-  - 查看类加载
-  - 动态的替换类的class文件 --通过类加载器
+    - 查看线程信息
+    - dump堆信息
+    - 查看jvm信息
+    - 查看类加载
+    - 动态的替换类的class文件 --通过类加载器
 
 ### Java线程的实现方式？
 
@@ -192,8 +208,15 @@
 
 ### CountDownLatch、CyclicBarrier、FutureTask知道吗？讲讲？
 
-- CountDown
-
+- CountDownLatch:
+    - 也是依赖AQS,利用State做计数器的功能,初始化countDownLatch的时候,会对state的值进行初始化,当countDownLatch调用await的方法的时候,会判断state是否为0,如果为不为0的话
+      就将当前线程挂起,进行阻塞。
+    - 如果线程调用了countDownLatch的countDown方法,会将state进行减1操作,并唤醒阻塞队列中的线程,然后判断state是否为0,如果不为0的话接着挂起。
+- CyclicBarrier:
+    - 是多个线程相互等待,到达某一个临界点,然后结束获取去执行下一组任务。
+    - CyclicBarrier内部有一个计数器,每个线程到达屏障点的时候会调用await方法将自己进行阻塞,然后计数器count进行减1,当计数器减为0的时候,所有因await方法而阻塞的线程将要被唤醒。
+- FutureTask:
+    - 内部维护了几个状态,一个是新建状态,一个是执行中状态,其他包括正常结束、异常、中断等状态，如果当前futureTask状态是新建和执行中的状态,那么就把当前线程挂起,等待所有线程执行完毕。
 
 
 

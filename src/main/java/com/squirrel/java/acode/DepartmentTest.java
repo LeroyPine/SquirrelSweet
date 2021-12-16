@@ -37,8 +37,6 @@ public class DepartmentTest {
      * @return
      */
     public static void sub(int id, List<Department> res, List<Department> allDepartment) {
-
-
         for (Department part : allDepartment) {
             if (part.getPid() == id) {
                 res.add(part);

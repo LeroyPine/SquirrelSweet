@@ -88,6 +88,18 @@
 - 切分大查询:
     - 可以将一个数据量特别大查询语句,切分成几块,避免给数据库特别大的压力
 
+### explain中Type有哪些类型？
+
+- all:全表扫描
+- index: 是另一种全表扫描,只不过扫描的顺序是按照索引的次序进行扫描的,主要有点避免了排序。（聚合函数 分组等等）
+    - extra:
+        - using index:使用覆盖索引
+        - Using fileSort:  - 查询语句有字段走了索引,但是排序字段没走索引`EXPLAIN SELECT id FROM testing WHERE room_number=1000 ORDER BY id ;`
+- range:范围扫描索引。 between  >= <= > <
+- ref: 索引访问,返回所有匹配某个值的行
+- eq_ref: 联表查询时命中了主键索引或者唯一索引的非空索引时为eq_ref.
+- const:主键或者唯一索引等值查询的时候
+
 ### Mysql分页优化？
 
 - 默认的limit分页,在limit一个很大的下标的时候,查询速度会变得及其慢,因为他也将下标之前的那些数据查询了出来,导致效率变慢
