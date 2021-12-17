@@ -1,6 +1,6 @@
 package com.squirrel.java.leet.树.面试;
 
-public class 是否是平衡二叉树 {
+public class 验证平衡二叉树 {
 
 
     /**
@@ -24,12 +24,10 @@ public class 是否是平衡二叉树 {
         int leftHeight = height(root.left);
         int rightHeight = height(root.right);
 
-        // 判断条件
-        if (Math.abs(leftHeight - rightHeight) > 1 || leftHeight == -1 || rightHeight == -1) {
+        if (leftHeight == -1 || rightHeight == -1 || Math.abs(leftHeight - rightHeight) > 1) {
             return -1;
-        } else {
-            return Math.max(leftHeight, rightHeight) + 1;
         }
+        return Math.max(leftHeight, rightHeight) + 1;
     }
 
 
