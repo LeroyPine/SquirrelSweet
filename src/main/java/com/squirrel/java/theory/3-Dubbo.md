@@ -15,13 +15,12 @@ https://zhuanlan.zhihu.com/p/341638244
 
 ### Dubbo的总体调用流程？
 
-(白话文)
-
-- 服务启动,加载运行服务提供者
-- 服务提供者向注册中心注册服务
-- 消费者启动,从注册中心拉取全量服务到本地,如果服务发生变化,会推送变更数据给消费者
-- 通过负载均衡,路由等在服务列表中选取一台进行调用
-- 如果调用失败,会进行重试等操作。
+- 服务容器负责启动，加载，运行服务提供者（Standalone 容器）。
+- 服务提供者在启动时，向注册中心注册自己提供的服务（Zookeeper/Redis）。
+- 服务消费者在启动时，向注册中心订阅自己所需的服务。
+- 注册中心返回服务提供者地址列表给消费者，如果有变更，注册中心将基于长连接推送变更数据给消费者。
+- 服务消费者，从提供者地址列表中，基于软负载均衡算法，选一台提供者进行调用，如果调用失败，再选另一台调用。
+- 服务消费者和提供者，在内存中累计调用次数和调用时间，定时每分钟发送一次统计数据到监控中心（根据数据可以动态调整权重）
 
 ### 说说Dubbo支持哪些协议,每种协议的应用场景和特点
 
@@ -29,7 +28,7 @@ https://zhuanlan.zhihu.com/p/341638244
 - http:基于HTTP 多个短连接
 - redis:发送订阅机制,通过list实现
 - rmi:jdk 版本
-- Hession:
+- Hessian2:
 - webService:
 
 ### Dubbo中用到哪些设计模式？
@@ -40,10 +39,6 @@ https://zhuanlan.zhihu.com/p/341638244
 - 修饰器模式：ProtocolFilterWrapper 类是对Protocol类的修饰,在export和refer方法中,配合责任链模式Filter组装成责任链,实现对protocol功能的修饰
 - 适配器模式：dubbo 日志设置
 - **代理模式**:Dubbo为服务提供者和生产者都生成一个代理.使用这个代理去进行请求
-
-### Dubbo中provider提供的服务有多个版本怎么办？
-
-- 我们可以针对dubbo的方法进行版本的控制,此时dubbo会去寻找对应的版本
 
 ### 服务暴露的过程是怎么样的？ ServiceBean
 
@@ -126,3 +121,15 @@ https://zhuanlan.zhihu.com/p/341638244
 ### Dubbo服务之间的调用是阻塞的吗?
 
 - 默认是同步等待结果阻塞的，支持异步调用. future-get
+
+### Dubbo中provider提供的服务有多个版本怎么办？
+
+- 我们可以针对dubbo的方法进行版本的控制,此时dubbo会去寻找对应的版本
+
+### Dubbo和SpringCloud的区别？
+
+- 注册中心不同,dubbo使用zk,springCloud使用eureka
+- dubbo调用是RPC,springCloud是http
+- dubbo不支持链路跟踪,SpringCloud支持链路追踪
+- Dubbo 专注 RPC 和服务治理，Spring Cloud 则是一个微服务架构生态。
+- SpringCloud还支持分布式配置、断路器等

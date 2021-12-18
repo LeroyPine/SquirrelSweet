@@ -1,6 +1,5 @@
 package com.squirrel.java.leet.链表.meet;
 
-import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -18,7 +17,6 @@ import lombok.Data;
  * @since 1.0
  */
 @Data
-@Builder
 public class ListNode {
 
     int val;

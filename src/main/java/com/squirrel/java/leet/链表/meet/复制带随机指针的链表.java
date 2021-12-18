@@ -16,8 +16,8 @@ public class 复制带随机指针的链表 {
      * @return 拷贝后的链表
      */
     public ListNode copyRandomList(ListNode head) {
-        if (head == null || head.next == null) {
-            return head;
+        if (head == null) {
+            return null;
         }
         // map集合
         Map<ListNode, ListNode> map = new HashMap<>();
@@ -26,9 +26,10 @@ public class 复制带随机指针的链表 {
         }
         for (ListNode curr = head; curr != null; curr = curr.next) {
             map.get(curr).next = map.get(curr.next);
-            map.get(curr).random = map.get(curr.next);
+            map.get(curr).random = map.get(curr.random);
         }
         return map.get(head);
     }
+
 
 }

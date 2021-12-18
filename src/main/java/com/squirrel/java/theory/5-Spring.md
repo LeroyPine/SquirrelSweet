@@ -2,7 +2,7 @@
 
 - 首先会构建一个SpringApplication实例
 - 然后会创建一个ApplicationContext,在创建ApplicationContext的过程中将一个ConfigurationClassPostProcessor的后置处理器注入到BeanFactory中
-- 然后刷新线程上下文,通过刚刚的后置处理器将Bean都扫描出来并加入到BeanFactory中
+- 然后刷新线程上下文,并加入事件发布器以及事件监听者等,并通过刚刚的后置处理器将Bean都扫描出来并加入到BeanFactory中,
 - 然后进行Bean的实例化
 - 都完成之后,获取ApplicationRunner和CommandLineRunner的实现类,并执行
 
@@ -10,11 +10,11 @@
 
 - 实例化Bean
 - 设置Bean的属性
-- 设置BeanNameAware
-- 调用BeanPostProcessor-Bean初始化完成之前的
-- 检查Bean是否实现了InitializingBean接口
+- 设置BeanNameAware、BeanFactoryAware相关接口
+- 调用Bean初始化完成之前的 BeanPostProcessor的方法
+- 检查Bean是否实现了InitializingBean接口,如果实现了就调用了 afterProperties方法
 - 然后再检查是否存在init-method方法
-- 然后在调用BeanPostProcessor-Bean初始化之后的
+- 然后在调用Bean初始化之后的BeanPostProcessor
 - 最终在看是否实现了销毁Bean的接口
 
 ### SpringIOC 循环依赖？
@@ -23,8 +23,9 @@
 - 一级缓存是存储的是一个完整的Bean。 singletonObjects
 - 二级缓存存储的是一个提前暴露的Bean,Bean是不完整的,没有进行属性注入和执行init方法
 - 三级缓存存储的是Bean工厂,主要是生产Bean,并存放到二级缓存中,为了解决代理的问题,如果不需要代理,该工厂直接返回原来的Bean,否则返回代理之后的Bean
-- 创建一个Bean A,首先加入到三级缓存中,然后想要注入B,此时B还没有实例化,接着实例化B,实例化B的时候,又发先B需要A,从三级缓存中取出A,然后把A放入二级缓存,删除三级缓存的A,
+- 创建一个Bean A,首先加入到三级缓存中,然后想要注入B,此时B还没有实例化,接着实例化B,实例化B的时候,又发现B需要A,从三级缓存中取出A,然后把A放入二级缓存,删除三级缓存的A,
   然后把A注入B,此时B实例化完成,然后A在进行实例化
+- 因为循环依赖的话,如果有某个类有代理的话,我们需要把代理对象注入进去,所以就用了三级缓存。
 
 ### SpringAOP如何实现的？
 
@@ -34,11 +35,17 @@
 
 ### Spring中的设计模式有哪些？
 
-- 模板模式
-- 单例模式
+- 模板模式:
+  - 定义了一个操作中的行为,但是这些行为由子类去进行实现。
+  - 例如Spring中的事务管理器的相关代码,存在一个抽象的事务管理器,然后 由 JDBC、RABBITMQ等实现对应的事务
+- 单例模式：
+  - Spring中的Bean默认是单例的
 - 工厂模式
+  - 生产Bean
 - 代理模式
+  - AOP
 - 观察者模式
+  - 事件广播机制、
 
 ### Spring事务传播行为有哪些？
 
@@ -60,7 +67,8 @@
 
 ### Spring如何在运行时通知对象？
 
-- AOP代理
+- 其实就是在调用目标方法的时候,前后会执行一些方法逻辑,Spring通过代理类封装了目标类,并拦截被通知的方法的调用,再将调用转发给真正的Bean
+- 如果使用 ApplicationContext，在 ApplicationContext 从 BeanFactory 中加载所有 Bean 时，Spring 创建代理对象
 
 ### SpringMVC的执行流程？
 

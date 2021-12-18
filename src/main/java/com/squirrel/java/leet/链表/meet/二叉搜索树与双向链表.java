@@ -1,17 +1,13 @@
 package com.squirrel.java.leet.链表.meet;
 
-import org.w3c.dom.Node;
-
-import java.util.Deque;
-import java.util.LinkedList;
-
-public class 二叉树转化为双向链表 {
+public class 二叉搜索树与双向链表 {
 
 
     Node pre = null, head = null;
+
     public Node treeToDoublyList(Node root) {
         if (root == null) {
-            return root;
+            return null;
         }
         dfs(root);
         head.left = pre;
@@ -19,6 +15,9 @@ public class 二叉树转化为双向链表 {
         return head;
     }
 
+    /**
+     * @param root
+     */
     private void dfs(Node root) {
         if (root == null) {
             return;
@@ -38,7 +37,7 @@ public class 二叉树转化为双向链表 {
     }
 
 
-    class Node {
+    static class Node {
         public int value;
         public Node left;
         public Node right;
