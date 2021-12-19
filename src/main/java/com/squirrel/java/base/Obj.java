@@ -19,11 +19,18 @@ public class Obj {
 
 
 
-    class O implements Come {
+    class O implements Come,Leave {
 
         @Override
         public void doCome() {
             System.out.println("我来了");
+            skr();
+            squCome("A");
+        }
+
+        @Override
+        public void doLeave() {
+
         }
     }
 
