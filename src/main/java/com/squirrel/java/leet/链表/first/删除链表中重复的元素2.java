@@ -14,7 +14,7 @@ package com.squirrel.java.leet.链表.first;
  * @date Created in 2021年05月14日 14:04
  * @since 1.0
  */
-public class 删除链表中重复的元素 {
+public class 删除链表中重复的元素2 {
 
     /**
      * 思路:
@@ -36,8 +36,7 @@ public class 删除链表中重复的元素 {
         ListNode curr = dummyNode;
         while (curr.next != null && curr.next.next != null) {
             int val = curr.next.val;
-            // 连续元素值相同
-            if (curr.next.val == curr.next.next.val) {
+            if (curr.next.next.val == val) {
                 while (curr.next != null && curr.next.val == val) {
                     curr.next = curr.next.next;
                 }

@@ -1,59 +1,44 @@
 package com.squirrel.java.leet.树.面试;
 
-import java.util.*;
+import sun.reflect.generics.tree.Tree;
+
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.List;
 
 public class 二叉树的完全性校验 {
 
 
+    /**
+     * 思路:
+     * 1.使用二叉树的层序遍历加入到集合中
+     * 2.如果在遍历集合的时候如果 空值后面还有元素的话就不是完全二叉树
+     *
+     * @param root 根节点
+     * @return 是否是完全二叉树
+     */
     public boolean isCompleteTree(TreeNode root) {
-        // root
         if (root == null) {
             return false;
         }
-
-        List<Anode> nodes = new ArrayList<>();
-        nodes.add(new Anode(root, 1));
-
-        int i = 0;
-        while (i < nodes.size()) {
-            Anode anode = nodes.get(i++);
-            if (anode.node != null) {
-                nodes.add(new Anode(anode.node.left, anode.code * 2));
-                nodes.add(new Anode(anode.node.right, anode.code * 2 + 1));
-            }
-        }
-
-        return nodes.get(i - 1).code == nodes.size();
-    }
-
-
-    public class Anode {
-        TreeNode node;
-        int code;
-
-        public Anode(TreeNode node, int code) {
-            this.node = node;
-            this.code = code;
-        }
-    }
-
-
-    public boolean isCompleteTree1(TreeNode root) {
-        if(root == null) return true;
+        // 层序遍历
         Deque<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
-        TreeNode node;
-        while((node = queue.poll()) != null) {
-            queue.offer(node.left);
-            queue.offer(node.right);
+        boolean isComplete = false;
+        while (!queue.isEmpty()) {
+            TreeNode poll = queue.poll();
+            // 只有最后一个元素可以为空
+            if (poll != null) {
+                if (isComplete) {
+                    return false;
+                }
+                queue.offer(poll.left);
+                queue.offer(poll.right);
+            } else {
+                isComplete = true;
+            }
         }
-
-        for(TreeNode n : queue) {
-            if(n != null)
-                return false;
-        }
-        return true;
-
-
+        return isComplete;
     }
 }

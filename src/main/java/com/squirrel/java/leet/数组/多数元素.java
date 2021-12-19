@@ -1,49 +1,28 @@
 package com.squirrel.java.leet.数组;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
 public class 多数元素 {
 
 
-    // 大于数组一般的元素。
+    /**
+     * 思路:
+     * 1.投票算法
+     *
+     * @param nums 数组
+     * @return 多数元素
+     */
     public int majorityElement(int[] nums) {
 
-
-        int len = nums.length;
-        if(len <2){
-            return nums[0];
-        }
-        // 集合
-        Map<Integer,Integer> map = new HashMap<>();
-
-        for (int num : nums) {
-            if (map.containsKey(num)) {
-                Integer integer = map.get(num);
-                map.put(num, integer + 1);
-            } else {
-                map.put(num, 1);
+        int candidate = 0;
+        int count = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (count == 0) {
+                candidate = nums[i];
             }
-        }
-        //7
-        // 遍历map
-        int middle = len/2 +1;
-
-        int ans = 0;
-        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-
-            if (entry.getValue() >= middle ){
-                ans = entry.getKey();
-            }
+            count += candidate == nums[i] ? 1 : -1;
         }
 
-        return ans;
+        return candidate;
     }
 
-    public static void main(String[] args) {
-        多数元素 a = new 多数元素();
-        a.majorityElement(new int[]{-1,-1,2147483647});
 
-    }
 }

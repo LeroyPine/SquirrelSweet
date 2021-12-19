@@ -17,18 +17,12 @@ package com.squirrel.java.leet.链表.first;
 public class 两两交换链表中的节点 {
 
 
-    public static void main(String[] args) {
-
-    }
-
-
     /**
-     * 两两交换
-     * 妹两组一交换
-     * 1 2 3 4 5 6 7
+     * 思路:
+     * 1. 两两互相交换
      *
-     * @param head
-     * @return
+     * @param head 链表节点
+     * @return 交换后的节点
      */
     public ListNode swapPairs(ListNode head) {
         if (head == null) {
@@ -42,16 +36,15 @@ public class 两两交换链表中的节点 {
 
         // 进行两两交换
         while (temp.next != null && temp.next.next != null) {
-            // 第一个节点
-            ListNode node = temp.next;
-            // 第二个节点
+            ListNode curr = temp.next;
             ListNode nextNode = temp.next.next;
-            node.next = nextNode.next;
-            // 节点置为第二个
+            // 节点指向第二个节点
             temp.next = nextNode;
-            // 进行交换
-            nextNode.next = node;
-            temp = node;
+            // 节点交换
+            curr.next = nextNode.next;
+            // 节点交换
+            nextNode.next = curr;
+            temp = curr;
         }
         return dummyNode.next;
     }

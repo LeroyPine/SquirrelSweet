@@ -17,8 +17,14 @@ package com.squirrel.java.leet.树.面试;
 public class 翻转二叉树 {
 
 
+    /**
+     * 思路:
+     * 1. 深度优先遍历 访问每个节点,每个节点的左右子节点直接进行反转即可。
+     *
+     * @param root 根节点
+     * @return 翻转后的二叉树
+     */
     public TreeNode invertTree(TreeNode root) {
-
         if (root == null) {
             return null;
         }
@@ -28,25 +34,7 @@ public class 翻转二叉树 {
         invertTree(root.left);
         invertTree(root.right);
         return root;
-
-
     }
 
 
-    public TreeNode invertTree1(TreeNode root) {
-
-        // 交换左右节点即可  dfs
-
-        if (root==null){
-            return null;
-        }
-
-        TreeNode left = root.left;
-        root.left = root.right;
-        root.right = left;
-
-        invertTree1(root.left);
-        invertTree1(root.right);
-        return root;
-    }
 }

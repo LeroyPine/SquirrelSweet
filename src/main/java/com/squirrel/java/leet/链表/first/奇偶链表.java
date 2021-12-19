@@ -18,7 +18,6 @@ public class 奇偶链表 {
 
     public ListNode oddEvenList(ListNode head) {
 
-
         // 定义一个奇数链表和一个偶数链表
         if (head == null) {
             return null;
@@ -28,11 +27,10 @@ public class 奇偶链表 {
         ListNode evenHead = even;
 
         while (even != null && even.next != null) {
-
             // 奇->偶的下一个
             odd.next = even.next;
             odd = odd.next;
-            //
+            // 偶数
             even.next = odd.next;
             even = even.next;
 
