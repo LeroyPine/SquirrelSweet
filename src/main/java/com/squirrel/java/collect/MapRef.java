@@ -39,7 +39,7 @@ public class MapRef {
         System.out.println(s);
 
         ConcurrentHashMap hashMap = new ConcurrentHashMap<>();;
-      hashMap.put("1","12");
+        hashMap.put("1","12");
         Object put1 = hashMap.put("1", "124");
         System.out.println(put1);
 

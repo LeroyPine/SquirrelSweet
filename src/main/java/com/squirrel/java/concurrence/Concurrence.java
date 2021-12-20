@@ -1,15 +1,13 @@
 package com.squirrel.java.concurrence;
 
-import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.logging.Handler;
 
 /**
  * <p></p>
@@ -28,48 +26,22 @@ import java.util.concurrent.Future;
 @Slf4j
 @Component
 public class Concurrence {
-
-   /* @Autowired
-    @Qualifier("squirrelThreadPool")
-    private static ThreadPoolTaskExecutor squirrelPool;*/
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         // ThreadPoolExecutor
-
         ExecutorService executor = Executors.newFixedThreadPool(5);
 
-        List<Future> futureList = new ArrayList<>();
-
-
-        futureList.add(executor.submit(() -> {
-            Thread.sleep(100000);
-            System.out.println("task1");
-            return "task1";
-        }));
-
-
-        futureList.add(executor.submit(() -> {
-            System.out.println("task2");
-            return "task2";
-        }));
-
-        futureList.add(executor.submit(() -> {
-            System.out.println("task3");
-            return "task3";
-        }));
-
-        futureList.forEach(s -> {
-            try {
-                Object o = s.get();
-                log.info("result：{}", JSONObject.toJSONString(o));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-
+        CompletableFuture<Integer> completableFuture = CompletableFuture.supplyAsync(() -> {
+            return 2 / 0;
+        }).exceptionally(ex -> {
+            System.out.println("ex:" + ex.getMessage());
+            return 0;
         });
+        completableFuture.join();
+
+        ConcurrentHashMap map = new ConcurrentHashMap();
+        map.put("as","as");
+        Thread.sleep(10000);
     }
 
 
