@@ -2,9 +2,9 @@
 
 - 首先会构建一个SpringApplication实例
 - 然后会创建一个ApplicationContext,在创建ApplicationContext的过程中将一个ConfigurationClassPostProcessor的后置处理器注入到BeanFactory中
-- 然后刷新线程上下文,并加入事件发布器以及事件监听者等,并通过刚刚的后置处理器将Bean都扫描出来并加入到BeanFactory中,
+- 然后刷新线程上下文,在这过程中添加事件发布器以及事件监听者等,并通过刚刚的后置处理器将Bean都扫描出来并加入到BeanFactory中,
 - 然后进行Bean的实例化
-- 都完成之后,获取ApplicationRunner和CommandLineRunner的实现类,并执行
+- 都完成之后,获取ApplicationRunner和CommandLineRunner的实现类,并执行相应逻辑。
 
 ### SpringBean的生命周期
 
@@ -12,8 +12,8 @@
 - 设置Bean的属性
 - 设置BeanNameAware、BeanFactoryAware相关接口
 - 调用Bean初始化完成之前的 BeanPostProcessor的方法
-- 检查Bean是否实现了InitializingBean接口,如果实现了就调用了 afterProperties方法
-- 然后再检查是否存在init-method方法
+- 检查Bean是否实现了InitializingBean接口,如果实现了就调用了afterProperties方法
+- 然后再检查Bean是否存在init-method方法
 - 然后在调用Bean初始化之后的BeanPostProcessor
 - 最终在看是否实现了销毁Bean的接口
 
@@ -38,12 +38,15 @@
 - 模板模式:
   - 定义了一个操作中的行为,但是这些行为由子类去进行实现。
   - 例如Spring中的事务管理器的相关代码,存在一个抽象的事务管理器,然后 由 JDBC、RABBITMQ等实现对应的事务
+    - startTrans
+    - commit
+    - rollBack
 - 单例模式：
   - Spring中的Bean默认是单例的
 - 工厂模式
   - 生产Bean
 - 代理模式
-  - AOP
+  - AOP ---
 - 观察者模式
   - 事件广播机制、
 
@@ -61,9 +64,10 @@
 
 - Spring 通过 ApplicationEvent、ApplicationListener、ApplicationPublisher 完成的事件监听模式
 - 发布容器事件,会根据事件和事件源类型在一个map中查找对应的监听器列表,然后遍历监听器列表执行事件,判断有没有异步。
-- Spring帮我们创建一个简单的事件发布器并交由容器管理。
+
+- Spring容器启动的时候帮我们创建一个简单的事件发布器并交由容器管理。
 - 然后将我们实现的监听者注入到事件发布器中。
-- 发布事件的时候,通过事件的类型查询出泛型相匹配的监听者,然后进行调用也就是我们自己实现的方法。
+- 发布事件的时候,通过事件的类型查询出泛型相匹配的监听者(还有他的父类),然后进行调用也就是我们自己实现的方法。
 
 ### Spring如何在运行时通知对象？
 
