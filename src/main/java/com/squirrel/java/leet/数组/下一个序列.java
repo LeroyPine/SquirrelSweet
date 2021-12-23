@@ -20,22 +20,27 @@ public class 下一个序列 {
     // 下一个序列
     public void nextPermutation(int[] nums) {
 
+        // 1  2 5 4 3   1 1 5 3
+        // 查找不是逆序的第一个元素
         int i = nums.length - 2;
+        // 定位到不是逆序的第一个元素
         while (i >= 0 && nums[i] > nums[i + 1]) {
             i--;
         }
+
+        // 继续向前找第一个大于i下标处的元素
         if (i >= 0) {
             int j = nums.length - 1;
             while (j >= 0 && nums[i] >= nums[j]) {
                 j--;
             }
-         swap(nums,i,j);
+            swap(nums, i, j);
         }
 
-        reverse(nums,i+1);
+        reverse(nums, i + 1, nums.length - 1);
     }
 
-    private void reverse(int[] nums, int i) {
+    private void reverse(int[] nums, int i, int j) {
 
     }
 

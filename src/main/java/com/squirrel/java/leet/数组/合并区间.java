@@ -37,7 +37,6 @@ public class 合并区间 {
         }
         // 首先将数组按照左端数字进行升序排列
         Arrays.sort(intervals, new Comparator<int[]>() {
-
             @Override
             public int compare(int[] o1, int[] o2) {
                 return o1[0] - o2[0];

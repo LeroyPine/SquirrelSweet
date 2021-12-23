@@ -180,8 +180,8 @@ public class 两数相加 {
 
         int carry = 0;
 
-        ListNode resultNode = new ListNode(-1);
-        ListNode dummyNode = resultNode;
+        ListNode dummyNode = new ListNode(-1);
+        ListNode curr = dummyNode;
         int result = 0;
 
         while (l1 != null || l2 != null) {
@@ -194,8 +194,8 @@ public class 两数相加 {
             result = (l1Num + l2Num + carry) % 10;
             carry = (l1Num + l2Num + carry) / 10;
 
-            dummyNode.next = new ListNode(result);
-            dummyNode = dummyNode.next;
+            curr.next = new ListNode(result);
+            curr = curr.next;
 
             if (l1 != null) {
                 l1 = l1.next;
@@ -204,13 +204,10 @@ public class 两数相加 {
                 l2 = l2.next;
             }
         }
-
         if (carry > 0) {
             dummyNode.next = new ListNode(carry);
         }
-
-
-        return resultNode.next;
+        return dummyNode.next;
 
     }
 

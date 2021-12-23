@@ -25,6 +25,7 @@ public class 最长上升子序列 {
                 // 比较元素之间的大小,如果小 那么就累加长度
                 if (nums[j] < nums[i]) {
                     dp[i] = Math.max(dp[i], dp[j] + 1);
+
                 }
                 ans = Math.max(ans, dp[i]);
             }
