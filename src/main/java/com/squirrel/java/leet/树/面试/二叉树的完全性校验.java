@@ -1,11 +1,7 @@
 package com.squirrel.java.leet.树.面试;
 
-import sun.reflect.generics.tree.Tree;
-
-import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.List;
 
 public class 二叉树的完全性校验 {
 

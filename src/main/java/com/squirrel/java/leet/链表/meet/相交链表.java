@@ -26,15 +26,15 @@ public class 相交链表 {
      * @return 相交节点
      */
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        // 校验空
         if (headA == null || headB == null) {
             return null;
         }
         ListNode tempA = headA;
         ListNode tempB = headB;
+        // 循环
         while (tempA != tempB) {
-            tempA = tempA != null ? tempA.next : headB;
-            tempB = tempB != null ? tempB.next : headA;
+            tempA = tempA == null ? headB : tempA.next;
+            tempB = tempB == null ? headA : tempB.next;
         }
         return tempA;
     }

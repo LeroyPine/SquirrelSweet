@@ -19,4 +19,14 @@ public class SquirrelController {
         return "1";
     }
 
+
+
+    @RequestMapping("/clientAbort")
+    public String alarmClientAbortException(){
+        int i =0;
+        while (i<1000000000){
+            i++;
+        }
+        return "success";
+    }
 }

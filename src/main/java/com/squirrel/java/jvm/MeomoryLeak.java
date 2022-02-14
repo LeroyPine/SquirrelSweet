@@ -4,10 +4,6 @@ public class MeomoryLeak {
 
 
 
-    public static void main(String[] args) {
-
-
-        ThreadLocal local = new ThreadLocal();
-
+    public void tesa(String a, Integer b) {
     }
 }
