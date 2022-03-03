@@ -21,15 +21,16 @@ public class 二叉树的直径 {
         return ans;
     }
 
+    // 每一条二叉树的「直径」长度，就是一个节点的左右子树的最大深度之和。
     private int ans = 0;
 
     private int depth(TreeNode root) {
         if (root == null) {
             return 0;
         }
-        int leftDepth = depth(root.left);
-        int rightDepth = depth(root.right);
-        ans = Math.max(ans, leftDepth + rightDepth); // 最大直径,左子树深度+右子树深度
-        return Math.max(leftDepth, rightDepth) + 1;
+        int leftMax = depth(root.left);
+        int rightMax = depth(root.right);
+        ans = Math.max(ans, leftMax + rightMax);
+        return 1 + Math.max(leftMax, rightMax);
     }
 }
