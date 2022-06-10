@@ -1,4 +1,4 @@
-package com.squirrel.java.leet.树.面试;
+package com.squirrel.java.leet.树.meet;
 
 /**
  * <p></p>
@@ -27,6 +27,8 @@ public class TreeNode {
         this.val = val;
     }
 
+
+
     TreeNode(int val, TreeNode left, TreeNode right) {
         this.val = val;
         this.left = left;
@@ -45,6 +47,10 @@ public class TreeNode {
      *
      *
      */
+
+    public static void main(String[] args) {
+        String a = "ivllas";
+    }
 
 
 
