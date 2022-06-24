@@ -1,4 +1,4 @@
-package com.squirrel.java.leet.树.面试;
+package com.squirrel.java.leet.树.meet;
 
 public class 是否为二叉树的子结构 {
 

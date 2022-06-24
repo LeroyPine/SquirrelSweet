@@ -1,6 +1,5 @@
-package com.squirrel.java.leet.树.面试;
+package com.squirrel.java.leet.树.meet;
 
-import java.beans.IntrospectionException;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;

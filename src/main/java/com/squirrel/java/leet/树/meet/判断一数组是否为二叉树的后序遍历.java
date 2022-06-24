@@ -1,4 +1,4 @@
-package com.squirrel.java.leet.树.面试;
+package com.squirrel.java.leet.树.meet;
 
 public class 判断一数组是否为二叉树的后序遍历 {
 

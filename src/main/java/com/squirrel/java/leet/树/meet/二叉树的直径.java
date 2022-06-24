@@ -1,4 +1,4 @@
-package com.squirrel.java.leet.树.面试;
+package com.squirrel.java.leet.树.meet;
 
 /**
  * 题目:给定一棵二叉树，你需要计算它的直径长度。一棵二叉树的直径长度是任意两个结点路径长度中的最大值。这条路径可能穿过也可能不穿过根结点。
