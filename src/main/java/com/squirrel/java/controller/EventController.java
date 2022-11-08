@@ -6,6 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
+import java.util.Objects;
+import java.util.Optional;
+
 /**
  * <p></p>
  * <p>
@@ -42,6 +46,9 @@ public class EventController {
         myEventPublish.publishEv();
         return "success";
 
+    }
+
+    public static void main(String[] args) {
     }
 
 }
