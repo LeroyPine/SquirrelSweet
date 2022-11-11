@@ -1,12 +1,14 @@
 package com.squirrel.java.algorithm.listnode;
 
 import com.squirrel.java.entity.ListNode;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author luobaosong
  * @date 2022/11/6 11:28
  * @description
  **/
+@Slf4j
 public class PartitionListNode {
 
     /**
@@ -38,6 +40,7 @@ public class PartitionListNode {
             p = temp;
         }
         p1.next = dummyNode2.next;
+        log.info("test plan");
         return dummyNode1.next;
     }
 }

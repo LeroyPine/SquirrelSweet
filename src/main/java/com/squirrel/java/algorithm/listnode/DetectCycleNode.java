@@ -32,7 +32,15 @@ public class DetectCycleNode {
             }
         }
         // 证明没有环
-        return null;
+        if (fast == null || fast.next == null) {
+            return null;
+        }
+        slow = head;
+        while (slow != fast) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow;
 
     }
 
