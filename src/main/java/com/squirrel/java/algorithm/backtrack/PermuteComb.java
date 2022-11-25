@@ -10,6 +10,9 @@ import java.util.List;
 
 /**
  * 排列组合相关回溯算法
+ * <p>
+ * 组合问题需要用    start 游标做限制
+ * 排列问题         i = 0 开始
  *
  * @author luobaosong
  * @date 2022/11/15 22:43
@@ -166,4 +169,40 @@ public class PermuteComb {
             track.removeLast();
         }
     }
+
+
+    /**
+     * 元素可重 不可复选  排列
+     *
+     * @param nums 全国矿工工会
+     * @return {@link List}<{@link List}<{@link Integer}>>
+     */
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        LinkedList<Integer> track = new LinkedList<>();
+        boolean[] used = new boolean[nums.length];
+        Arrays.sort(nums);
+        permuteUniqueBackTrack(res, track, used, nums);
+        return res;
+    }
+
+    private void permuteUniqueBackTrack(List<List<Integer>> res, LinkedList<Integer> track, boolean[] used, int[] nums) {
+        // base case
+        if (track.size() == nums.length) {
+            res.add(new LinkedList<>(track));
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            // 剪枝 + 固定排序
+            if (i > 0 && nums[i] == nums[i - 1] && !used[i - 1]) {
+                continue;
+            }
+            track.addLast(nums[i]);
+            used[i] = true;
+            permuteUniqueBackTrack(res, track, used, nums);
+            track.removeLast();
+            used[i] = false;
+        }
+    }
+
 }
