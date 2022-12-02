@@ -1,0 +1,45 @@
+## Word
+
+- 递归: recursion 
+- 遍历: traverse
+- 回调: callback
+- 直径: diameter
+- 动作: action
+- 占位符: placeholder
+- 精准: precise
+- 预期: prospective
+- 备忘录: memo
+- I want to live happily  — 我要开心的生活
+- The body is the capital of the revolution - 身体是革命的本钱
+- 骑行：ride  
+- 直方图：Histogram 
+- 支配树：Dominator Tree 
+- 顶级消费者：Top Consumers 
+- 泄漏嫌疑人：Leak Suspects   
+- 阈值：threshold  
+- 超过：exceed
+- 存活：survive
+- 存活年龄： survival age
+- 雨季：rainy season
+- The economy is going backwards  经济在倒退
+- The current social instability              现在的社会不稳定
+- Strength is the last word                    实力才是硬道理
+- It's beautiful to imagine, lazy to do    想象是美好的,做起来是懒惰的
+- Anxiety does nothing for you             焦虑并不会给你带来什么
+- Do what you want, don't worry          想做什么就去做吧,不要有顾虑
+- Why do people make themselves unhappy   人何必让自己不快乐
+- Dynamic clear                                     动态清零
+- Bad stomach,nothing is good            胃不好,什么都不好
+- Going around,it`s still her                    兜兜转转,还是她
+- life-work balance                                生活与工作的平衡
+- Do your best and take responsibility  努力工作并且承担起自己责任
+- learn to grow at work                           在工作中学会成长
+- dare to express                                    敢于表达
+- Socializing will only reduce your loneliness a little bit    社交只会降低你的一点点孤独感
+- I don't want to wake up   我不愿再醒来
+- eventual consistency       最终一致性
+- One's whole life is a struggle with self-control    人的一生都在与自制力作斗争     
+- Dizziness and tinnitus      头晕耳鸣   
+- Are you happy ？            你快乐吗？
+
+ 
