@@ -1,10 +1,15 @@
 package com.squirrel.java.controller;
 
+import com.fasterxml.jackson.databind.introspect.Annotated;
 import com.squirrel.java.annoation.SquLog;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.sql.DriverManager;
+import java.util.ArrayList;
+import java.util.concurrent.locks.ReentrantLock;
 
 @Slf4j
 @RestController
@@ -15,6 +20,8 @@ public class SquirrelController {
     @PostMapping("/aspect")
     @SquLog
     public String squLog() {
+
+        ArrayList list = new ArrayList();
         log.info("方法执行中");
         return "1";
     }
@@ -28,5 +35,15 @@ public class SquirrelController {
             i++;
         }
         return "success";
+    }
+
+    public static void main(String[] args) {
+
+
+        while (true){
+            System.out.println(1);
+            new Thread().start();
+        }
+
     }
 }

@@ -2,6 +2,7 @@ package com.squirrel.java.algorithm.listnode;
 
 import com.squirrel.java.entity.ListNode;
 
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
@@ -27,7 +28,7 @@ public class MergeKListNodes {
         }
         // 声明一个优先队列,
         PriorityQueue<ListNode> priorityQueue =
-                new PriorityQueue<>(lists.length, (a, b) -> (a.val - b.val));
+                new PriorityQueue<>(lists.length, Comparator.comparingInt(a -> a.val));
         // 将链表的头节点放入优先队列
         for (ListNode item : lists) {
             if (item != null) {

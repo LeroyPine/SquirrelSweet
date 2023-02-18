@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicStampedReference;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * 回溯
@@ -21,6 +23,11 @@ public class Backtrack {
         Backtrack backtrack = new Backtrack();
         List<List<Integer>> permute = backtrack.permute(new int[]{1, 2, 3});
         log.info(JSON.toJSONString(permute));
+        AtomicStampedReference<String> stampedReference = new AtomicStampedReference<>("a",1);
+
+        ReentrantLock lock = new ReentrantLock();
+        lock.unlock();
+        lock.lock();
     }
 
     /**

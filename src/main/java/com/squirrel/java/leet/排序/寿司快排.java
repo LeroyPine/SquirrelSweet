@@ -30,7 +30,7 @@ public class 寿司快排 {
     public static void main(String[] args) {
         System.out.printf("123123");
         寿司快排 a = new 寿司快排();
-        final int[] ints = a.quickSort(new int[]{7, 12, 3, 4, 6, 33, 1});
+        final int[] ints = a.quickSort(new int[]{5,2,3,1});
 
 
         System.out.println(ints);
