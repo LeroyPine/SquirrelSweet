@@ -1,5 +1,7 @@
 package com.squirrel.java.spi;
 
+import com.squirrel.java.proxy.Squirrel;
+
 import javax.xml.ws.Service;
 import java.util.ServiceLoader;
 
@@ -19,6 +21,8 @@ import java.util.ServiceLoader;
  */
 public class SquirrelSPI {
 
+
+    public static final Squirrel squirrel = new Squirrel();
 
     public static void main(String[] args) {
 
