@@ -4,7 +4,6 @@ import com.squirrel.java.face.ISquirrel;
 import com.squirrel.java.proxy.Squirrel;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.weaver.ast.Test;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,7 +31,6 @@ public class KeepAliveController {
 
         return "I'm alive";
     }
-
 
 
     public static void main(String[] args) {
