@@ -1,5 +1,6 @@
 package com.squirrel.java.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.squirrel.java.spring.publish.MyEventPublish;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,8 +50,9 @@ public class EventController {
     }
 
     public static void main(String[] args) {
-        System.out.println(124);
-        System.out.println(123);
+        JSONObject object = new JSONObject();
+        object.remove("as");
+        System.out.println(12);
     }
 
 }
