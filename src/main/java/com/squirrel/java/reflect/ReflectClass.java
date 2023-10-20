@@ -1,7 +1,10 @@
 package com.squirrel.java.reflect;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * <p></p>
@@ -45,6 +48,11 @@ public class ReflectClass {
         for (Method method : methods) {
             //method.invoke()
         }
+        Field[] declaredFields = aClass.getDeclaredFields();
+
+        for (Field declaredField : declaredFields) {
+
+        }
 
         //aClass.getDeclaredFields()
 
@@ -53,12 +61,38 @@ public class ReflectClass {
 
     }
 
+
+    public static Date getFreeDate(Date currentDate, int dateType, Integer intervalTimeNum) {
+        if(intervalTimeNum == null){
+            return null;
+        }
+        Calendar ca = Calendar.getInstance();//得到一个Calendar的实例
+        ca.setTime(currentDate); //设置时间为指定时间
+        switch (dateType) {
+            case 1: ca.add(Calendar.YEAR, intervalTimeNum);
+                break;
+            case 2: ca.add(Calendar.MONTH, intervalTimeNum);
+                break;
+            case 3: ca.add(Calendar.DATE, intervalTimeNum);
+                break;
+            case 4: ca.add(Calendar.HOUR, intervalTimeNum);
+                break;
+        }
+        return ca.getTime();
+    }
+
     public static void main(String[] args) throws InstantiationException, IllegalAccessException {
         ReflectClass reflectClass = new ReflectClass();
 
         // reflectClass.skr(null);
         // Class.forName()
 
+        Date now = new Date();
+
+        System.out.println(now.getTime());
+        Date freeDate = getFreeDate(now, 4, 0);
+
+        System.out.println(freeDate.getTime());
 
     }
 }

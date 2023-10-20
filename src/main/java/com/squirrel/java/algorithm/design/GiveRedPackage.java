@@ -2,6 +2,7 @@ package com.squirrel.java.algorithm.design;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Objects;
 import java.util.Random;
 import java.util.RandomAccess;
 
@@ -45,6 +46,13 @@ public class GiveRedPackage {
             total += randomPackage;
         }
         log.info("====total:{}", total);
+
+        short a =1;
+
+        boolean equals = Objects.equals((short)1, a);
+        System.out.println(equals);
+
+
     }
 
 

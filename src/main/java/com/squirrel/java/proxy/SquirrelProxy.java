@@ -6,9 +6,15 @@ import java.lang.reflect.Proxy;
 
 public class SquirrelProxy implements InvocationHandler {
 
+    private String name;
+
     // 松鼠代理
     public SquirrelProxy(Squirrel squirrel) {
         this.squirrel = squirrel;
+    }
+
+    public SquirrelProxy(){
+
     }
 
     private Squirrel squirrel;
@@ -39,4 +45,11 @@ public class SquirrelProxy implements InvocationHandler {
 
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
