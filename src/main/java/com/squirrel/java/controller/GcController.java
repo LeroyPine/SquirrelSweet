@@ -1,19 +1,13 @@
 package com.squirrel.java.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.concurrent.*;
-
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+@Slf4j
 @Component
 public class GcController implements ApplicationRunner {
 
@@ -22,7 +16,7 @@ public class GcController implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(1);
         scheduledThreadPoolExecutor.scheduleAtFixedRate(() -> {
-            System.out.println(12);
+           log.info("niubi~~~");
         }, 0, 10, TimeUnit.SECONDS);
 
         new Thread(()->{

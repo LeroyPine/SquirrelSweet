@@ -1,10 +1,10 @@
 package com.squirrel.java.algorithm.design;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
 import java.util.Random;
-import java.util.RandomAccess;
 
 /**
  * 发红包
@@ -13,12 +13,13 @@ import java.util.RandomAccess;
  * @date 2022/11/10 13:54
  * @description
  **/
-@Slf4j
+
 public class GiveRedPackage {
 
     public static double packageMoney = 100;
     public static int totalPeople = 10;
 
+    private static final Logger log = LoggerFactory.getLogger(GiveRedPackage.class);
 
     public static double getRandomPackage() {
         if (totalPeople == 1) {
@@ -37,7 +38,6 @@ public class GiveRedPackage {
         totalPeople--;
         return money;
     }
-
     public static void main(String[] args) {
         double total = 0;
         for (int i = 0; i < 10; i++) {
@@ -49,8 +49,8 @@ public class GiveRedPackage {
 
         short a =1;
 
+
         boolean equals = Objects.equals((short)1, a);
-        System.out.println(equals);
 
 
     }
