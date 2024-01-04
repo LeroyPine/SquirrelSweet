@@ -41,7 +41,7 @@ public class SquirrelController {
         ExecutorService executorService = TtlExecutors.getTtlExecutorService(Executors.newFixedThreadPool(1));
 
         executorService.submit(() -> log.info("子线程traceId"));
-        log.info("asdasafa");
+
 
         return "1";
     }
