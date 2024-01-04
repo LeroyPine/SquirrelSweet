@@ -4,9 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
-
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 @Slf4j
 @Component
 public class GcController implements ApplicationRunner {
@@ -14,9 +11,9 @@ public class GcController implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(1);
+       /* ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(1);
         scheduledThreadPoolExecutor.scheduleAtFixedRate(() -> {
-           log.info("niubi~~~");
+          // log.info("niubi~~~");
         }, 0, 10, TimeUnit.SECONDS);
 
         new Thread(()->{
@@ -28,6 +25,6 @@ public class GcController implements ApplicationRunner {
                     throw new RuntimeException(e);
                 }
             }
-        }).start();
+        }).start();*/
     }
 }

@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,6 +24,9 @@ public class Link extends BaseLink {
         lin
                 .setUrl("124");
 
-        System.out.println(JSONObject.toJSONString(lin));
+        List<BaseLink> linkList1 =  new ArrayList<>();
+        linkList1.add(lin);
+
+        System.out.println(JSONObject.toJSONString(linkList1));
     }
 }
