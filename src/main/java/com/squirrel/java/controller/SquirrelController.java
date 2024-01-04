@@ -52,7 +52,6 @@ public class SquirrelController {
 
         producer.send();
 
-        log.info("2314124");
         return "success";
     }
 
