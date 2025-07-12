@@ -20,25 +20,24 @@ import org.springframework.stereotype.Component;
 public class SquirrelAspect {
 
 
-    @Pointcut("@annotation(com.squirrel.java.annoation.SquLog))")
+    // 定义切点，拦截带有@SquLog注解的方法
+    @Pointcut("@annotation(com.squirrel.java.annoation.SquLog)")
     public void squirrelLog() {
-        //
+        // Pointcut for methods annotated with @SquLog
     }
     // ssh
 
 
+    /**
+     * 环绕通知，打印方法入参和返回值
+     */
     @Around(value = "squirrelLog()")
-    public Object squ(ProceedingJoinPoint point) throws Throwable {
-
+    public Object logAround(ProceedingJoinPoint point) throws Throwable {
         Object[] args = point.getArgs();
-
-        log.info("start log:{}", JSON.toJSONString(args));
-
-        Object proceed = point.proceed();
-
-        log.info("end log:{}", JSON.toJSONString(proceed));
-
-        return proceed;
+        log.info("[AOP日志] 方法开始，参数: {}", JSON.toJSONString(args));
+        Object result = point.proceed();
+        log.info("[AOP日志] 方法结束，返回: {}", JSON.toJSONString(result));
+        return result;
     }
 
 }

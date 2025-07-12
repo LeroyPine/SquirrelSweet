@@ -25,34 +25,32 @@ public class SquirrelController {
     private Producer producer;
 
 
-    @PostMapping("/aspect")
+    @PostMapping("/log-demo")
     @SquLog
-    public String squLog() {
+    public String logDemo() {
+        // 生成并设置traceId
+        String traceId = String.valueOf(UUID.randomUUID());
+        MDC.put("traceId", traceId);
 
-        MDC.put("traceId", String.valueOf(UUID.randomUUID()));
-
-        ArrayList list = new ArrayList();
-        log.info("方法执行中");
-
-        Link link = new Link();
-        log.info("asdasda");
-
+        log.info("主线程-方法执行中, traceId={}", traceId);
 
         ExecutorService executorService = TtlExecutors.getTtlExecutorService(Executors.newFixedThreadPool(1));
+        try {
+            executorService.submit(() -> {
+                String childTraceId = MDC.get("traceId");
+                log.info("子线程-收到traceId={}", childTraceId);
+            });
+        } finally {
+            executorService.shutdown();
+        }
 
-        executorService.submit(() -> log.info("子线程traceId"));
-
-
-        return "1";
+        return "{\"status\":\"success\",\"traceId\":\"" + traceId + "\"}";
     }
 
-
-    @RequestMapping("/mq")
-    public String mq() {
-
+    @PostMapping("/mq/send")
+    public String sendMqMessage() {
         producer.send();
-
-        return "success";
+        return "{\"status\":\"success\"}";
     }
 
 
